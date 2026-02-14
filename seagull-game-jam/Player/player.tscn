@@ -620,9 +620,10 @@ shape = SubResource("CapsuleShape3D_00tjw")
 stream = ExtResource("9_op7ga")
 
 [node name="CamPivot" type="Node3D" parent="." unique_id=1063726610]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6682422, 0)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CamPivot" unique_id=51372274]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.84, 3.799)
+spring_length = 5.0
 
 [node name="Camera3D" type="Camera3D" parent="CamPivot/SpringArm3D" unique_id=1057931142]
 
