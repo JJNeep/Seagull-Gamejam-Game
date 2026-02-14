@@ -81,7 +81,7 @@ func perform_squawk() -> void:
 	# 2. Alert Humans
 	# This sends a signal to any node in the "humans" group
 	get_tree().call_group("humans", "get_annoyed", global_position)
-	print("SQUAWK! Humans annoyed.")
+	print("AI text here")
 	await get_tree().create_timer(1).timeout
 	is_squawking = false
 
