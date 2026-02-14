@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://dhmsuhkn50pl4"]
+
+[ext_resource type="Shader" uid="uid://b3ye5fbh7y4du" path="res://ocean_generator.gdshader" id="1_j38dg"]
+[ext_resource type="Script" uid="uid://kqu56rvqv7tf" path="res://wave.gd" id="1_tiovm"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_j38dg"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nb2vx"]
+noise = SubResource("FastNoiseLite_j38dg")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nb2vx"]
+render_priority = 0
+shader = ExtResource("1_j38dg")
+shader_parameter/deep_color = Color(0, 0.2, 0.6, 1)
+shader_parameter/shallow_color = Color(0.2, 0.6, 1, 1)
+shader_parameter/foam_color = Color(1, 1, 1, 1)
+shader_parameter/wave_height = 2.0
+shader_parameter/speed = 0.1
+shader_parameter/wave_foam_level = 0.65
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_nb2vx")
+shader_parameter/noise_scale = 0.05
+shader_parameter/shoreline_foam_width = 1.5
+shader_parameter/voxel_style_foam = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_tiovm"]
+material = SubResource("ShaderMaterial_nb2vx")
+size = Vector3(0.4, 0.4, 0.4)
+
+[sub_resource type="MultiMesh" id="MultiMesh_tiovm"]
+transform_format = 1
+mesh = SubResource("BoxMesh_tiovm")
+
+[node name="Ocean" type="MultiMeshInstance3D" unique_id=214444040]
+multimesh = SubResource("MultiMesh_tiovm")
+script = ExtResource("1_tiovm")
+voxel_size = 0.4

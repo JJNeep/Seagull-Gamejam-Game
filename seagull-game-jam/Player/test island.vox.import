@@ -1,0 +1,18 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions.To.Mesh"
+type="Mesh"
+uid="uid://cib4fvn7yaqva"
+path="res://.godot/imported/test island.vox-d339e15637ce72104f961676fd091c09.mesh"
+
+[deps]
+
+source_file="res://Player/test island.vox"
+dest_files=["res://.godot/imported/test island.vox-d339e15637ce72104f961676fd091c09.mesh"]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
+FirstKeyframeOnly=true
