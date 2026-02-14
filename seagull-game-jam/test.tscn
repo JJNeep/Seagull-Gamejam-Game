@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://biav8avwfbm5v"]
 
+[ext_resource type="Texture2D" uid="uid://cqg3dytvtwj1s" path="res://A.png" id="1_6uqi0"]
 [ext_resource type="PackedScene" uid="uid://sthmotkx108k" path="res://Player/player.tscn" id="1_37kl0"]
+[ext_resource type="ArrayMesh" uid="uid://dxn2qd2uu0qhu" path="res://Beach boy.vox.obj" id="3_ppyta"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8uh7m"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -15,6 +17,12 @@ sky = SubResource("Sky_6uqi0")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ppyta"]
+albedo_texture = ExtResource("1_6uqi0")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ykrsh"]
+albedo_texture = ExtResource("1_6uqi0")
+
 [node name="Node3D" type="Node3D" unique_id=658902118]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=135382378]
@@ -25,9 +33,15 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=623621042]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5015564, -0.38330078, -3.4379807)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8939447, -0.30284214, -2.8487523)
+material_override = SubResource("StandardMaterial3D_ppyta")
 use_collision = true
 size = Vector3(16.214783, 0.23339844, 18.992233)
 
 [node name="Player" parent="." unique_id=843585877 instance=ExtResource("1_37kl0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.617101, 0)
+
+[node name="BeachBoy_vox" type="MeshInstance3D" parent="." unique_id=1550044161]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3920197, 0.0110526085, 1.5824461)
+material_override = SubResource("StandardMaterial3D_ykrsh")
+mesh = ExtResource("3_ppyta")
