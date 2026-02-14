@@ -1,8 +1,12 @@
 [gd_scene format=3 uid="uid://biav8avwfbm5v"]
 
 [ext_resource type="PackedScene" uid="uid://sthmotkx108k" path="res://Player/player.tscn" id="1_37kl0"]
+<<<<<<< HEAD
 [ext_resource type="ArrayMesh" uid="uid://5248wcsawxdp" path="res://Beach boy.vox" id="3_6uqi0"]
 [ext_resource type="ArrayMesh" uid="uid://c44irj3uiybkk" path="res://Beach.vox" id="5_g14j6"]
+=======
+[ext_resource type="ArrayMesh" uid="uid://5248wcsawxdp" path="res://Beach boy.vox" id="2_8uh7m"]
+>>>>>>> 9221d421c7f56cc0bad79427351ff2d195b01cb6
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8uh7m"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -17,6 +21,7 @@ sky = SubResource("Sky_6uqi0")
 tonemap_mode = 2
 glow_enabled = true
 
+<<<<<<< HEAD
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6uqi0"]
 radius = 1.2172852
 height = 6.104248
@@ -24,6 +29,8 @@ height = 6.104248
 [sub_resource type="BoxShape3D" id="BoxShape3D_ppyta"]
 size = Vector3(3.7710571, 0.0871582, 3.593567)
 
+=======
+>>>>>>> 9221d421c7f56cc0bad79427351ff2d195b01cb6
 [node name="Node3D" type="Node3D" unique_id=658902118]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=135382378]
@@ -33,10 +40,19 @@ environment = SubResource("Environment_ppyta")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
+<<<<<<< HEAD
+=======
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=623621042]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8939447, -0.30284214, -2.8487523)
+use_collision = true
+size = Vector3(16.214783, 0.23339844, 18.992233)
+
+>>>>>>> 9221d421c7f56cc0bad79427351ff2d195b01cb6
 [node name="Player" parent="." unique_id=843585877 instance=ExtResource("1_37kl0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.617101, 0)
 
 [node name="BeachBoy_vox" type="MeshInstance3D" parent="." unique_id=1550044161]
+<<<<<<< HEAD
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9861159, 0.35235023, 1.5824461)
 mesh = ExtResource("3_6uqi0")
 
@@ -55,3 +71,7 @@ mesh = ExtResource("5_g14j6")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Beach/StaticBody3D" unique_id=679714500]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.043304443, 0.048706062, -0.016204715)
 shape = SubResource("BoxShape3D_ppyta")
+=======
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3920197, 0.0110526085, 1.5824461)
+mesh = ExtResource("2_8uh7m")
+>>>>>>> 9221d421c7f56cc0bad79427351ff2d195b01cb6

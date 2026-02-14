@@ -166,15 +166,15 @@ func update_animations() -> void:
 	if is_squawking:
 		pass
 	elif is_gliding:
-		anim_player.play("Glide", 0.2)
+		anim_player.play("Glide")
 	elif is_on_floor():
 		var h_vel = Vector2(velocity.x, velocity.z)
 		if h_vel.length() > 0.1:
-			anim_player.play("Run", 0.2)
+			anim_player.play("Run")
 		else:
-			anim_player.play("Idle", 0.2)
+			anim_player.play("Idle")
 	else:
 		if velocity.y > 0:
-			anim_player.play("Jump", 0.2)
+			anim_player.play("Jump")
 		else:
-			anim_player.play("Fall", 0.2)
+			anim_player.play("Fall")
