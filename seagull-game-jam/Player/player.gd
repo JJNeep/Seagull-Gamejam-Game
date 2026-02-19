@@ -17,7 +17,6 @@ extends CharacterBody3D
 @export var roll_amount: float = 30.0
 
 # --- References ---
-@onready var stair_scanner: ShapeCast3D = $StairScanner # Make sure path is correct!
 @onready var visuals: Node3D = $Visuals
 @onready var cam_pivot: Node3D = $CamPivot
 @onready var spring_arm: SpringArm3D = $CamPivot/SpringArm3D
@@ -54,7 +53,6 @@ func _physics_process(delta: float) -> void:
 		process_standard_movement(delta)
 		
 	move_and_slide()
-	handle_stairs(delta)
 	update_visuals(delta)
 	update_animations() 
 	
@@ -146,30 +144,3 @@ func update_animations() -> void:
 			anim_player.play("Jump")
 		else:
 			anim_player.play("Fall")
-
-func handle_stairs(delta: float) -> void:
-	# 1. Only climb if we are on the floor and moving against a wall
-	if not is_on_floor() or not is_on_wall():
-		return
-
-	# 2. Update the scanner to look in our movement direction
-	# We normalize velocity so the scanner always checks exactly 0.6 meters ahead
-	var vel_2d = Vector2(velocity.x, velocity.z)
-	if vel_2d.length() < 0.1:
-		return # Not moving enough to step up
-		
-	var look_dir = Vector3(vel_2d.x, 0, vel_2d.y).normalized()
-	stair_scanner.target_position = look_dir * 0.6
-	
-	# 3. Force the scanner to check NOW (Physics updates happen later usually)
-	stair_scanner.force_shapecast_update()
-	
-	# 4. The Logic:
-	# If the scanner (at height 1.1) hits NOTHING, it means the space above the block is empty.
-	# Therefore, the block in front of us is short enough to step on.
-	if not stair_scanner.is_colliding():
-		# TELEPORT UP!
-		# We use global_position for snapping. 
-		# We add a tiny bit of forward movement so you don't snap up and fall back down.
-		global_position.y += step_height * delta * 5.0 # Smooth step
-		global_position += look_dir * 0.2 # Nudge forward onto the step

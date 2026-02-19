@@ -653,9 +653,6 @@ _data = {
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5tmop"]
 albedo_texture = ExtResource("8_u1c27")
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_5htga"]
-height = 0.5
-
 [node name="Player" type="CharacterBody3D" unique_id=843585877]
 script = ExtResource("1_b26j0")
 
@@ -707,8 +704,3 @@ mesh = ExtResource("6_5htga")
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.1, 0)
 material_override = SubResource("StandardMaterial3D_5tmop")
 mesh = ExtResource("6_5htga")
-
-[node name="StairScanner" type="ShapeCast3D" parent="." unique_id=796373381]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32656527, 0)
-shape = SubResource("CylinderShape3D_5htga")
-target_position = Vector3(0, 0, -0.8)
