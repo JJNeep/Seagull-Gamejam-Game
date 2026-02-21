@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 # --- State Machine Setup ---
 enum State { IDLE, STARTLE, INVESTIGATE, CHASE }
-enum Idle_State { WORK, HOME, BEACH }
+enum Idle_State { WORK, BEACH, HOME }
 var current_state: State = State.IDLE
 var current_idle: Idle_State = Idle_State.WORK
 var is_at_location = false
@@ -21,7 +21,6 @@ var is_at_location = false
 @export var run_speed: float = 7.0
 @export var flee_duration: float = 4.0
 
-@export var movement_target: Node3D
 @export var player : Player
 
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -40,7 +39,7 @@ func set_movement_target(target:Vector3):
 	nav_agent.target_position = target
 
 func _physics_process(delta: float) -> void:
-	if not is_on_floor():
+	if not is_on_floor() and not is_on_wall():
 		velocity.y -= gravity * delta
 	elif current_state == State.IDLE:
 		idle(delta)
@@ -50,13 +49,36 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 
+func next_idle_state():
+	current_idle = (current_idle + 1) % Idle_State.size()
+	is_at_location = false
+
 func idle(delta):
 	if current_idle == Idle_State.WORK:
 		if !is_at_location:
 			set_movement_target(job_position.position)
 			navigation_frame(delta)
 		else:
-			pass
+			hide_player()
+			await get_tree().create_timer(job_time).timeout
+			show_player()
+			next_idle_state()
+	if current_idle == Idle_State.HOME:
+		if !is_at_location:
+			set_movement_target(home_position.position)
+			navigation_frame(delta)
+		else:
+			hide_player()
+			await get_tree().create_timer(home_time).timeout
+			show_player()
+			next_idle_state()
+	if current_idle == Idle_State.BEACH:
+		if !is_at_location:
+			set_movement_target(beach_position.position)
+			navigation_frame(delta)
+		else:
+			await get_tree().create_timer(beach_time).timeout
+			next_idle_state()
 
 func navigation_frame(delta):
 	if nav_agent.is_navigation_finished():
@@ -74,6 +96,14 @@ func navigation_frame(delta):
 		rotation.y = lerp_angle(rotation.y, target_angle, 10.0 * delta)
 	
 	velocity = new_velocity
+
+func hide_player():
+	$Reaction.hide()
+	$BeachBoy.hide()
+
+func show_player():
+	$Reaction.show()
+	$BeachBoy.show()
 
 # --- EXTERNAL SIGNALS ---
 
