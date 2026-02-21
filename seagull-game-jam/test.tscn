@@ -6,6 +6,7 @@
 [ext_resource type="ArrayMesh" uid="uid://cojv5rae4miu6" path="res://Road and test stuff.vox" id="4_ppyta"]
 [ext_resource type="PackedScene" uid="uid://iqx2qa3vwyrj" path="res://Human/human.tscn" id="5_ykrsh"]
 [ext_resource type="ArrayMesh" uid="uid://8hlky3n66uer" path="res://Jack's food building.vox" id="6_g14j6"]
+[ext_resource type="ArrayMesh" uid="uid://cjktyy3uhhcwu" path="res://Seagull mafia lord.vox" id="7_vbegm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8uh7m"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -86,7 +87,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.19329, 0.5537398, -6.0360
 gizmo_extents = 4.11
 
 [node name="Human" parent="." unique_id=2136399363 node_paths=PackedStringArray("job_position", "home_position", "beach_position", "player") instance=ExtResource("5_ykrsh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.101124, 6.3400016, -7.926559)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.74597, 2.2832446, -7.926559)
 job_position = NodePath("../job_position")
 job_time = 1.0
 home_position = NodePath("../home_position")
@@ -102,3 +103,11 @@ gizmo_extents = 4.11
 [node name="beach_position" type="Marker3D" parent="." unique_id=647440154]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.407934, 2.2149591, 6.3846893)
 gizmo_extents = 4.11
+
+[node name="Jack\'sFoodBuilding" type="MeshInstance3D" parent="." unique_id=1807127275]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -22.11146, -17.260805, -18.35846)
+mesh = ExtResource("6_g14j6")
+
+[node name="SeagullMafiaLord" type="MeshInstance3D" parent="." unique_id=1331684966]
+transform = Transform3D(2.1, 0, 0, 0, 2.1, 0, 0, 0, 2.1, 2.6029053, 1.9999981, 4.319296)
+mesh = ExtResource("7_vbegm")
