@@ -1,0 +1,18 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions.To.Mesh"
+type="Mesh"
+uid="uid://bi12lfml3ra7y"
+path="res://.godot/imported/Beach boy Startled.vox-5af7d746cf91df56f8b1c9db59c80c43.mesh"
+
+[deps]
+
+source_file="res://Human/Beach boy Startled.vox"
+dest_files=["res://.godot/imported/Beach boy Startled.vox-5af7d746cf91df56f8b1c9db59c80c43.mesh"]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
+FirstKeyframeOnly=true

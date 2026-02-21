@@ -1,0 +1,18 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions.To.Mesh"
+type="Mesh"
+uid="uid://78qvijewdcj8"
+path="res://.godot/imported/exclaimation mark.vox-b85e5a23ebb6f03b59089628331cb0bf.mesh"
+
+[deps]
+
+source_file="res://Human/exclaimation mark.vox"
+dest_files=["res://.godot/imported/exclaimation mark.vox-b85e5a23ebb6f03b59089628331cb0bf.mesh"]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
+FirstKeyframeOnly=true

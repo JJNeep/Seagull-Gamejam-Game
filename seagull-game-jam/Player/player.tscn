@@ -9,6 +9,7 @@
 [ext_resource type="ArrayMesh" uid="uid://dedw4fp4iljgy" path="res://Player/Wing_Down.obj" id="6_5htga"]
 [ext_resource type="ArrayMesh" uid="uid://cmqb8sq1topq3" path="res://Player/Wing.obj" id="6_bwjto"]
 [ext_resource type="ArrayMesh" uid="uid://cjkwqnwbxjiak" path="res://Player/Leg.obj" id="7_606se"]
+[ext_resource type="ArrayMesh" uid="uid://cp1d7yc1t8pdl" path="res://Player/Leg_Up.obj" id="8_p5o4e"]
 [ext_resource type="Texture2D" uid="uid://du4xqiupnkjud" path="res://Player/pal0.png" id="8_u1c27"]
 [ext_resource type="AudioStream" uid="uid://dheyanob84clo" path="res://Player/Squawk.mp3" id="9_op7ga"]
 [ext_resource type="ArrayMesh" uid="uid://brjkkkmlfy1lc" path="res://Player/Leg_Forward.obj" id="11_5htga"]
@@ -141,6 +142,35 @@ tracks/9/keys = {
 "values": [Vector3(0, -2.1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_lfmf2"]
+resource_name = "Flap"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/Offset/Wing_Right:mesh")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("5_urp6f"), ExtResource("6_5htga")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/Offset/Wing_Left:mesh")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("5_urp6f"), ExtResource("6_5htga")]
+}
+
 [sub_resource type="Animation" id="Animation_p5o4e"]
 resource_name = "Glide"
 tracks/0/type = "value"
@@ -153,7 +183,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("7_606se")]
+"values": [ExtResource("8_p5o4e")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -165,7 +195,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("7_606se")]
+"values": [ExtResource("8_p5o4e")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -177,7 +207,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("6_5htga")]
+"values": [ExtResource("6_bwjto")]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -189,7 +219,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("6_5htga")]
+"values": [ExtResource("6_bwjto")]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -618,31 +648,20 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Visuals/Offset/Leg_Right:mesh")
+tracks/6/path = NodePath("Squawk:playing")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.06666668),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("7_606se")]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Visuals/Offset/Leg_Left:mesh")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("7_606se")]
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pbfsw"]
 _data = {
 &"Fall": SubResource("Animation_dkpta"),
+&"Flap": SubResource("Animation_lfmf2"),
 &"Glide": SubResource("Animation_p5o4e"),
 &"Idle": SubResource("Animation_pylmc"),
 &"Jump": SubResource("Animation_5htga"),
@@ -698,9 +717,13 @@ mesh = ExtResource("7_606se")
 [node name="Wing_Right" type="MeshInstance3D" parent="Visuals/Offset" unique_id=1596002125]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.1, 0)
 material_override = SubResource("StandardMaterial3D_5tmop")
-mesh = ExtResource("6_5htga")
+mesh = ExtResource("4_ivps1")
 
 [node name="Wing_Left" type="MeshInstance3D" parent="Visuals/Offset" unique_id=1710493421]
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.1, 0)
 material_override = SubResource("StandardMaterial3D_5tmop")
-mesh = ExtResource("6_5htga")
+mesh = ExtResource("4_ivps1")
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=1661526467]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6869828, 0)
+target_position = Vector3(0, 0, -1)

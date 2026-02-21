@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://iqx2qa3vwyrj"]
+
+[ext_resource type="Script" uid="uid://87c71g5rvju0" path="res://Human/human.gd" id="1_sb0fm"]
+[ext_resource type="ArrayMesh" uid="uid://bi12lfml3ra7y" path="res://Human/Beach boy Startled.vox" id="2_q7i2j"]
+[ext_resource type="ArrayMesh" uid="uid://dclai3bu47dqd" path="res://Human/question mark.vox" id="3_w10no"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sb0fm"]
+radius = 1.097168
+height = 5.6049805
+
+[node name="Human" type="CharacterBody3D" unique_id=2136399363 groups=["humans"]]
+script = ExtResource("1_sb0fm")
+
+[node name="BeachBoy" type="MeshInstance3D" parent="." unique_id=1666240330]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.124005556, 0, 0)
+mesh = ExtResource("2_q7i2j")
+
+[node name="Reaction" type="MeshInstance3D" parent="." unique_id=1843588983]
+transform = Transform3D(-1.5, 0, -1.3113416e-07, 0, 1.5, 0, 1.3113416e-07, 0, -1.5, 0, 5.923512, 0)
+mesh = ExtResource("3_w10no")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=380257067]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8024902, 0)
+shape = SubResource("CapsuleShape3D_sb0fm")
+
+[node name="RayFront" type="RayCast3D" parent="." unique_id=623872331]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1751184644]
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1128873949]

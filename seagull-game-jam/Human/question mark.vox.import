@@ -1,0 +1,18 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions.To.Mesh"
+type="Mesh"
+uid="uid://dclai3bu47dqd"
+path="res://.godot/imported/question mark.vox-19413f9f27c1330db738cd5592922380.mesh"
+
+[deps]
+
+source_file="res://Human/question mark.vox"
+dest_files=["res://.godot/imported/question mark.vox-19413f9f27c1330db738cd5592922380.mesh"]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
+FirstKeyframeOnly=true

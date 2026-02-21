@@ -1,0 +1,18 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions.To.Mesh"
+type="Mesh"
+uid="uid://cojv5rae4miu6"
+path="res://.godot/imported/Road and test stuff.vox-c4a5669f25d5ea8b7739012a26141bcb.mesh"
+
+[deps]
+
+source_file="res://Road and test stuff.vox"
+dest_files=["res://.godot/imported/Road and test stuff.vox-c4a5669f25d5ea8b7739012a26141bcb.mesh"]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
+FirstKeyframeOnly=true
