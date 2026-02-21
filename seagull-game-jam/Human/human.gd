@@ -32,8 +32,8 @@ var state_timer: float = 0.0
 @onready var anim_player: AnimationPlayer = $AnimationPlayer # Optional: If you have animations
 
 func _ready() -> void:
-	nav_agent.path_desired_distance = 4.0
-	nav_agent.target_desired_distance = 4.0
+	nav_agent.path_desired_distance = 1.0
+	nav_agent.target_desired_distance = 1.0
 
 func set_movement_target(target:Vector3):
 	nav_agent.target_position = target
@@ -50,7 +50,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func next_idle_state():
-	current_idle = (current_idle + 1) % Idle_State.size()
+	current_idle = ((current_idle + 1) % Idle_State.size()) as Idle_State
 	is_at_location = false
 
 func idle(delta):
@@ -82,6 +82,7 @@ func idle(delta):
 
 func navigation_frame(delta):
 	if nav_agent.is_navigation_finished():
+		print("aww")
 		is_at_location = true
 	
 	var current_agent_position: Vector3 = global_position
