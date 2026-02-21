@@ -1,0 +1,18 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions.To.Mesh"
+type="Mesh"
+uid="uid://cjktyy3uhhcwu"
+path="res://.godot/imported/Seagull mafia lord.vox-d2d53ccb1083ffe71d2b52b6d4806643.mesh"
+
+[deps]
+
+source_file="res://Seagull mafia lord.vox"
+dest_files=["res://.godot/imported/Seagull mafia lord.vox-d2d53ccb1083ffe71d2b52b6d4806643.mesh"]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
+FirstKeyframeOnly=true
