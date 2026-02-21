@@ -5,6 +5,7 @@
 [ext_resource type="ArrayMesh" uid="uid://cib4fvn7yaqva" path="res://Player/test island.vox" id="3_6uqi0"]
 [ext_resource type="ArrayMesh" uid="uid://cojv5rae4miu6" path="res://Road and test stuff.vox" id="4_ppyta"]
 [ext_resource type="PackedScene" uid="uid://iqx2qa3vwyrj" path="res://Human/human.tscn" id="5_ykrsh"]
+[ext_resource type="ArrayMesh" uid="uid://8hlky3n66uer" path="res://Jack's food building.vox" id="6_g14j6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8uh7m"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -90,3 +91,7 @@ gizmo_extents = 4.11
 [node name="beach_position" type="Marker3D" parent="." unique_id=647440154]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.407934, 2.2149591, 6.3846893)
 gizmo_extents = 4.11
+
+[node name="Jack\'sFoodBuilding" type="MeshInstance3D" parent="." unique_id=1807127275]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -22.11146, -17.260805, -18.35846)
+mesh = ExtResource("6_g14j6")

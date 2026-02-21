@@ -1,0 +1,18 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions.To.Mesh"
+type="Mesh"
+uid="uid://8hlky3n66uer"
+path="res://.godot/imported/Jack's food building.vox-2fec571e0cf708f3836e90e0fb4fac22.mesh"
+
+[deps]
+
+source_file="res://Jack's food building.vox"
+dest_files=["res://.godot/imported/Jack's food building.vox-2fec571e0cf708f3836e90e0fb4fac22.mesh"]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
+FirstKeyframeOnly=true
