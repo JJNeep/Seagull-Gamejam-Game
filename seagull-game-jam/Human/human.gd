@@ -59,26 +59,26 @@ func idle(delta):
 			set_movement_target(job_position.position)
 			navigation_frame(delta)
 		else:
+			next_idle_state()
 			hide_player()
 			await get_tree().create_timer(job_time).timeout
 			show_player()
-			next_idle_state()
 	if current_idle == Idle_State.HOME:
 		if !is_at_location:
 			set_movement_target(home_position.position)
 			navigation_frame(delta)
 		else:
+			next_idle_state()
 			hide_player()
 			await get_tree().create_timer(home_time).timeout
 			show_player()
-			next_idle_state()
 	if current_idle == Idle_State.BEACH:
 		if !is_at_location:
 			set_movement_target(beach_position.position)
 			navigation_frame(delta)
 		else:
-			await get_tree().create_timer(beach_time).timeout
 			next_idle_state()
+			await get_tree().create_timer(beach_time).timeout
 
 func navigation_frame(delta):
 	if nav_agent.is_navigation_finished():

@@ -33,7 +33,6 @@ var current_glide_speed: float = 0.0
 var default_gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	spring_arm.add_excluded_object(self)
 
 func _input(event: InputEvent) -> void:
