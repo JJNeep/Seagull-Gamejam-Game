@@ -56,6 +56,10 @@ func non_idle(delta):
 		current_state = State.INVESTIGATE
 		$AnimationPlayer.play("Startle")
 	if current_state == State.INVESTIGATE:
+		var timer = null
+		if not timer:
+			timer = get_tree().create_timer(1)
+		print(timer.time)
 		velocity = Vector3.ZERO
 		for i in ray_front.get_collision_count():
 			if ray_front.is_colliding() and player == ray_front.get_collider(i):
