@@ -61,7 +61,7 @@ func _physics_process(delta: float) -> void:
 		process_glide(delta)
 	else:
 		process_standard_movement(delta)
-		if not $RayCast3D.is_colliding() and is_on_wall():
+		if not $Visuals/Offset/RayCast3D.is_colliding() and is_on_wall():
 			velocity.y += 0.3
 	
 	move_and_slide()

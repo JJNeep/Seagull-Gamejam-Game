@@ -6,6 +6,15 @@ enum Idle_State { WORK, BEACH, HOME }
 var current_state: State = State.IDLE
 var current_idle: Idle_State = Idle_State.WORK
 var is_at_location = false
+var suspicious = false
+var state_timer : SceneTreeTimer
+var suspicion_timer : SceneTreeTimer
+
+@export var investigate_time : float = 4.0
+@export var chase_time : float = 4.0
+@export var suspicious_for_investigate_timer : float = 20.0
+@export var suspicious_for_chase_timer : float = 60.0
+@export var hearing_range : float = 10.0
 
 @export_group("Pathfind")
 @export var job_position = Node3D
@@ -25,7 +34,6 @@ var is_at_location = false
 
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var move_dir: Vector3 = Vector3.ZERO
-var state_timer: float = 0.0
 
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var ray_front: ShapeCast3D = $RayFront
@@ -46,6 +54,14 @@ func _physics_process(delta: float) -> void:
 	else:
 		non_idle(delta)
 	
+	if suspicion_timer and not suspicion_timer.time_left == 0:
+		suspicious = true
+	
+	if suspicious and ray_front.is_colliding():
+		for i in ray_front.get_collision_count():
+			if player == ray_front.get_collider(i):
+				current_state = State.CHASE
+	
 	$Reaction.look_at(Vector3(player.camera.global_position.x,$Reaction.position.y,player.camera.global_position.z))
 	$Reaction.rotation_degrees.y -= 180
 	
@@ -54,19 +70,28 @@ func _physics_process(delta: float) -> void:
 func non_idle(delta):
 	if current_state == State.STARTLE:
 		current_state = State.INVESTIGATE
+		state_timer = get_tree().create_timer(investigate_time)
 		$AnimationPlayer.play("Startle")
 	if current_state == State.INVESTIGATE:
-		var timer = null
-		if not timer:
-			timer = get_tree().create_timer(1)
-		print(timer.time)
 		velocity = Vector3.ZERO
-		for i in ray_front.get_collision_count():
-			if ray_front.is_colliding() and player == ray_front.get_collider(i):
-				current_state = State.CHASE
-			else:
-				rotate_y(1*delta)
+		if ray_front.is_colliding():
+			for i in ray_front.get_collision_count():
+				if player == ray_front.get_collider(i):
+					state_timer = get_tree().create_timer(chase_time)
+					current_state = State.CHASE
+				else:
+					rotate_y(1*delta)
+		if state_timer.time_left == 0:
+			suspicion_timer = get_tree().create_timer(suspicious_for_investigate_timer)
+			current_state = State.IDLE
 	if current_state == State.CHASE:
+		if ray_front.is_colliding():
+			for i in ray_front.get_collision_count():
+				if player == ray_front.get_collider(i):
+					state_timer = get_tree().create_timer(chase_time)
+		if state_timer.time_left == 0:
+			suspicion_timer = get_tree().create_timer(suspicious_for_chase_timer)
+			current_state = State.IDLE
 		set_movement_target(player.position)
 		navigation_frame(delta, true)
 
@@ -133,5 +158,6 @@ func show_player():
 
 # This exact function name was called by your Player's perform_squawk()
 func get_annoyed(bird_pos: Vector3) -> void:
-	print("AHHHHH")
-	current_state = State.STARTLE
+	if bird_pos.distance_to(position) < hearing_range:
+		print("AHHHHH")
+		current_state = State.STARTLE
