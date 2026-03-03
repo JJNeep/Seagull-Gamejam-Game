@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://sthmotkx108k" path="res://Player/player.tscn" id="1_37kl0"]
 [ext_resource type="PackedScene" uid="uid://dhmsuhkn50pl4" path="res://ocean.tscn" id="2_8uh7m"]
-[ext_resource type="ArrayMesh" uid="uid://cib4fvn7yaqva" path="res://Player/test island.vox" id="3_6uqi0"]
+[ext_resource type="ArrayMesh" uid="uid://cib4fvn7yaqva" path="res://test island.vox" id="3_6uqi0"]
 [ext_resource type="ArrayMesh" uid="uid://cojv5rae4miu6" path="res://Road and test stuff.vox" id="4_ppyta"]
 [ext_resource type="PackedScene" uid="uid://iqx2qa3vwyrj" path="res://Human/human.tscn" id="5_ykrsh"]
 [ext_resource type="ArrayMesh" uid="uid://8hlky3n66uer" path="res://Jack's food building.vox" id="6_g14j6"]
