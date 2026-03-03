@@ -130,6 +130,9 @@ func navigation_frame(delta, running:bool=false):
 	if nav_agent.is_navigation_finished():
 		is_at_location = true
 	
+	if not nav_agent.is_target_reachable():
+		nav_agent.target_position = NavigationServer3D.map_get_closest_point(nav_agent.get_navigation_map(), nav_agent.target_position)
+	
 	var current_agent_position: Vector3 = global_position
 	var next_path_position: Vector3 = nav_agent.get_next_path_position()
 	var new_velocity: Vector3 = next_path_position - current_agent_position
@@ -145,6 +148,18 @@ func navigation_frame(delta, running:bool=false):
 		rotation.y = lerp_angle(rotation.y, target_angle, 10.0 * delta)
 	
 	velocity = new_velocity
+
+func set_safe_target(target_pos: Vector3):
+	var map = get_world_3d().navigation_map
+	var closest_point = NavigationServer3D.map_get_closest_point(map, target_pos)
+	
+	# Check if the closest reachable point is too far from the intended target
+	if nav_agent.is_target_reachable(): 
+		# The target is likely "out of reach" (in the air or behind a wall)
+		# You can choose to stop or move to the closest valid point instead
+		nav_agent.target_position = closest_point 
+	else:
+		nav_agent.target_position = target_pos
 
 func hide_player():
 	$Reaction.hide()

@@ -101,12 +101,20 @@ gizmo_extents = 4.11
 
 [node name="Human" parent="." unique_id=2136399363 node_paths=PackedStringArray("job_position", "home_position", "beach_position", "player") instance=ExtResource("5_ykrsh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.74597, 2.2832446, -7.926559)
+investigate_time = null
+chase_time = null
+suspicious_for_investigate_timer = null
+suspicious_for_chase_timer = null
+hearing_range = null
 job_position = NodePath("../job_position")
 job_time = 1.0
 home_position = NodePath("../home_position")
 home_time = 1.0
 beach_position = NodePath("../beach_position")
 beach_time = 1.0
+walk_speed = null
+run_speed = null
+flee_duration = null
 player = NodePath("../Player")
 
 [node name="home_position" type="Marker3D" parent="." unique_id=1752409436]
