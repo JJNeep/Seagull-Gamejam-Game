@@ -76,6 +76,7 @@ func _physics_process(delta: float) -> void:
 func perform_squawk() -> void:
 	is_squawking = true
 	# Alert Humans in a 20 meter radius
+	print("SQUAWK")
 	get_tree().call_group("humans", "get_annoyed", global_position)
 	await get_tree().create_timer(1).timeout
 	is_squawking = false

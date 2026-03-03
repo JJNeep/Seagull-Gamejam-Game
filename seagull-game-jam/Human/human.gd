@@ -28,7 +28,7 @@ var move_dir: Vector3 = Vector3.ZERO
 var state_timer: float = 0.0
 
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
-@onready var ray_front: RayCast3D = $RayFront
+@onready var ray_front: ShapeCast3D = $RayFront
 @onready var anim_player: AnimationPlayer = $AnimationPlayer # Optional: If you have animations
 
 func _ready() -> void:
@@ -43,11 +43,32 @@ func _physics_process(delta: float) -> void:
 		velocity.y -= gravity * delta
 	elif current_state == State.IDLE:
 		idle(delta)
+	else:
+		non_idle(delta)
 	
 	$Reaction.look_at(Vector3(player.camera.global_position.x,$Reaction.position.y,player.camera.global_position.z))
 	$Reaction.rotation_degrees.y -= 180
 	
 	move_and_slide()
+
+func non_idle(delta):
+	if current_state == State.STARTLE:
+		current_state = State.INVESTIGATE
+		$AnimationPlayer.play("Startle")
+	if current_state == State.INVESTIGATE:
+		var timer = null
+		if not timer:
+			timer = get_tree().create_timer(1)
+		print(timer.time)
+		velocity = Vector3.ZERO
+		for i in ray_front.get_collision_count():
+			if ray_front.is_colliding() and player == ray_front.get_collider(i):
+				current_state = State.CHASE
+			else:
+				rotate_y(1*delta)
+	if current_state == State.CHASE:
+		set_movement_target(player.position)
+		navigation_frame(delta, true)
 
 func next_idle_state():
 	current_idle = ((current_idle + 1) % Idle_State.size()) as Idle_State
@@ -80,16 +101,18 @@ func idle(delta):
 			next_idle_state()
 			await get_tree().create_timer(beach_time).timeout
 
-func navigation_frame(delta):
+func navigation_frame(delta, running:bool=false):
 	if nav_agent.is_navigation_finished():
-		print("aww")
 		is_at_location = true
 	
 	var current_agent_position: Vector3 = global_position
 	var next_path_position: Vector3 = nav_agent.get_next_path_position()
 	var new_velocity: Vector3 = next_path_position - current_agent_position
 	new_velocity = new_velocity.normalized()
-	new_velocity = new_velocity * walk_speed
+	if running:
+		new_velocity = new_velocity * run_speed
+	else:
+		new_velocity = new_velocity * walk_speed
 	
 	# Place this after calculating new_velocity but before move_and_slide()
 	if new_velocity.length() > 0.1:
@@ -110,4 +133,5 @@ func show_player():
 
 # This exact function name was called by your Player's perform_squawk()
 func get_annoyed(bird_pos: Vector3) -> void:
-	pass
+	print("AHHHHH")
+	current_state = State.STARTLE
