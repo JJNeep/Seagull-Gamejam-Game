@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://degeafueu4c5b"]
+
+[ext_resource type="ArrayMesh" uid="uid://dpkf1jx056nx6" path="res://Player/package.vox" id="1_yt42q"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q1vm8"]
+size = Vector3(0.6, 0.2, 0.6)
+
+[node name="Package" type="Area3D" unique_id=1762443383]
+
+[node name="Package" type="MeshInstance3D" parent="." unique_id=1327300614]
+mesh = ExtResource("1_yt42q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1170989915]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("BoxShape3D_q1vm8")
