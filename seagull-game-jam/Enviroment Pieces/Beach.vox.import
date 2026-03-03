@@ -1,0 +1,18 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions.To.Mesh"
+type="Mesh"
+uid="uid://c44irj3uiybkk"
+path="res://.godot/imported/Beach.vox-85dd9d4cd4fe50d2e19b5a8637887f68.mesh"
+
+[deps]
+
+source_file="res://Enviroment Pieces/Beach.vox"
+dest_files=["res://.godot/imported/Beach.vox-85dd9d4cd4fe50d2e19b5a8637887f68.mesh"]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
+FirstKeyframeOnly=true

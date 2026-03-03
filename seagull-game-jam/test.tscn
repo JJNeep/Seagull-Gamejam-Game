@@ -2,23 +2,23 @@
 
 [ext_resource type="PackedScene" uid="uid://sthmotkx108k" path="res://Player/player.tscn" id="1_37kl0"]
 [ext_resource type="PackedScene" uid="uid://dhmsuhkn50pl4" path="res://ocean.tscn" id="2_8uh7m"]
-[ext_resource type="ArrayMesh" uid="uid://cib4fvn7yaqva" path="res://test island.vox" id="3_6uqi0"]
-[ext_resource type="ArrayMesh" uid="uid://cojv5rae4miu6" path="res://Road and test stuff.vox" id="4_ppyta"]
+[ext_resource type="ArrayMesh" uid="uid://cib4fvn7yaqva" path="res://Enviroment Pieces/test island.vox" id="3_6uqi0"]
+[ext_resource type="ArrayMesh" uid="uid://cojv5rae4miu6" path="res://Enviroment Pieces/Road and test stuff.vox" id="4_ppyta"]
 [ext_resource type="PackedScene" uid="uid://iqx2qa3vwyrj" path="res://Human/human.tscn" id="5_ykrsh"]
-[ext_resource type="ArrayMesh" uid="uid://hjn5sxb03iw8" path="res://City Building 1.vox" id="6_ehkex"]
-[ext_resource type="ArrayMesh" uid="uid://8hlky3n66uer" path="res://Jack's food building.vox" id="6_g14j6"]
+[ext_resource type="ArrayMesh" uid="uid://hjn5sxb03iw8" path="res://Enviroment Pieces/City Building 1.vox" id="6_ehkex"]
+[ext_resource type="ArrayMesh" uid="uid://8hlky3n66uer" path="res://Enviroment Pieces/Jack's food building.vox" id="6_g14j6"]
 [ext_resource type="ArrayMesh" uid="uid://cjktyy3uhhcwu" path="res://Seagull mafia lord.vox" id="7_vbegm"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8uh7m"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_77dp3"]
+sky_top_color = Color(0.015859274, 0.49726123, 0.99996144, 1)
+sky_horizon_color = Color(0.8417286, 0.60062116, 0.28336942, 1)
 
-[sub_resource type="Sky" id="Sky_6uqi0"]
-sky_material = SubResource("ProceduralSkyMaterial_8uh7m")
+[sub_resource type="Sky" id="Sky_5tkv4"]
+sky_material = SubResource("ProceduralSkyMaterial_77dp3")
 
 [sub_resource type="Environment" id="Environment_ppyta"]
 background_mode = 2
-sky = SubResource("Sky_6uqi0")
+sky = SubResource("Sky_5tkv4")
 tonemap_mode = 2
 glow_enabled = true
 

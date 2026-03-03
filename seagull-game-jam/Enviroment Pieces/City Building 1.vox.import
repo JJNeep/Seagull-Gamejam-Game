@@ -1,0 +1,18 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions.To.Mesh"
+type="Mesh"
+uid="uid://hjn5sxb03iw8"
+path="res://.godot/imported/City Building 1.vox-f6f39733adabac9f512013a6434946c2.mesh"
+
+[deps]
+
+source_file="res://Enviroment Pieces/City Building 1.vox"
+dest_files=["res://.godot/imported/City Building 1.vox-f6f39733adabac9f512013a6434946c2.mesh"]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
+FirstKeyframeOnly=true
