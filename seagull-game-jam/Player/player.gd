@@ -183,3 +183,9 @@ func update_animations() -> void:
 			anim_player.play("Jump")
 		else:
 			anim_player.play("Fall")
+
+
+
+#joseph@codekids.com.au for help
+func _on_button_pressed() -> void:
+	get_node('2Deagull').visible = true
