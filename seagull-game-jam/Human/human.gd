@@ -222,5 +222,5 @@ func hear_squawk(bird_pos: Vector3) -> void:
 		current_state = State.STARTLE
 
 func collide_package() -> void:
-	after_startle = State.PACKAGE
+	after_startle = State.CONFUSED
 	current_state = State.STARTLE
