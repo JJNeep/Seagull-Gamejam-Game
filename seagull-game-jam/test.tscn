@@ -8,6 +8,8 @@
 [ext_resource type="ArrayMesh" uid="uid://hjn5sxb03iw8" path="res://Enviroment Pieces/City Building 1.vox" id="6_ehkex"]
 [ext_resource type="ArrayMesh" uid="uid://8hlky3n66uer" path="res://Enviroment Pieces/Jack's food building.vox" id="6_g14j6"]
 [ext_resource type="ArrayMesh" uid="uid://cjktyy3uhhcwu" path="res://Seagull mafia lord.vox" id="7_vbegm"]
+[ext_resource type="ArrayMesh" uid="uid://bjfqojr8ebpaw" path="res://Enviroment Pieces/Road turn.vox" id="9_00tp4"]
+[ext_resource type="ArrayMesh" uid="uid://bk4ebo1cgr7pj" path="res://Player/Road.vox" id="10_77dp3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_77dp3"]
 sky_top_color = Color(0.015859274, 0.49726123, 0.99996144, 1)
@@ -70,7 +72,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5629501, 0, 0)
 navigation_mesh = SubResource("NavigationMesh_ppyta")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D" unique_id=304360120]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.145359, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0041792393, 1.145359, 0.022509575)
 collision_mask = 7
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D" unique_id=573168773]
@@ -143,5 +145,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.407934, 2.2149591, 6.384689
 gizmo_extents = 4.11
 
 [node name="SeagullMafiaLord" type="MeshInstance3D" parent="." unique_id=1331684966]
-transform = Transform3D(2.1, 0, 0, 0, 2.1, 0, 0, 0, 2.1, 2.6029053, 1.9999981, 4.319296)
+transform = Transform3D(2.0999742, -0.010372449, 0, 0.010372449, 2.0999742, 0, 0, 0, 2.0999997, 3.3795218, 2.0224714, 3.0535707)
 mesh = ExtResource("7_vbegm")
+
+[node name="RoadTurn" type="MeshInstance3D" parent="." unique_id=882026241]
+transform = Transform3D(-2, 0, -1.7484555e-07, 0, 2, 0, 1.7484555e-07, 0, -2, -23.089493, 0, 17.214397)
+mesh = ExtResource("9_00tp4")
+
+[node name="TileMap" type="TileMap" parent="RoadTurn" unique_id=1461499040]
+format = 2
+
+[node name="Road2" type="MeshInstance3D" parent="." unique_id=2079924246]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -29.277756, 0, 20.353262)
+mesh = ExtResource("10_77dp3")
