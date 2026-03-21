@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://chsiqhed6plri"]
+
+[ext_resource type="Script" uid="uid://om1jdtmkeksi" path="res://sound_manager.gd" id="1_g5net"]
+[ext_resource type="AudioStream" uid="uid://blih6vvsuegl1" path="res://Player/poop.mp3" id="2_ndygv"]
+[ext_resource type="AudioStream" uid="uid://bcu6qv16hklmf" path="res://Player/splat.mp3" id="3_h8btt"]
+[ext_resource type="AudioStream" uid="uid://dheyanob84clo" path="res://Player/Squawk.mp3" id="4_7jwsb"]
+
+[node name="Sound Manager" type="Node3D" unique_id=773484433]
+script = ExtResource("1_g5net")
+library = Dictionary[String, AudioStream]({
+"Squawk.mp3": ExtResource("4_7jwsb"),
+"poop.mp3": ExtResource("2_ndygv"),
+"splat.mp3": ExtResource("3_h8btt")
+})

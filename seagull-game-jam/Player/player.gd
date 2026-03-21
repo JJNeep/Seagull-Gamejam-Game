@@ -9,12 +9,12 @@ class_name Player
 @export var mouse_sensitivity: float = 0.003
 
 @export_group("Flight Physics")
-@export var min_glide_speed: float = 8.0
+@export var min_glide_speed: float = 0.0
 @export var max_glide_speed: float = 30.0 
 @export var dive_acceleration: float = 25.0 
 @export var climb_deceleration: float = 40.0 
-@export var glide_gravity: float = 8.0 # This ensures you slowly sink if looking forward
-@export var base_glide_speed: float = 8.0
+@export var glide_gravity: float = 16.0 # This ensures you slowly sink if looking forward
+@export var base_glide_speed: float = 0.0
 @export var roll_amount: float = 30.0
 @export var flap_force: float = 20.0
 
@@ -24,6 +24,8 @@ class_name Player
 @onready var spring_arm: SpringArm3D = $CamPivot/SpringArm3D
 @onready var camera: Camera3D = $CamPivot/SpringArm3D/Camera3D
 @onready var anim_player: AnimationPlayer = $Visuals/AnimationPlayer 
+
+var package = preload("res://Player/package.tscn")
 
 var pov = 1
 var is_flapping: bool = false
@@ -55,6 +57,9 @@ func _input(event: InputEvent) -> void:
 			pov = -1
 		else:
 			pov = 1
+	
+	if event.is_action_pressed("drop_package"):
+		drop_package()
 
 func _physics_process(delta: float) -> void:
 	if is_gliding:
@@ -73,11 +78,17 @@ func _physics_process(delta: float) -> void:
 	
 	spring_arm.rotation_degrees.y = 180 * abs(clamp(pov,-1,0))
 
+func drop_package() -> void:
+	SoundManager.play_sound("poop.mp3",0.0,randf_range(0.5,1.5))
+	var inst = package.instantiate()
+	inst.position = $Visuals/Offset/Package_Drop_Point.global_position
+	inst.rotation_degrees.y = $Visuals.rotation_degrees.snapped(Vector3(0,90,0)).y
+	get_parent().add_child(inst)
+
 func perform_squawk() -> void:
 	is_squawking = true
 	# Alert Humans in a 20 meter radius
-	print("SQUAWK")
-	get_tree().call_group("humans", "get_annoyed", global_position)
+	get_tree().call_group("humans", "hear_squawk", global_position)
 	await get_tree().create_timer(1).timeout
 	is_squawking = false
 
@@ -104,6 +115,9 @@ func process_glide(delta: float) -> void:
 		current_glide_speed += pitch_factor * climb_deceleration * delta
 		
 	current_glide_speed = clamp(current_glide_speed, min_glide_speed, max_glide_speed)
+	
+	if current_glide_speed == 0 :
+		toggle_glide()
 	
 	velocity = aim_dir * current_glide_speed
 	velocity.y -= glide_gravity * delta

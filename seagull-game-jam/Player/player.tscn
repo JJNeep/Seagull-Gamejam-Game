@@ -1,18 +1,17 @@
 [gd_scene format=3 uid="uid://sthmotkx108k"]
 
 [ext_resource type="Script" uid="uid://jw13mxilyjsu" path="res://Player/player.gd" id="1_b26j0"]
-[ext_resource type="ArrayMesh" uid="uid://d04ruqhf410b4" path="res://Player/Body_Without_Large_Beak.obj" id="2_n7ghd"]
-[ext_resource type="ArrayMesh" uid="uid://bk6v0yka5pt4l" path="res://Player/Body_Honk.obj" id="3_nvl01"]
-[ext_resource type="ArrayMesh" uid="uid://cfcryo14p4up3" path="res://Player/Wing_By_Side.obj" id="4_ivps1"]
-[ext_resource type="ArrayMesh" uid="uid://cjl611f02lnx4" path="res://Player/Leg_Back.obj" id="5_apopc"]
-[ext_resource type="ArrayMesh" uid="uid://di85gqjwxker4" path="res://Player/Wing_Up.obj" id="5_urp6f"]
-[ext_resource type="ArrayMesh" uid="uid://dedw4fp4iljgy" path="res://Player/Wing_Down.obj" id="6_5htga"]
-[ext_resource type="ArrayMesh" uid="uid://cmqb8sq1topq3" path="res://Player/Wing.obj" id="6_bwjto"]
-[ext_resource type="ArrayMesh" uid="uid://cjkwqnwbxjiak" path="res://Player/Leg.obj" id="7_606se"]
-[ext_resource type="ArrayMesh" uid="uid://cp1d7yc1t8pdl" path="res://Player/Leg_Up.obj" id="8_p5o4e"]
-[ext_resource type="Texture2D" uid="uid://du4xqiupnkjud" path="res://Player/pal0.png" id="8_u1c27"]
+[ext_resource type="ArrayMesh" uid="uid://dl312jeedyv7y" path="res://Player/Body.vox" id="3_5htga"]
+[ext_resource type="ArrayMesh" uid="uid://clrxo738a1vob" path="res://Player/Leg.vox" id="4_p5o4e"]
+[ext_resource type="ArrayMesh" uid="uid://bp7b78m72x7dy" path="res://Player/Wing_By_Side.vox" id="5_gu6f8"]
+[ext_resource type="ArrayMesh" uid="uid://5dv5fbn0s0o3" path="res://Player/Wing_Up.vox" id="6_dkpta"]
+[ext_resource type="ArrayMesh" uid="uid://cukbd555iyplr" path="res://Player/Wing_Down.vox" id="7_lfmf2"]
+[ext_resource type="ArrayMesh" uid="uid://inbj4g5g3bmq" path="res://Player/Leg_Up.vox" id="8_pisgm"]
+[ext_resource type="ArrayMesh" uid="uid://ddig8eico668x" path="res://Player/Wing.vox" id="9_b1ygp"]
 [ext_resource type="AudioStream" uid="uid://dheyanob84clo" path="res://Player/Squawk.mp3" id="9_op7ga"]
-[ext_resource type="ArrayMesh" uid="uid://brjkkkmlfy1lc" path="res://Player/Leg_Forward.obj" id="11_5htga"]
+[ext_resource type="ArrayMesh" uid="uid://vpyms0lpx014" path="res://Player/Leg_Back.vox" id="10_o28un"]
+[ext_resource type="ArrayMesh" uid="uid://cbt34j5mr6li3" path="res://Player/Leg_Forward.vox" id="11_n471f"]
+[ext_resource type="ArrayMesh" uid="uid://cux6yapt53y5i" path="res://Player/Body_Honk.vox" id="12_7emwf"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_00tjw"]
 radius = 0.9086914
@@ -31,7 +30,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_n7ghd")]
+"values": [ExtResource("3_5htga")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -43,7 +42,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("7_606se")]
+"values": [ExtResource("4_p5o4e")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -55,7 +54,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("7_606se")]
+"values": [ExtResource("4_p5o4e")]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -67,7 +66,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_ivps1")]
+"values": [ExtResource("5_gu6f8")]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -79,7 +78,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_ivps1")]
+"values": [ExtResource("5_gu6f8")]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -156,7 +155,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("5_urp6f"), ExtResource("6_5htga")]
+"values": [ExtResource("6_dkpta"), ExtResource("7_lfmf2")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -168,7 +167,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("5_urp6f"), ExtResource("6_5htga")]
+"values": [ExtResource("6_dkpta"), ExtResource("7_lfmf2")]
 }
 
 [sub_resource type="Animation" id="Animation_p5o4e"]
@@ -183,7 +182,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("8_p5o4e")]
+"values": [ExtResource("8_pisgm")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -195,7 +194,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("8_p5o4e")]
+"values": [ExtResource("8_pisgm")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -207,7 +206,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("6_bwjto")]
+"values": [ExtResource("9_b1ygp")]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -219,7 +218,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("6_bwjto")]
+"values": [ExtResource("9_b1ygp")]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -279,7 +278,7 @@ tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_n7ghd")]
+"values": [ExtResource("3_5htga")]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
@@ -307,7 +306,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_n7ghd")]
+"values": [ExtResource("3_5htga")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -319,7 +318,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("7_606se")]
+"values": [ExtResource("4_p5o4e")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -331,7 +330,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("7_606se")]
+"values": [ExtResource("4_p5o4e")]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -343,7 +342,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_ivps1")]
+"values": [ExtResource("5_gu6f8")]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -355,7 +354,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_ivps1")]
+"values": [ExtResource("5_gu6f8")]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -431,7 +430,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("7_606se")]
+"values": [ExtResource("4_p5o4e")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -443,7 +442,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("7_606se")]
+"values": [ExtResource("4_p5o4e")]
 }
 
 [sub_resource type="Animation" id="Animation_gu6f8"]
@@ -460,7 +459,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.4, 0.9),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ExtResource("5_apopc"), ExtResource("11_5htga"), ExtResource("5_apopc")]
+"values": [ExtResource("10_o28un"), ExtResource("11_n471f"), ExtResource("10_o28un")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -472,7 +471,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0.4, 0.9),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("5_apopc"), ExtResource("11_5htga")]
+"values": [ExtResource("10_o28un"), ExtResource("11_n471f")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -484,7 +483,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_ivps1")]
+"values": [ExtResource("5_gu6f8")]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -496,7 +495,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_ivps1")]
+"values": [ExtResource("5_gu6f8")]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -508,7 +507,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_n7ghd")]
+"values": [ExtResource("3_5htga")]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -583,7 +582,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1667, 0.93333334),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ExtResource("2_n7ghd"), ExtResource("3_nvl01"), ExtResource("2_n7ghd")]
+"values": [ExtResource("3_5htga"), ExtResource("12_7emwf"), ExtResource("3_5htga")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -607,7 +606,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.23333332, 0.42, 0.64, 0.8666667, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("4_ivps1"), ExtResource("5_urp6f"), ExtResource("6_bwjto"), ExtResource("5_urp6f"), ExtResource("6_bwjto"), ExtResource("4_ivps1")]
+"values": [ExtResource("5_gu6f8"), ExtResource("6_dkpta"), ExtResource("9_b1ygp"), ExtResource("6_dkpta"), ExtResource("9_b1ygp"), ExtResource("5_gu6f8")]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -619,7 +618,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.23333332, 0.42, 0.64, 0.8666667, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("4_ivps1"), ExtResource("5_urp6f"), ExtResource("6_bwjto"), ExtResource("5_urp6f"), ExtResource("6_bwjto"), ExtResource("4_ivps1")]
+"values": [ExtResource("5_gu6f8"), ExtResource("6_dkpta"), ExtResource("9_b1ygp"), ExtResource("6_dkpta"), ExtResource("9_b1ygp"), ExtResource("5_gu6f8")]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -669,10 +668,9 @@ _data = {
 &"Squawk": SubResource("Animation_q13i1")
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5tmop"]
-albedo_texture = ExtResource("8_u1c27")
-
 [node name="Player" type="CharacterBody3D" unique_id=843585877]
+collision_layer = 2
+collision_mask = 7
 script = ExtResource("1_b26j0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=285806390]
@@ -701,29 +699,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.461089, 0)
 
 [node name="Body" type="MeshInstance3D" parent="Visuals/Offset" unique_id=628440405]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.1, 0)
-material_override = SubResource("StandardMaterial3D_5tmop")
-mesh = ExtResource("2_n7ghd")
+mesh = ExtResource("3_5htga")
 
 [node name="Leg_Right" type="MeshInstance3D" parent="Visuals/Offset" unique_id=446918218]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.1, 0)
-material_override = SubResource("StandardMaterial3D_5tmop")
-mesh = ExtResource("7_606se")
+mesh = ExtResource("10_o28un")
 
 [node name="Leg_Left" type="MeshInstance3D" parent="Visuals/Offset" unique_id=261088747]
-transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.1, 0)
-material_override = SubResource("StandardMaterial3D_5tmop")
-mesh = ExtResource("7_606se")
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+mesh = ExtResource("11_n471f")
 
 [node name="Wing_Right" type="MeshInstance3D" parent="Visuals/Offset" unique_id=1596002125]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.1, 0)
-material_override = SubResource("StandardMaterial3D_5tmop")
-mesh = ExtResource("4_ivps1")
+mesh = ExtResource("5_gu6f8")
 
 [node name="Wing_Left" type="MeshInstance3D" parent="Visuals/Offset" unique_id=1710493421]
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.1, 0)
-material_override = SubResource("StandardMaterial3D_5tmop")
-mesh = ExtResource("4_ivps1")
+mesh = ExtResource("5_gu6f8")
 
 [node name="RayCast3D" type="RayCast3D" parent="Visuals/Offset" unique_id=1661526467]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7741062, 0)
 target_position = Vector3(0, 0, -1)
+
+[node name="Package_Drop_Point" type="Marker3D" parent="Visuals/Offset" unique_id=366868600]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.79864204, 0)

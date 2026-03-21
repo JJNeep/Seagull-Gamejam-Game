@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://by7kwcqwqhggd"]
+
+[ext_resource type="PackedScene" uid="uid://iqx2qa3vwyrj" path="res://Human/human.tscn" id="1_q7irv"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1jsay"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_nrywj"]
+sky_material = SubResource("ProceduralSkyMaterial_1jsay")
+
+[sub_resource type="Environment" id="Environment_iq4qb"]
+background_mode = 2
+sky = SubResource("Sky_nrywj")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_35iiv"]
+font_size = 100
+
+[node name="Absolute Cinema" type="Node3D" unique_id=1307781858]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=72806999]
+environment = SubResource("Environment_iq4qb")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1932464175]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=717776507]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 4.197, -3.823)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1677680935]
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1722811079]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -409.5
+offset_right = 409.5
+offset_bottom = 137.0
+grow_horizontal = 2
+text = "Absolute Cinema"
+label_settings = SubResource("LabelSettings_35iiv")
+
+[node name="Human" parent="." unique_id=2136399363 instance=ExtResource("1_q7irv")]
+absolute_cinema = true
