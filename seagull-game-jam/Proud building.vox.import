@@ -1,0 +1,18 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions.To.Mesh"
+type="Mesh"
+uid="uid://b68ybpy6atd1k"
+path="res://.godot/imported/Proud building.vox-28ba29dfaf795d696f90501554a6fede.mesh"
+
+[deps]
+
+source_file="res://Proud building.vox"
+dest_files=["res://.godot/imported/Proud building.vox-28ba29dfaf795d696f90501554a6fede.mesh"]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
+FirstKeyframeOnly=true

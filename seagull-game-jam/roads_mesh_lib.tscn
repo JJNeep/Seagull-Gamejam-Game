@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cyv5raswpp70"]
+
+[ext_resource type="ArrayMesh" uid="uid://bjfqojr8ebpaw" path="res://Enviroment Pieces/Road turn.vox" id="1_4kghu"]
+[ext_resource type="ArrayMesh" uid="uid://ddmblq667vmap" path="res://Enviroment Pieces/Road.vox" id="2_kg67r"]
+
+[node name="Roads mesh lib" type="Node3D" unique_id=80520191]
+
+[node name="Road turn" type="MeshInstance3D" parent="." unique_id=1947865266]
+mesh = ExtResource("1_4kghu")
+
+[node name="Road" type="MeshInstance3D" parent="." unique_id=1986321754]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0, 0.1)
+mesh = ExtResource("2_kg67r")
