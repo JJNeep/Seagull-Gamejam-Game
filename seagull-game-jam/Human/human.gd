@@ -56,6 +56,10 @@ func set_movement_target(target:Vector3):
 	nav_agent.target_position = target
 
 func _physics_process(delta: float) -> void:
+	if position.y < -100:
+		QuestManager.check_quests("human", self)
+		queue_free()
+	
 	if absolute_cinema:
 		return
 	
@@ -80,6 +84,7 @@ func _physics_process(delta: float) -> void:
 
 func non_idle(delta):
 	if current_state == State.STARTLE:
+		show_player()
 		stop_pathfinding()
 		state_player.play("Startle")
 		await get_tree().create_timer(2).timeout
@@ -145,8 +150,14 @@ func idle(delta):
 			set_movement_target(beach_position.position)
 			navigation_frame(delta)
 		else:
-			next_idle_state()
+			stop_pathfinding()
+			eat_chip()
+			
 			await get_tree().create_timer(beach_time).timeout
+			next_idle_state()
+
+func eat_chip():
+	pass
 
 func navigation_frame(delta, running:bool=false):
 	if nav_agent.is_navigation_finished():
