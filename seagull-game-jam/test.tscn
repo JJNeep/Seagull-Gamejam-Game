@@ -157,7 +157,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.407934, 2.2149591, 6.384689
 gizmo_extents = 4.11
 
 [node name="Mafia Lord" parent="." unique_id=479415176 instance=ExtResource("9_77dp3")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 3.3166838, 0, 3.4504585)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 3.3166838, 2.1100512, 3.4504585)
 
 [node name="GridMap" type="GridMap" parent="." unique_id=2139592216]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -23.967028, -0.999382, 18.467817)
