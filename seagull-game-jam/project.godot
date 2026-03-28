@@ -19,7 +19,6 @@ config/icon="uid://dl7jlxes4nafc"
 
 Global="*uid://dtpcleyjvvoo"
 SoundManager="*uid://chsiqhed6plri"
-QuestManager="*uid://ct3tl6q4p06nv"
 
 [editor_plugins]
 
