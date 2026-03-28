@@ -9,8 +9,8 @@ class_name Player
 @export var mouse_sensitivity: float = 0.003
 
 @export_group("Flight Physics")
-@export var min_glide_speed: float = 5.0
-@export var max_glide_speed: float = 30.0
+@export var min_glide_speed: float = 0.0
+@export var max_glide_speed: float = 30.0 
 @export var dive_acceleration: float = 25.0 
 @export var climb_deceleration: float = 40.0 
 @export var glide_gravity: float = 16.0 # This ensures you slowly sink if looking forward
@@ -34,55 +34,49 @@ var is_gliding: bool = false
 var current_glide_speed: float = 0.0
 var default_gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-var can_move = true
-
 func _ready() -> void:
-	camera.current = true
 	spring_arm.add_excluded_object(self)
 
 func _input(event: InputEvent) -> void:
-	if can_move:
-		if event is InputEventMouseMotion:
-			if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
-				return
-			var rot = cam_pivot.rotation_degrees
-			rot.y -= event.relative.x * mouse_sensitivity * 50.0
-			rot.x -= event.relative.y * mouse_sensitivity * 50.0
-			rot.x = clamp(rot.x, -80.0, 80.0)
-			rot.z = 0.0
-			cam_pivot.rotation_degrees = rot
+	if event is InputEventMouseMotion:
+		var rot = cam_pivot.rotation_degrees
+		rot.y -= event.relative.x * mouse_sensitivity * 50.0
+		rot.x -= event.relative.y * mouse_sensitivity * 50.0
+		rot.x = clamp(rot.x, -80.0, 80.0)
+		rot.z = 0.0
+		cam_pivot.rotation_degrees = rot
 
-		if event.is_action_pressed("jump") and not is_on_floor():
-			toggle_glide()
+	if event.is_action_pressed("jump") and not is_on_floor():
+		toggle_glide()
 			
-		if event.is_action_pressed("squawk"):
-			perform_squawk()
+	if event.is_action_pressed("squawk"):
+		perform_squawk()
 	
-		if event.is_action_pressed("toggle_pov"):
-			if pov == 1:
-				pov = -1
-			else:
-				pov = 1
+	if event.is_action_pressed("toggle_pov"):
+		if pov == 1:
+			pov = -1
+		else:
+			pov = 1
 	
-		if event.is_action_pressed("drop_package"):
-			drop_package()
+	if event.is_action_pressed("drop_package"):
+		drop_package()
 
 func _physics_process(delta: float) -> void:
-	if can_move:
-		if is_gliding:
-			process_glide(delta)
-		else:
-			process_standard_movement(delta)
-			if not $Visuals/Offset/ShapeCast3D.is_colliding() and is_on_wall():
-				velocity.y += 0.3
-		update_visuals(delta)
-		update_animations() 
+	if is_gliding:
+		process_glide(delta)
+	else:
+		process_standard_movement(delta)
+		if not $Visuals/Offset/RayCast3D.is_colliding() and is_on_wall():
+			velocity.y += 0.3
 	
-		if is_gliding and is_on_floor():
-			toggle_glide()
+	move_and_slide()
+	update_visuals(delta)
+	update_animations() 
 	
-		spring_arm.rotation_degrees.y = 180 * abs(clamp(pov,-1,0))
-		move_and_slide()	
+	if is_gliding and is_on_floor():
+		toggle_glide()
+	
+	spring_arm.rotation_degrees.y = 180 * abs(clamp(pov,-1,0))
 
 func drop_package() -> void:
 	SoundManager.play_sound("poop.mp3",0.0,randf_range(0.5,1.5))
@@ -122,7 +116,7 @@ func process_glide(delta: float) -> void:
 		
 	current_glide_speed = clamp(current_glide_speed, min_glide_speed, max_glide_speed)
 	
-	if current_glide_speed == 5 and not is_flapping:
+	if current_glide_speed == 0 :
 		toggle_glide()
 	
 	velocity = aim_dir * current_glide_speed
@@ -205,17 +199,8 @@ func update_animations() -> void:
 		else:
 			anim_player.play("Fall")
 
-func cutscene(duration: float):
-	can_move = false
-	camera.current = false
-	await get_tree().create_timer(duration).timeout
-	can_move = true
-	camera.current = true
 
-func start_cutscene():
-	can_move = false
-	camera.current = false
 
-func end_cutscene():
-	can_move = true
-	camera.current = true
+#joseph@codekids.com.au for help
+func _on_button_pressed() -> void:
+	get_node('2Deagull').visible = true

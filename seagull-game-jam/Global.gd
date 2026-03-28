@@ -1,7 +1,5 @@
 extends Node
 
-var points = 0
-
 var mouse_locked = true
 
 func _ready() -> void:
