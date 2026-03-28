@@ -9,6 +9,7 @@
 [ext_resource type="ArrayMesh" uid="uid://8hlky3n66uer" path="res://Enviroment Pieces/Jack's food building.vox" id="6_g14j6"]
 [ext_resource type="PackedScene" uid="uid://bp1ntwn8unb7v" path="res://mafia_lord.tscn" id="8_ehkex"]
 [ext_resource type="Script" uid="uid://o5p4eb22dbg2" path="res://QuestHUD.gd" id="9_00tp4"]
+[ext_resource type="AudioStream" uid="uid://cko45pbkpq582" path="res://starostin-comedy-cartoon-funny-background-music-492540.mp3" id="10_0m0f1"]
 [ext_resource type="PackedScene" uid="uid://bt30dumfyb6mv" path="res://quest_menu.tscn" id="10_77dp3"]
 [ext_resource type="ArrayMesh" uid="uid://b68ybpy6atd1k" path="res://Proud building.vox" id="11_77dp3"]
 [ext_resource type="MeshLibrary" uid="uid://bg5bkh2u0hlag" path="res://Enviroment Pieces/Roads.tres" id="12_5tkv4"]
@@ -189,3 +190,7 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -23.967028, -0.999382, 18.467
 mesh_library = ExtResource("12_5tkv4")
 cell_size = Vector3(2.5, 2.5, 2.5)
 metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1174170426]
+stream = ExtResource("10_0m0f1")
+autoplay = true
