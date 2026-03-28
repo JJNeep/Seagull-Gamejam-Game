@@ -10,6 +10,7 @@ var is_at_location = false
 var suspicious = false
 var state_timer : SceneTreeTimer
 var suspicion_timer : SceneTreeTimer
+var is_eating_chip = false
 
 var view_distance: float = 1000.0
 var fov_angle: float = 90.0 # Total FOV in degrees
@@ -44,7 +45,7 @@ var move_dir: Vector3 = Vector3.ZERO
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var anim_player: AnimationPlayer = $Visuals/AnimationPlayer
 @onready var state_player: AnimationPlayer = $Visuals/StatePlayer
-
+@onready var chip = preload("res://chip.tscn")
 @onready var ray = $Vision
 
 func _ready() -> void:
@@ -56,6 +57,10 @@ func set_movement_target(target:Vector3):
 	nav_agent.target_position = target
 
 func _physics_process(delta: float) -> void:
+	if position.y < -100:
+		QuestManager.check_quests("human", self)
+		queue_free()
+	
 	if absolute_cinema:
 		return
 	
@@ -80,6 +85,7 @@ func _physics_process(delta: float) -> void:
 
 func non_idle(delta):
 	if current_state == State.STARTLE:
+		show_player()
 		stop_pathfinding()
 		state_player.play("Startle")
 		await get_tree().create_timer(2).timeout
@@ -127,26 +133,39 @@ func idle(delta):
 			set_movement_target(job_position.position)
 			navigation_frame(delta)
 		else:
-			next_idle_state()
+			stop_pathfinding()
 			hide_player()
 			await get_tree().create_timer(job_time).timeout
+			next_idle_state()
 			show_player()
 	if current_idle == Idle_State.HOME:
 		if !is_at_location:
 			set_movement_target(home_position.position)
 			navigation_frame(delta)
 		else:
-			next_idle_state()
+			stop_pathfinding()
 			hide_player()
 			await get_tree().create_timer(home_time).timeout
+			next_idle_state()
 			show_player()
 	if current_idle == Idle_State.BEACH:
 		if !is_at_location:
 			set_movement_target(beach_position.position)
 			navigation_frame(delta)
 		else:
-			next_idle_state()
+			stop_pathfinding()
+			eat_chip()
+			
 			await get_tree().create_timer(beach_time).timeout
+			next_idle_state()
+
+func eat_chip():
+	if not is_eating_chip:
+		var inst : Node3D = chip.instantiate()
+		inst.position = $Chip.position
+		$Chip.add_child(inst)
+		state_player.play("eat_chip")
+		is_eating_chip = true
 
 func navigation_frame(delta, running:bool=false):
 	if nav_agent.is_navigation_finished():
