@@ -4,6 +4,7 @@
 [ext_resource type="ArrayMesh" uid="uid://docaorgfjmeq0" path="res://Human/01_Leg.vox" id="2_6vlvu"]
 [ext_resource type="ArrayMesh" uid="uid://c67okbprt33fv" path="res://Human/01_Body.vox" id="2_8ukam"]
 [ext_resource type="ArrayMesh" uid="uid://78qvijewdcj8" path="res://Human/exclaimation mark.vox" id="3_68iq3"]
+[ext_resource type="ArrayMesh" uid="uid://bkn5kk82wy1ry" path="res://Human/01_Body_Armout.vox" id="3_l1w7d"]
 [ext_resource type="ArrayMesh" uid="uid://dclai3bu47dqd" path="res://Human/question mark.vox" id="3_w10no"]
 [ext_resource type="ArrayMesh" uid="uid://c0exaxj17ixd7" path="res://Human/01_Body_Freaked.vox" id="4_jbo2n"]
 [ext_resource type="ArrayMesh" uid="uid://conwb5ta4rp8m" path="res://Human/01_Head_Annoyed.vox" id="4_l1w7d"]
@@ -490,12 +491,29 @@ tracks/3/keys = {
 "values": [ExtResource("11_cgu6v")]
 }
 
+[sub_resource type="Animation" id="Animation_05na6"]
+resource_name = "eat_chip"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("01Body:mesh")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_l1w7d")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l1w7d"]
 _data = {
 &"Angry": SubResource("Animation_8ukam"),
 &"Confused": SubResource("Animation_g3f36"),
 &"Normal": SubResource("Animation_l1w7d"),
-&"Startle": SubResource("Animation_hsefb")
+&"Startle": SubResource("Animation_hsefb"),
+&"eat_chip": SubResource("Animation_05na6")
 }
 
 [node name="Human" type="CharacterBody3D" unique_id=2136399363 groups=["humans"]]
@@ -521,15 +539,16 @@ target_position = Vector3(0, 0, -1.25)
 
 [node name="Reaction" type="MeshInstance3D" parent="Visuals" unique_id=1843588983]
 transform = Transform3D(-1.5, 0, -1.3113416e-07, 0, 1.5, 0, 1.3113416e-07, 0, -1.5, 0, 5.923512, 0)
+visible = false
 mesh = ExtResource("3_68iq3")
 
 [node name="01Body" type="MeshInstance3D" parent="Visuals" unique_id=1418237536]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.124, 0, 0)
-mesh = ExtResource("2_8ukam")
+mesh = ExtResource("3_l1w7d")
 
 [node name="01Head" type="MeshInstance3D" parent="Visuals" unique_id=1616537121]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.124, 0, 0)
-mesh = ExtResource("4_l1w7d")
+mesh = ExtResource("6_hsefb")
 
 [node name="01Shorts" type="MeshInstance3D" parent="Visuals" unique_id=1834477937]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.124, 0, 0)
@@ -549,3 +568,5 @@ libraries/ = SubResource("AnimationLibrary_mcgpu")
 
 [node name="StatePlayer" type="AnimationPlayer" parent="Visuals" unique_id=1138153969]
 libraries/ = SubResource("AnimationLibrary_l1w7d")
+
+[node name="Chip" type="Node3D" parent="." unique_id=1768408883]
