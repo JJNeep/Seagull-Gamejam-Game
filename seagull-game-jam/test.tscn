@@ -154,11 +154,7 @@ transform = Transform3D(2.0999742, -0.010372449, 0, 0.010372449, 2.0999742, 0, 0
 mesh = ExtResource("7_vbegm")
 
 [node name="RoadTurn" type="MeshInstance3D" parent="." unique_id=882026241]
-<<<<<<< Updated upstream
 transform = Transform3D(-2, 0, -1.7484555e-07, 0, 2, 0, 1.7484555e-07, 0, -2, -13.1041565, 0.09482193, 21.284424)
-=======
-transform = Transform3D(-2, 0, -1.7484555e-07, 0, 2, 0, 1.7484555e-07, 0, -2, -11.001097, 0, 17.214397)
->>>>>>> Stashed changes
 mesh = ExtResource("9_00tp4")
 
 [node name="Road2" type="MeshInstance3D" parent="." unique_id=2079924246]
