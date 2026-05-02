@@ -127,8 +127,8 @@ func next_idle_state():
 	is_at_location = false
 
 func idle(delta):
-	state_player.play("Normal")
 	if current_idle == Idle_State.WORK:
+		state_player.play("Normal")
 		if !is_at_location:
 			set_movement_target(job_position.position)
 			navigation_frame(delta)
@@ -139,6 +139,7 @@ func idle(delta):
 			next_idle_state()
 			show_player()
 	if current_idle == Idle_State.HOME:
+		state_player.play("Normal")
 		if !is_at_location:
 			set_movement_target(home_position.position)
 			navigation_frame(delta)
@@ -150,21 +151,20 @@ func idle(delta):
 			show_player()
 	if current_idle == Idle_State.BEACH:
 		if !is_at_location:
+			state_player.play("Normal")
 			set_movement_target(beach_position.position)
 			navigation_frame(delta)
 		else:
 			stop_pathfinding()
 			eat_chip()
-			
 			await get_tree().create_timer(beach_time).timeout
 			next_idle_state()
+			is_eating_chip = false
 
 func eat_chip():
 	if not is_eating_chip:
 		var inst : Node3D = chip.instantiate()
-		inst.position = $Chip.position
 		$Chip.add_child(inst)
-		state_player.play("eat_chip")
 		is_eating_chip = true
 
 func navigation_frame(delta, running:bool=false):
@@ -196,7 +196,10 @@ func navigation_frame(delta, running:bool=false):
 
 func stop_pathfinding():
 	velocity = Vector3.ZERO
-	anim_player.play("Idle")
+	if is_eating_chip:
+		anim_player.play("EatChip")
+	else:
+		anim_player.play("Idle")
 
 func hide_player():
 	$Visuals.hide()

@@ -18,6 +18,21 @@
 radius = 1.097168
 height = 5.6049805
 
+[sub_resource type="Animation" id="Animation_mcgpu"]
+resource_name = "EatChip"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/01Body:mesh")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_l1w7d")]
+}
+
 [sub_resource type="Animation" id="Animation_cgu6v"]
 resource_name = "Idle"
 loop_mode = 1
@@ -287,6 +302,7 @@ tracks/6/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mcgpu"]
 _data = {
+&"EatChip": SubResource("Animation_mcgpu"),
 &"Idle": SubResource("Animation_cgu6v"),
 &"Run": SubResource("Animation_6o1x2"),
 &"Walk": SubResource("Animation_kewdx")
@@ -347,6 +363,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_g3f36"]
 resource_name = "Confused"
+length = 0.001
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -491,29 +508,12 @@ tracks/3/keys = {
 "values": [ExtResource("11_cgu6v")]
 }
 
-[sub_resource type="Animation" id="Animation_05na6"]
-resource_name = "eat_chip"
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("01Body:mesh")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_l1w7d")]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l1w7d"]
 _data = {
 &"Angry": SubResource("Animation_8ukam"),
 &"Confused": SubResource("Animation_g3f36"),
 &"Normal": SubResource("Animation_l1w7d"),
-&"Startle": SubResource("Animation_hsefb"),
-&"eat_chip": SubResource("Animation_05na6")
+&"Startle": SubResource("Animation_hsefb")
 }
 
 [node name="Human" type="CharacterBody3D" unique_id=2136399363 groups=["humans"]]
@@ -544,7 +544,7 @@ mesh = ExtResource("3_68iq3")
 
 [node name="01Body" type="MeshInstance3D" parent="Visuals" unique_id=1418237536]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.124, 0, 0)
-mesh = ExtResource("3_l1w7d")
+mesh = ExtResource("2_8ukam")
 
 [node name="01Head" type="MeshInstance3D" parent="Visuals" unique_id=1616537121]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.124, 0, 0)
@@ -570,3 +570,4 @@ libraries/ = SubResource("AnimationLibrary_mcgpu")
 libraries/ = SubResource("AnimationLibrary_l1w7d")
 
 [node name="Chip" type="Node3D" parent="." unique_id=1768408883]
+transform = Transform3D(1.9106855e-15, 4.371139e-08, 1, 1, -4.371139e-08, 0, 4.371139e-08, 1, -4.371139e-08, -0.78248817, 3.247, -1.3591299)
