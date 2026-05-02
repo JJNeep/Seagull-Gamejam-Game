@@ -13,6 +13,15 @@ var all_quests: Dictionary = {
 		"reward": 50,
 		"status": QuestStatus.LOCKED    # GIVEN quests start locked
 	},
+		"knock_building": {
+		"name": "I Did't touch it",
+		"description": "Knock the falling building off the edge",
+		"type": QuestType.HIDDEN,        # Must be given before it can complete
+		"checker": "building",
+		"requirement": func(node): return node.position.y < -100,
+		"reward": 50,
+		"status": QuestStatus.ACTIVE    # GIVEN quests start locked
+	},
 }
 
 # Only quests the player KNOWS about (given + discovered hidden ones)
