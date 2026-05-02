@@ -219,3 +219,4 @@ func start_cutscene():
 func end_cutscene():
 	can_move = true
 	camera.current = true
+	
