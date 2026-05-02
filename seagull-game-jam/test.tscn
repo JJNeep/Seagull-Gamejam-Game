@@ -8,10 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://iqx2qa3vwyrj" path="res://Human/human.tscn" id="5_ykrsh"]
 [ext_resource type="ArrayMesh" uid="uid://hjn5sxb03iw8" path="res://Enviroment Pieces/City Building 1.vox" id="6_ehkex"]
 [ext_resource type="ArrayMesh" uid="uid://8hlky3n66uer" path="res://Enviroment Pieces/Jack's food building.vox" id="6_g14j6"]
-[ext_resource type="PackedScene" uid="uid://bp1ntwn8unb7v" path="res://mafia_lord.tscn" id="8_ehkex"]
-[ext_resource type="Script" uid="uid://o5p4eb22dbg2" path="res://QuestHUD.gd" id="9_00tp4"]
+[ext_resource type="PackedScene" uid="uid://d3gumrhshhd3d" path="res://mafia_lord.tscn" id="8_ehkex"]
+[ext_resource type="Script" path="res://QuestHUD.gd" id="9_00tp4"]
 [ext_resource type="AudioStream" uid="uid://cko45pbkpq582" path="res://starostin-comedy-cartoon-funny-background-music-492540.mp3" id="10_0m0f1"]
-[ext_resource type="PackedScene" uid="uid://bt30dumfyb6mv" path="res://quest_menu.tscn" id="10_77dp3"]
+[ext_resource type="PackedScene" uid="uid://coacalsc2uesw" path="res://quest_menu.tscn" id="10_77dp3"]
 [ext_resource type="ArrayMesh" uid="uid://b68ybpy6atd1k" path="res://Proud building.vox" id="11_77dp3"]
 [ext_resource type="MeshLibrary" uid="uid://bg5bkh2u0hlag" path="res://Enviroment Pieces/Roads.tres" id="12_5tkv4"]
 
@@ -124,6 +124,17 @@ mesh = ExtResource("11_77dp3")
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -22.72116, -1.145359, 31.839481)
 shape = SubResource("ConcavePolygonShape3D_77dp3")
 
+[node name="RigidBody3D2" type="RigidBody3D" parent="NavigationRegion3D" unique_id=2127180317]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1099243, 49.18026, 0)
+
+[node name="CityBuilding1" type="MeshInstance3D" parent="NavigationRegion3D/RigidBody3D2" unique_id=1491639953]
+transform = Transform3D(-1.09278474e-07, 0, 2.5, 0, 2.5, 0, -2.5, 0, -1.09278474e-07, -31.969574, 1.145359, -15.329819)
+mesh = ExtResource("6_ehkex")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/RigidBody3D2" unique_id=1980492897]
+transform = Transform3D(-1.09278474e-07, 0, 2.5, 0, 2.5, 0, -2.5, 0, -1.09278474e-07, -31.969574, 1.145359, -15.329819)
+shape = SubResource("ConvexPolygonShape3D_ehkex")
+
 [node name="RigidBody3D" type="RigidBody3D" parent="NavigationRegion3D" unique_id=1049195613]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.933466, 0)
 
@@ -195,4 +206,5 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1174170426]
 stream = ExtResource("10_0m0f1")
+volume_db = -0.31
 autoplay = true

@@ -1,0 +1,161 @@
+[gd_scene format=3 uid="uid://c5masc642bstl"]
+
+[ext_resource type="FontFile" uid="uid://db28q6344mu8p" path="res://DoHyeon-Regular.ttf" id="1_rlhhc"]
+
+[sub_resource type="Animation" id="Animation_upxaw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-370.5, -177)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/Label2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0009999999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(602, 0), Vector2(-267, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/ColorRect:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.23137255, 0.23137255, 0.23137255, 0.4117647)]
+}
+
+[sub_resource type="Animation" id="Animation_mwmyu"]
+resource_name = "main"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Label:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 1, 1.75, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-1303, -177), Vector2(-463.75, -177), Vector2(-370.5, -177), Vector2(-273.05, -177), Vector2(604, -177)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/Label2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 1, 1.75, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(602, 0), Vector2(-180.09998, 0), Vector2(-267, 0), Vector2(-350, 0), Vector2(-1097, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/ColorRect:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25, 1, 1.75, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.23137255, 0.23137255, 0.23137255, 0), Color(0.23137255, 0.23137255, 0.23137255, 0.37058824), Color(0.23137255, 0.23137255, 0.23137255, 0.4117647), Color(0.23137255, 0.23137255, 0.23137255, 0.37058824), Color(0.23137255, 0.23137255, 0.23137255, 0)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lfeoa"]
+_data = {
+&"RESET": SubResource("Animation_upxaw"),
+&"main": SubResource("Animation_mwmyu")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_uuu5a"]
+font = ExtResource("1_rlhhc")
+font_size = 179
+
+[sub_resource type="LabelSettings" id="LabelSettings_g1ar1"]
+font = ExtResource("1_rlhhc")
+font_size = 81
+
+[node name="Quest Complete" type="Control" unique_id=487134353]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1187863697]
+libraries/ = SubResource("AnimationLibrary_lfeoa")
+autoplay = &"main"
+
+[node name="Control" type="Control" parent="." unique_id=2135083241]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=797761656]
+layout_mode = 0
+offset_left = -589.0
+offset_top = -331.0
+offset_right = 611.0
+offset_bottom = 369.0
+color = Color(0.23137255, 0.23137255, 0.23137255, 0.4117647)
+
+[node name="Label" type="Label" parent="Control" unique_id=1614152007]
+layout_mode = 1
+offset_left = -370.5
+offset_top = -177.0
+offset_right = 370.50024
+offset_bottom = 3.0
+text = "퀘스트 완료"
+label_settings = SubResource("LabelSettings_uuu5a")
+
+[node name="Label2" type="Label" parent="Control" unique_id=658146452]
+layout_mode = 1
+offset_left = 602.0
+offset_right = 1136.0005
+offset_bottom = 82.0
+text = "Quest Complete"
+label_settings = SubResource("LabelSettings_g1ar1")

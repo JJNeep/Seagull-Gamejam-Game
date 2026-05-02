@@ -1,5 +1,7 @@
 extends Node
 
+@onready var quest_complete = preload("res://quest_complete.tscn")
+
 enum QuestType { GIVEN, HIDDEN }
 enum QuestStatus { LOCKED, ACTIVE, COMPLETED }
 
@@ -55,6 +57,8 @@ func check_quests(checker_type: String, node: Node) -> void:
 			complete_quest(quest_id)
 
 func complete_quest(quest_id: String) -> void:
+	var inst = quest_complete.instantiate()
+	add_child(inst)
 	var quest = all_quests[quest_id]
 	quest.status = QuestStatus.COMPLETED
 	completed_quests.append(quest_id)
