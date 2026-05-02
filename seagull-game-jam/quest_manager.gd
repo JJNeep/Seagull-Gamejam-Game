@@ -58,6 +58,7 @@ func check_quests(checker_type: String, node: Node) -> void:
 
 func complete_quest(quest_id: String) -> void:
 	var inst = quest_complete.instantiate()
+	inst.get_node("Control/Label2/Label2").text = all_quests[quest_id].name
 	add_child(inst)
 	var quest = all_quests[quest_id]
 	quest.status = QuestStatus.COMPLETED
