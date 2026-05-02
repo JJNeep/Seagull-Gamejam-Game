@@ -1,0 +1,18 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions.To.Mesh"
+type="Mesh"
+uid="uid://dba04dqwq0nbt"
+path="res://.godot/imported/COOL KID GUN.vox-910ab5e973db568dddc302489f012f32.mesh"
+
+[deps]
+
+source_file="res://COOL KID GUN.vox"
+dest_files=["res://.godot/imported/COOL KID GUN.vox-910ab5e973db568dddc302489f012f32.mesh"]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
+FirstKeyframeOnly=true
