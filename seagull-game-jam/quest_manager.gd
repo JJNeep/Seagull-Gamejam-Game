@@ -16,7 +16,7 @@ var all_quests: Dictionary = {
 		"status": QuestStatus.LOCKED    # GIVEN quests start locked
 	},
 		"knock_building": {
-		"name": "I Did't touch it",
+		"name": "I Didn't touch it",
 		"description": "Knock the falling building off the edge",
 		"type": QuestType.HIDDEN,        # Must be given before it can complete
 		"checker": "building",
