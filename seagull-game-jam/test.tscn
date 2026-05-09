@@ -8,13 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://iqx2qa3vwyrj" path="res://Human/human.tscn" id="5_ykrsh"]
 [ext_resource type="ArrayMesh" uid="uid://hjn5sxb03iw8" path="res://Enviroment Pieces/City Building 1.vox" id="6_ehkex"]
 [ext_resource type="ArrayMesh" uid="uid://8hlky3n66uer" path="res://Enviroment Pieces/Jack's food building.vox" id="6_g14j6"]
-<<<<<<< Updated upstream
-[ext_resource type="PackedScene" uid="uid://bp1ntwn8unb7v" path="res://mafia_lord.tscn" id="8_ehkex"]
-[ext_resource type="Script" uid="uid://o5p4eb22dbg2" path="res://QuestHUD.gd" id="9_00tp4"]
-=======
 [ext_resource type="PackedScene" uid="uid://d3gumrhshhd3d" path="res://mafia_lord.tscn" id="8_ehkex"]
 [ext_resource type="Script" uid="uid://o5p4eb22dbg2" path="res://HUD.gd" id="9_00tp4"]
->>>>>>> Stashed changes
 [ext_resource type="AudioStream" uid="uid://cko45pbkpq582" path="res://starostin-comedy-cartoon-funny-background-music-492540.mp3" id="10_0m0f1"]
 [ext_resource type="PackedScene" uid="uid://bt30dumfyb6mv" path="res://quest_menu.tscn" id="10_77dp3"]
 [ext_resource type="ArrayMesh" uid="uid://b68ybpy6atd1k" path="res://Proud building.vox" id="11_77dp3"]
