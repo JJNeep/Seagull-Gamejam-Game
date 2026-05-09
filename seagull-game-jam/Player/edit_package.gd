@@ -9,6 +9,12 @@ const SHAKE_DECAY := 0.6
 const HYPE_PHRASES := ["MEGA POO", "W RIZZ", "GOONER MODE", "NO CAP", "💀💀💀", "OHIO FINAL BOSS", "SIGMA DROP", "GYATT"]
 const EMOJIS := ["💀", "🔥", "📈", "💯", "🗿", "💩", "👑"]
 
+const SPLAT_TEXTURE := preload("res://Player/Impact.png")
+const SPLAT_SIZE_NORMAL := 1.5
+const SPLAT_SIZE_LARGE := 4.0
+const SPLAT_LIFETIME := 30.0
+const EDIT_MAX_DURATION := 16.0  # seconds (real time) before edit force-ends
+
 # === State ===
 var on_floor := false
 var large := false
@@ -21,6 +27,11 @@ var _shake_cam: Camera3D
 var _shake_amount := 0.0
 var _emoji_spawning := false
 var _emoji_timer := 0.0
+
+# Mute main music
+var _main_music: AudioStreamPlayer
+var _main_music_was_playing := false
+var _main_music_position := 0.0
 
 # Node refs (created at runtime for large packages)
 var _overlay: CanvasLayer
@@ -44,6 +55,7 @@ func _physics_process(delta: float) -> void:
 		if not on_floor:
 			SoundManager.play_sound_3d("splat.mp3", position, 0.0, randf_range(0.5, 1.5))
 			if large and _edit_started and not _impact_triggered:
+				_spawn_splat()
 				_impact_triggered = true
 				_trigger_impact()
 		$Package.mesh = preload("res://Player/package.vox")
@@ -165,6 +177,12 @@ func _start_edit() -> void:
 	_edit_started = true
 	Engine.time_scale = SLOWMO_SCALE
 	
+	_main_music = get_node_or_null("/root/Node3D/AudioStreamPlayer")
+	if _main_music and _main_music.playing:
+		_main_music_was_playing = true
+		_main_music_position = _main_music.get_playback_position()
+		_main_music.stop()
+	
 	var cam := get_viewport().get_camera_3d()
 	if cam:
 		_saved_fov = cam.fov
@@ -185,7 +203,18 @@ func _start_edit() -> void:
 	
 	_flash_hype_text()
 	_emoji_spawning = true
+	
+	# Safety: force-end the edit if the package never lands
+	_start_timeout()
 
+func _start_timeout() -> void:
+	# Use a SceneTreeTimer with process_always=true so slow-mo doesn't affect it
+	# (we want REAL seconds, not in-game seconds)
+	var timer := get_tree().create_timer(EDIT_MAX_DURATION, true, false, true)
+	await timer.timeout
+	if _edit_started and not _impact_triggered:
+		print("Mega poo edit timed out — force-ending.")
+		_trigger_impact()
 
 func _flash_hype_text() -> void:
 	_hype_text.text = HYPE_PHRASES.pick_random()
@@ -229,6 +258,8 @@ func _trigger_impact() -> void:
 
 
 func _end_edit() -> void:
+	if _main_music and _main_music_was_playing and is_instance_valid(_main_music):
+		_main_music.play(_main_music_position)
 	var cam := get_viewport().get_camera_3d()
 	var t := create_tween().set_parallel(true)
 	t.tween_property(_vignette, "modulate:a", 0.0, 0.4)
@@ -263,6 +294,70 @@ func _spawn_emoji() -> void:
 	if is_instance_valid(label):
 		label.queue_free()
 
+func _spawn_splat() -> void:
+	# Raycast down to find exactly where to place the decal
+	var space := get_world_3d().direct_space_state
+	var from := global_position + Vector3.UP * 0.1
+	var to := global_position + Vector3.DOWN * 5.0
+	var query := PhysicsRayQueryParameters3D.create(from, to)
+	query.exclude = [self]
+	var result := space.intersect_ray(query)
+	
+	var splat_pos: Vector3
+	var splat_normal: Vector3 = Vector3.UP
+	if result.is_empty():
+		# Fallback: just use the package's current position
+		splat_pos = global_position
+	else:
+		splat_pos = result.position
+		splat_normal = result.normal
+	
+	# Build the decal
+	var decal := Decal.new()
+	decal.texture_albedo = SPLAT_TEXTURE
+	decal.albedo_mix = 1.0
+	decal.cull_mask = 2
+	decal.modulate = Color(0.35, 0.2, 0.08)
+	
+	var splat_size: float = SPLAT_SIZE_LARGE if large else SPLAT_SIZE_NORMAL
+	# Add randomness so they don't all look identical
+	splat_size *= randf_range(0.85, 1.15)
+	# Decal size: x/z = footprint, y = how deep down it projects
+	decal.size = Vector3(splat_size, 2.0, splat_size)
+	
+	# Figure out what to parent the decal to
+	var parent_node: Node = get_tree().current_scene
+	if not result.is_empty():
+		var hit_collider = result.collider
+		if hit_collider != null:
+			# Walk up to find a Node3D parent (decals need a 3D parent)
+			parent_node = _find_node3d_parent(hit_collider)
+	
+	parent_node.add_child(decal)
+	decal.global_position = splat_pos + splat_normal * 0.05
+	
+	# Orient the decal to point along the surface normal (handles slopes)
+	if splat_normal.is_equal_approx(Vector3.UP):
+		decal.rotation.y = randf() * TAU  # random rotation for variety
+	else:
+		decal.look_at(decal.global_position - splat_normal, Vector3.UP)
+		decal.rotate_object_local(Vector3.RIGHT, PI / 2)
+	
+	# Optional fade-out
+	if SPLAT_LIFETIME > 0.0:
+		var tween := decal.create_tween()
+		tween.tween_interval(SPLAT_LIFETIME - 2.0)
+		tween.tween_property(decal, "modulate:a", 0.0, 2.0)
+		tween.tween_callback(decal.queue_free)
+
+func _find_node3d_parent(node: Node) -> Node3D:
+	# Walk up the tree until we find a Node3D, fall back to current scene
+	var current := node
+	while current != null:
+		if current is Node3D:
+			return current
+		current = current.get_parent()
+	return get_tree().current_scene
 
 func _exit_tree() -> void:
 	# Safety: if package gets freed mid-edit, restore the world
