@@ -19,8 +19,13 @@
 [ext_resource type="PackedScene" uid="uid://bt30dumfyb6mv" path="res://quest_menu.tscn" id="10_77dp3"]
 [ext_resource type="ArrayMesh" uid="uid://b68ybpy6atd1k" path="res://Proud building.vox" id="11_77dp3"]
 [ext_resource type="MeshLibrary" uid="uid://bg5bkh2u0hlag" path="res://Enviroment Pieces/Roads.tres" id="12_5tkv4"]
+<<<<<<< Updated upstream
 [ext_resource type="FontFile" uid="uid://db28q6344mu8p" path="res://DoHyeon-Regular.ttf" id="12_a3se8"]
+=======
+>>>>>>> Stashed changes
 [ext_resource type="ArrayMesh" uid="uid://dba04dqwq0nbt" path="res://COOL KID GUN.vox" id="14_b0q6j"]
+[ext_resource type="AudioStream" uid="uid://cko45pbkpq582" path="res://starostin-comedy-cartoon-funny-background-music-492540.mp3" id="14_mhym6"]
+[ext_resource type="ArrayMesh" uid="uid://cbg0da8fbjvj3" path="res://WHITE BEACH BOY.vox" id="16_a3se8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_77dp3"]
 sky_top_color = Color(0.015859274, 0.49726123, 0.99996144, 1)
@@ -269,8 +274,13 @@ cell_size = Vector3(2.5, 2.5, 2.5)
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1174170426]
+<<<<<<< Updated upstream
 stream = ExtResource("10_0m0f1")
 volume_db = -3.43
+=======
+stream = ExtResource("14_mhym6")
+volume_db = 1.0
+>>>>>>> Stashed changes
 autoplay = true
 mix_target = 1
 parameters/looping = true
@@ -279,4 +289,10 @@ parameters/looping = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.679888, 40, 26.32821)
 mesh = ExtResource("14_b0q6j")
 
+<<<<<<< Updated upstream
 [connection signal="body_entered" from="NavigationRegion3D/RigidBody3D" to="NavigationRegion3D/RigidBody3D" method="_on_body_entered"]
+=======
+[node name="WhiteBeachBoy" type="MeshInstance3D" parent="." unique_id=1728174259]
+transform = Transform3D(1.1874745, 0, 0, 0, 1.1874745, 0, 0, 0, 1.1874745, -7.430512, 0.92854905, -3.122354)
+mesh = ExtResource("16_a3se8")
+>>>>>>> Stashed changes
