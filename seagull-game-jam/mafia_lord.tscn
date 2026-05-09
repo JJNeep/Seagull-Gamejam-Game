@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://bp1ntwn8unb7v"]
+[gd_scene format=3 uid="uid://d3gumrhshhd3d"]
 
-[ext_resource type="Script" uid="uid://bkqli33unsmdi" path="res://mafia_lord.gd" id="1_k2yjw"]
+[ext_resource type="Script" path="res://mafia_lord.gd" id="1_k2yjw"]
 [ext_resource type="ArrayMesh" uid="uid://cjktyy3uhhcwu" path="res://Seagull mafia lord.vox" id="2_vflte"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s1hry"]
@@ -90,6 +90,7 @@ offset_right = 95.0
 offset_bottom = -152.0
 grow_vertical = 0
 scale = Vector2(4.11, 4.11)
+focus_neighbor_right = NodePath("../Button2")
 text = "Yes"
 
 [node name="Button2" type="Button" parent="CanvasLayer" unique_id=1989746336]
@@ -102,6 +103,7 @@ offset_right = 409.0
 offset_bottom = -149.0
 grow_vertical = 0
 scale = Vector2(4.11, 4.11)
+focus_neighbor_left = NodePath("../Button")
 text = "No"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

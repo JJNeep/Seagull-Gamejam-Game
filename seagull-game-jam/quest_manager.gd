@@ -63,6 +63,7 @@ func complete_quest(quest_id: String) -> void:
 	var quest = all_quests[quest_id]
 	quest.status = QuestStatus.COMPLETED
 	completed_quests.append(quest_id)
+	Global.create_popup_display(Vector3(0,0,0),quest.reward,10)
 	Global.points += quest.reward    # However you're storing points
 	quest_completed.emit(quest_id)
 

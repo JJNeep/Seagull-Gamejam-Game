@@ -12,8 +12,13 @@ var state_timer : SceneTreeTimer
 var suspicion_timer : SceneTreeTimer
 var is_eating_chip = false
 
+var last_squawk_time: float = 0.0
+var squawk_cooldown: float = 2.5
+
 var view_distance: float = 1000.0
-var fov_angle: float = 90.0 # Total FOV in degrees
+var fov_angle: float = 90.0
+
+var curr_chip_object : RigidBody3D
 
 @export var absolute_cinema : bool = false
 
@@ -31,7 +36,6 @@ var fov_angle: float = 90.0 # Total FOV in degrees
 @export var beach_position = Node3D
 @export var beach_time : float
 
-# --- Configuration ---
 @export_group("Movement")
 @export var walk_speed: float = 2.5
 @export var run_speed: float = 7.0
@@ -71,12 +75,24 @@ func _physics_process(delta: float) -> void:
 	else:
 		non_idle(delta)
 	
-	if suspicion_timer and not suspicion_timer.time_left == 0:
+	# Update suspicious based on timer
+	if suspicion_timer and suspicion_timer.time_left > 0:
 		suspicious = true
+	else:
+		suspicious = false
 	
-	if suspicious and can_see_player():
+	# Only check suspicious during idle
+	if current_state == State.IDLE and suspicious and can_see_player():
 		current_state = State.STARTLE
 		after_startle = State.CHASE
+	
+	# Check if chip stolen while eating (only during idle)
+	if current_state == State.IDLE and is_eating_chip:
+		if not is_instance_valid(curr_chip_object) or curr_chip_object.get_parent() != $Chip:
+			is_eating_chip = false
+			curr_chip_object = null
+			after_startle = State.INVESTIGATE
+			current_state = State.STARTLE
 	
 	$Visuals/Reaction.look_at(Vector3(player.camera.global_position.x,$Visuals/Reaction.position.y,player.camera.global_position.z))
 	$Visuals/Reaction.rotation_degrees.y -= 180
@@ -84,9 +100,12 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func non_idle(delta):
+	is_at_location = false
 	if current_state == State.STARTLE:
 		show_player()
 		stop_pathfinding()
+		if is_eating_chip:
+			drop_chip()
 		state_player.play("Startle")
 		await get_tree().create_timer(2).timeout
 		current_state = after_startle
@@ -116,7 +135,6 @@ func non_idle(delta):
 	elif current_state == State.CONFUSED:
 		state_player.play("Confused")
 		if can_see_player(true):
-			#current_state = State.STARTLE
 			current_state = State.CHASE
 		stop_pathfinding()
 		await get_tree().create_timer(10).timeout
@@ -156,16 +174,25 @@ func idle(delta):
 			navigation_frame(delta)
 		else:
 			stop_pathfinding()
-			eat_chip()
+			# Only spawn chip if we don't have one
+			if not is_eating_chip and curr_chip_object == null:
+				curr_chip_object = chip.instantiate()
+				$Chip.add_child(curr_chip_object)
+				is_eating_chip = true
 			await get_tree().create_timer(beach_time).timeout
-			next_idle_state()
+			# Clean up chip before leaving
+			if is_eating_chip and is_instance_valid(curr_chip_object):
+				curr_chip_object.queue_free()
 			is_eating_chip = false
+			curr_chip_object = null
+			next_idle_state()
 
-func eat_chip():
-	if not is_eating_chip:
-		var inst : Node3D = chip.instantiate()
-		$Chip.add_child(inst)
-		is_eating_chip = true
+func drop_chip():
+	if is_instance_valid(curr_chip_object):
+		curr_chip_object.reparent(get_parent())
+		curr_chip_object.freeze = false
+	curr_chip_object = null
+	is_eating_chip = false
 
 func navigation_frame(delta, running:bool=false):
 	if nav_agent.is_navigation_finished():
@@ -187,7 +214,6 @@ func navigation_frame(delta, running:bool=false):
 		anim_player.play("Walk")
 		new_velocity = new_velocity * walk_speed
 	
-	# Place this after calculating new_velocity but before move_and_slide()
 	if new_velocity.length() > 0.1:
 		var target_angle = atan2(-new_velocity.x, -new_velocity.z)
 		rotation.y = lerp_angle(rotation.y, target_angle, 10.0 * delta)
@@ -208,38 +234,39 @@ func show_player():
 	$Visuals.show()
 
 func can_see_player(ignore_fov = false) -> bool:
-	# 1. Proximity Check
 	var dist = global_position.distance_to(player.global_position)
 	if dist > view_distance:
 		return false
 	
-	# 2. Field of View (FOV) Check
 	var direction_to_player = (player.global_position - global_position).normalized()
-	var forward_vector = -global_transform.basis.z # Godot's forward is -Z
+	var forward_vector = -global_transform.basis.z
 	
-	# Dot product returns 1.0 if facing same way, 0 if perpendicular, -1 if opposite
 	var dot_product = forward_vector.dot(direction_to_player)
 	var angle_to_player = rad_to_deg(acos(dot_product))
 	
 	if angle_to_player > fov_angle / 2 and not ignore_fov:
 		return false
 	
-	# 3. Line of Sight (Obstruction) Check
-	ray.look_at(player.global_position) # Point ray at player
-	ray.force_raycast_update() # Ensure ray is accurate this frame
+	ray.look_at(player.global_position)
+	ray.force_raycast_update()
 	
 	if ray.is_colliding():
 		var collider = ray.get_collider()
 		if collider == player:
-			return true # View is clear!
+			return true
 			
 	return false
 
-# --- EXTERNAL SIGNALS ---
-
-# This exact function name was called by your Player's perform_squawk()
 func hear_squawk(bird_pos: Vector3) -> void:
+	var current_time = Time.get_ticks_msec() / 1000.0
+	
+	if current_time - last_squawk_time < squawk_cooldown:
+		return
+	if current_state in [State.STARTLE, State.CHASE]:
+		return
+	
 	if bird_pos.distance_to(position) < hearing_range:
+		last_squawk_time = current_time
 		after_startle = State.INVESTIGATE
 		current_state = State.STARTLE
 

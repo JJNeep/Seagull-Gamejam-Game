@@ -1,11 +1,17 @@
 [gd_scene format=3 uid="uid://rk0l3iabs5q5"]
 
+[ext_resource type="Script" uid="uid://bfpgvvwhq30i8" path="res://chip.gd" id="1_ojlvc"]
 [ext_resource type="ArrayMesh" uid="uid://cisobe5kw6bov" path="res://Chip.vox" id="1_ri5qt"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ojlvc"]
 size = Vector3(1.2771485, 0.2, 0.23007813)
 
-[node name="Chip" type="CharacterBody3D" unique_id=1191615450]
+[sub_resource type="BoxShape3D" id="BoxShape3D_3la36"]
+size = Vector3(1.8685547, 1.2201904, 0.5996826)
+
+[node name="Chip" type="RigidBody3D" unique_id=1873392480]
+freeze = true
+script = ExtResource("1_ojlvc")
 
 [node name="Package" type="MeshInstance3D" parent="." unique_id=1033990712]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
@@ -16,7 +22,9 @@ shape = SubResource("BoxShape3D_ojlvc")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=1682404719]
 collision_layer = 8
-collision_mask = 4
+collision_mask = 7
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=928081250]
-shape = SubResource("BoxShape3D_ojlvc")
+shape = SubResource("BoxShape3D_3la36")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

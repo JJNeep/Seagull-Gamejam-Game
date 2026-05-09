@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dp2hopdq23dj7"]
+
+[ext_resource type="FontFile" uid="uid://db28q6344mu8p" path="res://DoHyeon-Regular.ttf" id="1_8qki8"]
+[ext_resource type="Script" uid="uid://ck3vuob8sa4y0" path="res://popup_display.gd" id="2_6xvug"]
+
+[node name="PopupDisplay" type="Label3D" unique_id=1282523221]
+billboard = 1
+text = "Hello"
+font = ExtResource("1_8qki8")
+font_size = 160
+script = ExtResource("2_6xvug")

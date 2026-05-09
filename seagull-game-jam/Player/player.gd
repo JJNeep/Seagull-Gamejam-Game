@@ -34,6 +34,7 @@ var is_gliding: bool = false
 var current_glide_speed: float = 0.0
 var default_gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+var poop_time : SceneTreeTimer
 var can_move = true
 
 func _ready() -> void:
@@ -65,10 +66,21 @@ func _input(event: InputEvent) -> void:
 				pov = 1
 	
 		if event.is_action_pressed("drop_package"):
-			drop_package()
+			poop_time = get_tree().create_timer(1)
+		if event.is_action_released("drop_package"):
+			if poop_time.time_left == 0 and Global.chips > 4:
+				drop_package(true)
+			elif Global.chips > 0:
+				drop_package()
 
 func _physics_process(delta: float) -> void:
 	if can_move:
+		var rot = cam_pivot.rotation_degrees
+		rot.y -= Input.get_joy_axis(0,JOY_AXIS_RIGHT_X) * mouse_sensitivity * 700.0
+		rot.x -= Input.get_joy_axis(0,JOY_AXIS_RIGHT_Y) * mouse_sensitivity * 700.0
+		rot.x = clamp(rot.x, -80.0, 80.0)
+		rot.z = 0.0
+		cam_pivot.rotation_degrees = rot
 		if is_gliding:
 			process_glide(delta)
 		else:
@@ -84,12 +96,17 @@ func _physics_process(delta: float) -> void:
 		spring_arm.rotation_degrees.y = 180 * abs(clamp(pov,-1,0))
 		move_and_slide()	
 
-func drop_package() -> void:
+func drop_package(large:bool=false) -> void:
 	SoundManager.play_sound("poop.mp3",0.0,randf_range(0.5,1.5))
 	var inst = package.instantiate()
 	inst.position = $Visuals/Offset/Package_Drop_Point.global_position
 	inst.rotation_degrees.y = $Visuals.rotation_degrees.snapped(Vector3(0,90,0)).y
+	inst.large = large
 	get_parent().add_child(inst)
+	if large:
+		Global.chips -= 5
+	else:
+		Global.chips -= 1
 
 func perform_squawk() -> void:
 	is_squawking = true
@@ -149,7 +166,7 @@ func process_standard_movement(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_velocity
 
-	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
+	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var cam_basis = cam_pivot.global_transform.basis
 	var direction = (cam_basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	direction.y = 0 
@@ -178,7 +195,7 @@ func update_visuals(delta: float) -> void:
 		visuals.rotation.z = lerp(visuals.rotation.z, 0.0, delta * 10.0)
 		visuals.rotation.x = lerp(visuals.rotation.x, 0.0, delta * 10.0)
 		
-		var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
+		var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 		if input_dir.length() > 0:
 			var cam_basis = cam_pivot.global_transform.basis
 			var direction = (cam_basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()

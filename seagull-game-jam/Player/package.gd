@@ -1,8 +1,11 @@
 extends CharacterBody3D
 
 var on_floor
+var large = false
 
 func _physics_process(delta: float) -> void:
+	if large:
+		scale = Vector3(2,2,2)
 	if is_on_floor():
 		if !on_floor:
 			SoundManager.play_sound_3d("splat.mp3", position, 0.0, randf_range(0.5,1.5))

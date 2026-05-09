@@ -1,8 +1,7 @@
 extends Area3D
 
 @export var quest_id: String = ""          # Set this in the Inspector per NPC
-@export var npc_yes_dialogue: String = "Excellent! Don't
-let me down."
+@export var npc_yes_dialogue: String = "Excellent! Don't\nlet me down."
 @export var npc_no_dialogue: String = "Then leave me!"
 
 var is_gaining_quest = false
@@ -79,6 +78,7 @@ func cutscene() -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		$CanvasLayer/Label.text = "I have nothing\nmore for you."
 		$CanvasLayer/Label.visible_ratio = 0
+		$CanvasLayer/Button.grab_focus()
 		$CanvasLayer.show()
 		await get_tree().create_timer(3).timeout
 		end_cutscene()
@@ -96,6 +96,7 @@ func cutscene() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	$CanvasLayer/Label.text = "Hello, have you\ncome for a quest?"
 	$CanvasLayer/Label.visible_ratio = 0
+	$CanvasLayer/Button.grab_focus()
 	$CanvasLayer.show()
 	$CanvasLayer/Button.show()
 	$CanvasLayer/Button2.show()
@@ -105,15 +106,18 @@ func end_cutscene() -> void:
 	player.end_cutscene()
 	$Camera3D.current = false
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	$CanvasLayer/Button.release_focus()
 	$CanvasLayer.hide()
 
 func _on_button_2_pressed() -> void:
+	$CanvasLayer/Button.release_focus()
 	$CanvasLayer/Button.hide()
 	$CanvasLayer/Button2.hide()
 	$CanvasLayer/Label.text = npc_no_dialogue
 	$CanvasLayer/Label.visible_ratio = 0
 
 func _on_button_pressed() -> void:
+	$CanvasLayer/Button.release_focus()
 	$CanvasLayer/Button.hide()
 	$CanvasLayer/Button2.hide()
 	$CanvasLayer/Label.text = npc_yes_dialogue
