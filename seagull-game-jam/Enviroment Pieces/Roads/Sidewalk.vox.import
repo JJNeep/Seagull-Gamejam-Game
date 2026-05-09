@@ -1,0 +1,18 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions.To.Mesh"
+type="Mesh"
+uid="uid://yo0jb1mtk1x"
+path="res://.godot/imported/Sidewalk.vox-14da4cdcff1d1da6304d5750bfd51108.mesh"
+
+[deps]
+
+source_file="res://Enviroment Pieces/Roads/Sidewalk.vox"
+dest_files=["res://.godot/imported/Sidewalk.vox-14da4cdcff1d1da6304d5750bfd51108.mesh"]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
+FirstKeyframeOnly=true

@@ -12,7 +12,6 @@
 [ext_resource type="Script" uid="uid://o5p4eb22dbg2" path="res://HUD.gd" id="9_00tp4"]
 [ext_resource type="PackedScene" uid="uid://coacalsc2uesw" path="res://quest_menu.tscn" id="10_77dp3"]
 [ext_resource type="ArrayMesh" uid="uid://b68ybpy6atd1k" path="res://Proud building.vox" id="11_77dp3"]
-[ext_resource type="MeshLibrary" uid="uid://bg5bkh2u0hlag" path="res://Enviroment Pieces/Roads.tres" id="12_5tkv4"]
 [ext_resource type="FontFile" uid="uid://db28q6344mu8p" path="res://DoHyeon-Regular.ttf" id="12_a3se8"]
 [ext_resource type="ArrayMesh" uid="uid://dba04dqwq0nbt" path="res://COOL KID GUN.vox" id="14_b0q6j"]
 [ext_resource type="AudioStream" uid="uid://cko45pbkpq582" path="res://starostin-comedy-cartoon-funny-background-music-492540.mp3" id="14_mhym6"]
@@ -85,7 +84,7 @@ environment = SubResource("Environment_ppyta")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Player" parent="." unique_id=843585877 instance=ExtResource("1_37kl0")]
+[node name="Player" parent="." unique_id=843585877 groups=["player"] instance=ExtResource("1_37kl0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2594352, 0)
 
 [node name="Ocean" parent="." unique_id=214444040 instance=ExtResource("2_8uh7m")]
@@ -246,7 +245,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="HUD/MarginContainer3/VBoxContainer" unique_id=388697531]
 layout_mode = 2
-text = "1000"
+text = "0"
 label_settings = SubResource("LabelSettings_4uo0j")
 horizontal_alignment = 2
 
@@ -256,12 +255,6 @@ theme = SubResource("Theme_a3se8")
 
 [node name="QuestMenu" parent="." unique_id=2068119428 instance=ExtResource("10_77dp3")]
 visible = false
-
-[node name="GridMap" type="GridMap" parent="." unique_id=2139592216]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -23.967028, -0.999382, 18.467817)
-mesh_library = ExtResource("12_5tkv4")
-cell_size = Vector3(2.5, 2.5, 2.5)
-metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1174170426]
 stream = ExtResource("14_mhym6")

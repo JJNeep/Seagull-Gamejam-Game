@@ -25,7 +25,7 @@ class_name Player
 @onready var camera: Camera3D = $CamPivot/SpringArm3D/Camera3D
 @onready var anim_player: AnimationPlayer = $Visuals/AnimationPlayer 
 
-var package = preload("res://Player/package.tscn")
+var package = preload("res://Player/edit_package.tscn")
 
 var pov = 1
 var is_flapping: bool = false

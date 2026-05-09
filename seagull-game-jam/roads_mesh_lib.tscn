@@ -1,13 +1,32 @@
-[gd_scene format=3 uid="uid://cyv5raswpp70"]
+[gd_scene format=3 uid="uid://ch72t7foo5ff5"]
 
-[ext_resource type="ArrayMesh" uid="uid://bjfqojr8ebpaw" path="res://Enviroment Pieces/Road turn.vox" id="1_4kghu"]
-[ext_resource type="ArrayMesh" uid="uid://ddmblq667vmap" path="res://Enviroment Pieces/Road.vox" id="2_kg67r"]
+[ext_resource type="ArrayMesh" uid="uid://bu3gn1my5o72t" path="res://Enviroment Pieces/Roads/Road Line Turn Dot.vox" id="1_qygvk"]
+[ext_resource type="ArrayMesh" uid="uid://deuxmud8klcxv" path="res://Enviroment Pieces/Roads/Road Line Turn.vox" id="2_jefvj"]
+[ext_resource type="ArrayMesh" uid="uid://dinsrl8eacenu" path="res://Enviroment Pieces/Roads/Road Line.vox" id="3_1gwc6"]
+[ext_resource type="ArrayMesh" uid="uid://c1utbtay6bwp6" path="res://Enviroment Pieces/Roads/Road.vox" id="4_1gwc6"]
+[ext_resource type="ArrayMesh" uid="uid://yo0jb1mtk1x" path="res://Enviroment Pieces/Roads/Sidewalk.vox" id="5_qygvk"]
 
 [node name="Roads mesh lib" type="Node3D" unique_id=80520191]
 
-[node name="Road turn" type="MeshInstance3D" parent="." unique_id=1947865266]
-mesh = ExtResource("1_4kghu")
+[node name="Node3D" type="Node3D" parent="." unique_id=1370112001]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 0, -1.25)
 
-[node name="Road" type="MeshInstance3D" parent="." unique_id=1986321754]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0, 0.1)
-mesh = ExtResource("2_kg67r")
+[node name="RoadLineTurnDot" type="MeshInstance3D" parent="." unique_id=996775003]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 0, -1.25)
+mesh = ExtResource("1_qygvk")
+
+[node name="RoadLineTurn" type="MeshInstance3D" parent="." unique_id=387800760]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 0, -1.25)
+mesh = ExtResource("2_jefvj")
+
+[node name="RoadLine" type="MeshInstance3D" parent="." unique_id=1474333610]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 0, -1.25)
+mesh = ExtResource("3_1gwc6")
+
+[node name="Road" type="MeshInstance3D" parent="." unique_id=905526227]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 0, -1.25)
+mesh = ExtResource("4_1gwc6")
+
+[node name="Sidewalk" type="MeshInstance3D" parent="." unique_id=1262374260]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 0, -1.25)
+mesh = ExtResource("5_qygvk")

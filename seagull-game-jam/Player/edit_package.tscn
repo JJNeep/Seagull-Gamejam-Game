@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://b6npkst5uh5b3"]
+
+[ext_resource type="Script" uid="uid://c4l2kfxpq3kuy" path="res://Player/edit_package.gd" id="1_p75k4"]
+[ext_resource type="ArrayMesh" uid="uid://cigfw27aal5nf" path="res://Player/package_2.vox" id="2_b5dln"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q1vm8"]
+size = Vector3(0.6, 0.2, 0.6)
+
+[node name="Package" type="CharacterBody3D" unique_id=1608386145]
+collision_layer = 8
+collision_mask = 5
+script = ExtResource("1_p75k4")
+
+[node name="Package" type="MeshInstance3D" parent="." unique_id=1327300614]
+mesh = ExtResource("2_b5dln")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1170989915]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("BoxShape3D_q1vm8")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1787443332]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=290282137]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("BoxShape3D_q1vm8")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

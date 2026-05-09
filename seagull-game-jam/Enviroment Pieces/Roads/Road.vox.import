@@ -1,0 +1,18 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions.To.Mesh"
+type="Mesh"
+uid="uid://c1utbtay6bwp6"
+path="res://.godot/imported/Road.vox-59a1ef48a1aa97238094d6b1a08db68f.mesh"
+
+[deps]
+
+source_file="res://Enviroment Pieces/Roads/Road.vox"
+dest_files=["res://.godot/imported/Road.vox-59a1ef48a1aa97238094d6b1a08db68f.mesh"]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
+FirstKeyframeOnly=true
