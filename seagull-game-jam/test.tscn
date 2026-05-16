@@ -86,7 +86,7 @@ environment = SubResource("Environment_ppyta")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Player" parent="." unique_id=843585877 instance=ExtResource("1_37kl0")]
+[node name="Player" parent="." unique_id=843585877 groups=["player"] instance=ExtResource("1_37kl0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2594352, 0)
 
 [node name="Ocean" parent="." unique_id=214444040 instance=ExtResource("2_8uh7m")]
@@ -110,14 +110,17 @@ shape = SubResource("ConcavePolygonShape3D_ykrsh")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D" unique_id=306735555]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, -1.145359, 0)
+layers = 2
 mesh = ExtResource("3_6uqi0")
 
 [node name="RoadAndTestStuff" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D" unique_id=1636110617]
 transform = Transform3D(0.0026176176, 0, 4.9999995, 0, 5, 0, -4.9999995, 0, 0.0026176176, -22.095089, -1.145359, -0.3869934)
+layers = 2
 mesh = ExtResource("4_ppyta")
 
 [node name="Jack\'sFoodBuilding" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D" unique_id=1807127275]
 transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -22.111, -9.345359, -14.069193)
+layers = 2
 mesh = ExtResource("6_g14j6")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D" unique_id=1439375228]
@@ -126,6 +129,7 @@ shape = SubResource("ConcavePolygonShape3D_g14j6")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D" unique_id=330822122]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.645039, -1.145359, -14.472665)
+layers = 2
 mesh = SubResource("BoxMesh_ehkex")
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D" unique_id=663416614]
@@ -134,6 +138,7 @@ shape = SubResource("ConcavePolygonShape3D_ehkex")
 
 [node name="ProudBuilding" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D" unique_id=1575233603]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -22.72116, -1.145359, 31.839481)
+layers = 2
 mesh = ExtResource("11_77dp3")
 
 [node name="CollisionShape3D5" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D" unique_id=740385485]
@@ -148,6 +153,7 @@ max_contacts_reported = 100
 
 [node name="CityBuilding1" type="MeshInstance3D" parent="NavigationRegion3D/RigidBody3D" unique_id=1454819195]
 transform = Transform3D(-1.09278474e-07, 0, 2.5, 0, 2.5, 0, -2.5, 0, -1.09278474e-07, -31.969574, 1.145359, -15.329819)
+layers = 2
 mesh = ExtResource("6_ehkex")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/RigidBody3D" unique_id=70663376]
@@ -257,12 +263,6 @@ theme = SubResource("Theme_a3se8")
 
 [node name="QuestMenu" parent="." unique_id=2068119428 instance=ExtResource("10_77dp3")]
 visible = false
-
-[node name="GridMap" type="GridMap" parent="." unique_id=2139592216]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -23.967028, -0.999382, 18.467817)
-mesh_library = ExtResource("12_5tkv4")
-cell_size = Vector3(2.5, 2.5, 2.5)
-metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1174170426]
 stream = ExtResource("14_mhym6")

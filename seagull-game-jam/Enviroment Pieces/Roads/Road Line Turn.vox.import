@@ -1,0 +1,18 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions.To.Mesh"
+type="Mesh"
+uid="uid://deuxmud8klcxv"
+path="res://.godot/imported/Road Line Turn.vox-61bc27ad7172db29cd531b6dcd359e62.mesh"
+
+[deps]
+
+source_file="res://Enviroment Pieces/Roads/Road Line Turn.vox"
+dest_files=["res://.godot/imported/Road Line Turn.vox-61bc27ad7172db29cd531b6dcd359e62.mesh"]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
+FirstKeyframeOnly=true

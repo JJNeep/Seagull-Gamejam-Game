@@ -22,9 +22,11 @@ config/icon="uid://k3nfkpf3jcla"
 Global="*uid://dtpcleyjvvoo"
 SoundManager="*uid://chsiqhed6plri"
 QuestManager="*uid://ct3tl6q4p06nv"
+DebugConsole="*uid://bmkhqu4171jql"
 
 [display]
 
+window/size/mode=3
 window/stretch/mode="canvas_items"
 
 [editor_plugins]
