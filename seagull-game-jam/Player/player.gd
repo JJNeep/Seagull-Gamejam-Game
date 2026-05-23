@@ -43,6 +43,8 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if can_move:
+		get_tree().get_first_node_in_group("ocean").get_wave_height(position)
+		
 		if event is InputEventMouseMotion:
 			if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 				return

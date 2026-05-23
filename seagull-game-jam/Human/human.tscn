@@ -545,7 +545,7 @@ mesh = ExtResource("3_68iq3")
 
 [node name="01Body" type="MeshInstance3D" parent="Visuals" unique_id=1418237536]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.124, 0, 0)
-mesh = ExtResource("2_8ukam")
+mesh = ExtResource("4_jbo2n")
 
 [node name="01Head" type="MeshInstance3D" parent="Visuals" unique_id=1616537121]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.124, 0, 0)
