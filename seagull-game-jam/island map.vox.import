@@ -1,0 +1,18 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions.To.Mesh"
+type="Mesh"
+uid="uid://co8h6p0tk3fem"
+path="res://.godot/imported/island map.vox-cdbd2088f71b10f0a7bb418271933551.mesh"
+
+[deps]
+
+source_file="res://island map.vox"
+dest_files=["res://.godot/imported/island map.vox-cdbd2088f71b10f0a7bb418271933551.mesh"]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
+FirstKeyframeOnly=true

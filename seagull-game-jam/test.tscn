@@ -18,6 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://c8k5aps3rftl1" path="res://Chip overbar.png" id="13_uty7l"]
 [ext_resource type="ArrayMesh" uid="uid://dba04dqwq0nbt" path="res://COOL KID GUN.vox" id="14_b0q6j"]
 [ext_resource type="AudioStream" uid="uid://cko45pbkpq582" path="res://starostin-comedy-cartoon-funny-background-music-492540.mp3" id="14_mhym6"]
+[ext_resource type="ArrayMesh" uid="uid://cbg0da8fbjvj3" path="res://WHITE BEACH BOY.vox" id="18_45l4g"]
+[ext_resource type="ArrayMesh" uid="uid://bpa8tubkus61b" path="res://Human/Table.vox" id="19_4uo0j"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_77dp3"]
 sky_top_color = Color(0.015859274, 0.49726123, 0.99996144, 1)
@@ -267,5 +269,13 @@ parameters/looping = true
 [node name="CoolKidGun" type="MeshInstance3D" parent="." unique_id=1179041483]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.679888, 40, 26.32821)
 mesh = ExtResource("14_b0q6j")
+
+[node name="WhiteBeachBoy" type="MeshInstance3D" parent="." unique_id=208125454]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.007086, 0.50000095, -0.5228586)
+mesh = ExtResource("18_45l4g")
+
+[node name="Table" type="MeshInstance3D" parent="." unique_id=1816411996]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -7, 0, 3)
+mesh = ExtResource("19_4uo0j")
 
 [connection signal="body_entered" from="NavigationRegion3D/RigidBody3D" to="NavigationRegion3D/RigidBody3D" method="_on_body_entered"]
