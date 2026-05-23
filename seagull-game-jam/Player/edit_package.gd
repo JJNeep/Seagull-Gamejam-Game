@@ -6,8 +6,8 @@ const FOV_PUNCH := 25.0
 const HITSTOP_DURATION := 0.15
 const SHAKE_AMOUNT := 0.3
 const SHAKE_DECAY := 0.6
-const HYPE_PHRASES := ["MEGA POO", "W RIZZ", "GOONER MODE", "NO CAP", "💀💀💀", "OHIO FINAL BOSS", "SIGMA DROP", "GYATT"]
-const EMOJIS := ["💀", "🔥", "📈", "💯", "🗿", "💩", "👑"]
+const HYPE_PHRASES := ["MEGA POO", "Sourdough", "Abracadabra", "Doppelgänger", "💀💀💀", "Quintessential", "Spoonerism", "Whippersnapper", "Jasper", "사과", "당신의", "감자 스튜"]
+const EMOJIS := ["💀", "🔥", "💯", "🗿", "💩", "👑", "🫃🏻", "🕚", "🎅🏿", "🐿️", "🤯"]
 
 const SPLAT_TEXTURE := preload("res://Player/Impact.png")
 const SPLAT_SIZE_NORMAL := 1.5

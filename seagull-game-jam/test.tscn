@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://bt30dumfyb6mv" path="res://quest_menu.tscn" id="10_77dp3"]
 [ext_resource type="ArrayMesh" uid="uid://b68ybpy6atd1k" path="res://Proud building.vox" id="11_77dp3"]
 [ext_resource type="Script" path="res://hud.gd" id="11_a3se8"]
-[ext_resource type="MeshLibrary" uid="uid://bg5bkh2u0hlag" path="res://Enviroment Pieces/Roads.tres" id="12_5tkv4"]
 [ext_resource type="FontFile" uid="uid://db28q6344mu8p" path="res://DoHyeon-Regular.ttf" id="12_a3se8"]
 [ext_resource type="Texture2D" uid="uid://rooad0xa7rta" path="res://Chip Underbar.png" id="13_45l4g"]
 [ext_resource type="Texture2D" uid="uid://c8k5aps3rftl1" path="res://Chip overbar.png" id="13_uty7l"]
