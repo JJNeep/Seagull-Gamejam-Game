@@ -6,7 +6,7 @@ const FOV_PUNCH := 25.0
 const HITSTOP_DURATION := 0.15
 const SHAKE_AMOUNT := 0.3
 const SHAKE_DECAY := 0.6
-const HYPE_PHRASES := ["MEGA POO", "Sourdough", "Abracadabra", "Doppelgänger", "💀💀💀", "Quintessential", "Spoonerism", "Whippersnapper", "Jasper", "사과", "당신의", "감자 스튜"]
+const HYPE_PHRASES := ["MEGA POO", "효모", "헛소리", "도플갱어", "💀💀💀", "전형적인", "스푸너주의", "하찮은 사람", "벽옥", "사과", "당신의", "감자 스튜", "공생"]
 const EMOJIS := ["💀", "🔥", "💯", "🗿", "💩", "👑", "🫃🏻", "🕚", "🎅🏿", "🐿️", "🤯"]
 
 const SPLAT_TEXTURE := preload("res://Player/Impact.png")

@@ -10,7 +10,9 @@
 [ext_resource type="ArrayMesh" uid="uid://hjn5sxb03iw8" path="res://Enviroment Pieces/City Building 1.vox" id="6_ehkex"]
 [ext_resource type="ArrayMesh" uid="uid://8hlky3n66uer" path="res://Enviroment Pieces/Jack's food building.vox" id="6_g14j6"]
 [ext_resource type="PackedScene" uid="uid://bp1ntwn8unb7v" path="res://mafia_lord.tscn" id="8_ehkex"]
+[ext_resource type="ArrayMesh" uid="uid://4tcv8wnb2vn7" path="res://goodBoat.vox" id="9_pdf00"]
 [ext_resource type="PackedScene" uid="uid://bt30dumfyb6mv" path="res://quest_menu.tscn" id="10_77dp3"]
+[ext_resource type="ArrayMesh" uid="uid://5htampfka314" path="res://Gullboat.vox" id="10_a6gra"]
 [ext_resource type="ArrayMesh" uid="uid://b68ybpy6atd1k" path="res://Proud building.vox" id="11_77dp3"]
 [ext_resource type="Script" path="res://hud.gd" id="11_a3se8"]
 [ext_resource type="FontFile" uid="uid://db28q6344mu8p" path="res://DoHyeon-Regular.ttf" id="12_a3se8"]
@@ -118,7 +120,7 @@ layers = 2
 mesh = ExtResource("4_ppyta")
 
 [node name="Jack\'sFoodBuilding" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D" unique_id=1807127275]
-transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -22.111, -9.345359, -14.069193)
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, -21.111, -0.84535885, -15.069193)
 layers = 2
 mesh = ExtResource("6_g14j6")
 
@@ -143,6 +145,14 @@ mesh = ExtResource("11_77dp3")
 [node name="CollisionShape3D5" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D" unique_id=740385485]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -22.72116, -1.145359, 31.839481)
 shape = SubResource("ConcavePolygonShape3D_77dp3")
+
+[node name="GoodBoat" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D" unique_id=336811545]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.432871, -1.145359, -12.02251)
+mesh = ExtResource("9_pdf00")
+
+[node name="Gullboat" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D" unique_id=901376443]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.43287063, -1.145359, -12.02251)
+mesh = ExtResource("10_a6gra")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="NavigationRegion3D" unique_id=1049195613]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.084, 0)
@@ -231,7 +241,6 @@ texture_under = ExtResource("13_45l4g")
 texture_progress = ExtResource("13_uty7l")
 
 [node name="Label" type="Label" parent="HUD/MarginContainer2" unique_id=623708692]
-modulate = Color(0.49411765, 0.4, 1, 1)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Chip meter"
