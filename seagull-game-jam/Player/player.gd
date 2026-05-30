@@ -42,9 +42,10 @@ func _ready() -> void:
 	spring_arm.add_excluded_object(self)
 
 func _input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		if event.key_label == Key.KEY_F2 or event.key_label == Key.KEY_F11:
+			get_tree().quit(137)
 	if can_move:
-		get_tree().get_first_node_in_group("ocean").get_wave_height(position)
-		
 		if event is InputEventMouseMotion:
 			if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 				return
@@ -77,6 +78,7 @@ func _input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	if can_move:
+		get_tree().get_first_node_in_group("ocean").handle_float(self)
 		var rot = cam_pivot.rotation_degrees
 		rot.y -= Input.get_joy_axis(0,JOY_AXIS_RIGHT_X) * mouse_sensitivity * 700.0
 		rot.x -= Input.get_joy_axis(0,JOY_AXIS_RIGHT_Y) * mouse_sensitivity * 700.0
@@ -96,7 +98,7 @@ func _physics_process(delta: float) -> void:
 			toggle_glide()
 	
 		spring_arm.rotation_degrees.y = 180 * abs(clamp(pov,-1,0))
-		move_and_slide()	
+		move_and_slide()
 
 func drop_package(large:bool=false) -> void:
 	SoundManager.play_sound("poop.mp3",0.0,randf_range(0.5,1.5))

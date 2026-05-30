@@ -10,9 +10,12 @@ func _ready() -> void:
 	ocean_noise.noise = FastNoiseLite.new()
 	generate_ocean()
 
-func handle_float(body:CharacterBody3D):
+func handle_float(body: CharacterBody3D) -> Vector3:
 	if $Area3D.overlaps_body(body) and body.position.y < get_wave_height(body.position):
-		return Vector3(0,body.position.y - get_wave_height(body.position),0)
+		var push_up = get_wave_height(body.position) - body.position.y
+		print(Vector3(0, push_up, 0))
+		return Vector3(0, push_up, 0)
+	return Vector3.ZERO
 
 func get_wave_height(global_pos: Vector3) -> float:
 	# 1. Get the noise configuration from your texture

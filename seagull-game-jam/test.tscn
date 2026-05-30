@@ -171,6 +171,7 @@ shape = SubResource("ConvexPolygonShape3D_ehkex")
 
 [node name="Human" parent="." unique_id=2136399363 node_paths=PackedStringArray("job_position", "home_position", "beach_position", "player") instance=ExtResource("5_ykrsh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.74597, 2.2832446, -7.926559)
+human_type = 1
 job_position = NodePath("../job_position")
 job_time = 5.0
 home_position = NodePath("../home_position")

@@ -6,7 +6,6 @@
 [ext_resource type="ArrayMesh" uid="uid://iepyppinyx0x" path="res://Enviroment.vox" id="4_qrmce"]
 [ext_resource type="ArrayMesh" uid="uid://8hlky3n66uer" path="res://Enviroment Pieces/Jack's food building.vox" id="5_qrmce"]
 [ext_resource type="PackedScene" uid="uid://iqx2qa3vwyrj" path="res://Human/human.tscn" id="6_8q3i6"]
-[ext_resource type="AudioStream" uid="uid://cko45pbkpq582" path="res://starostin-comedy-cartoon-funny-background-music-492540.mp3" id="7_8q3i6"]
 [ext_resource type="PackedScene" uid="uid://cd00js8sxx5m3" path="res://Main Items.tscn" id="8_qlag8"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_iafiv"]
@@ -55,6 +54,7 @@ mesh = ExtResource("5_qrmce")
 
 [node name="Human" parent="." unique_id=2136399363 node_paths=PackedStringArray("job_position", "home_position", "beach_position", "player") instance=ExtResource("6_8q3i6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4842033, 14.75383, -22.211803)
+human_type = 1
 job_position = NodePath("../job_position")
 job_time = 5.0
 home_position = NodePath("../home_position")
@@ -74,12 +74,5 @@ gizmo_extents = 4.11
 [node name="beach_position" type="Marker3D" parent="." unique_id=661506788]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.236713, 1.6910448, 2.1059523)
 gizmo_extents = 4.11
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=858533535]
-stream = ExtResource("7_8q3i6")
-volume_db = -3.43
-autoplay = true
-mix_target = 1
-parameters/looping = true
 
 [node name="MainItems" parent="." unique_id=1226901575 instance=ExtResource("8_qlag8")]

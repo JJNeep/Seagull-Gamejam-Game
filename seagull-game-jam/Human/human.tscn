@@ -1,13 +1,11 @@
 [gd_scene format=3 uid="uid://iqx2qa3vwyrj"]
 
 [ext_resource type="Script" uid="uid://87c71g5rvju0" path="res://Human/human.gd" id="1_sb0fm"]
-[ext_resource type="ArrayMesh" uid="uid://docaorgfjmeq0" path="res://Human/01_Leg.vox" id="2_6vlvu"]
 [ext_resource type="ArrayMesh" uid="uid://c67okbprt33fv" path="res://Human/01_Body.vox" id="2_8ukam"]
 [ext_resource type="ArrayMesh" uid="uid://78qvijewdcj8" path="res://Human/exclaimation mark.vox" id="3_68iq3"]
 [ext_resource type="ArrayMesh" uid="uid://bkn5kk82wy1ry" path="res://Human/01_Body_Armout.vox" id="3_l1w7d"]
 [ext_resource type="ArrayMesh" uid="uid://dclai3bu47dqd" path="res://Human/question mark.vox" id="3_w10no"]
 [ext_resource type="ArrayMesh" uid="uid://c0exaxj17ixd7" path="res://Human/01_Body_Freaked.vox" id="4_jbo2n"]
-[ext_resource type="ArrayMesh" uid="uid://conwb5ta4rp8m" path="res://Human/01_Head_Annoyed.vox" id="4_l1w7d"]
 [ext_resource type="ArrayMesh" uid="uid://dp77o5ms6m7mu" path="res://Human/01_Leg_Back.vox" id="5_5jail"]
 [ext_resource type="ArrayMesh" uid="uid://br53ypttk2gw" path="res://Human/01_Leg_Forward.vox" id="6_8ukam"]
 [ext_resource type="ArrayMesh" uid="uid://bp0ihy5cgoo84" path="res://Human/01_Head_Normal.vox" id="6_hsefb"]
@@ -20,17 +18,19 @@ height = 5.6049805
 
 [sub_resource type="Animation" id="Animation_mcgpu"]
 resource_name = "EatChip"
-tracks/0/type = "value"
+tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/01Body:mesh")
+tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_l1w7d")]
+"values": [{
+"args": ["Body_Armout", NodePath("Visuals/Body")],
+"method": &"get_model"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_cgu6v"]
@@ -39,7 +39,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/01Head:position")
+tracks/0/path = NodePath("Visuals/Head:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -51,7 +51,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/01Shorts:position")
+tracks/1/path = NodePath("Visuals/Shorts:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -63,7 +63,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Visuals/01Leg2:position")
+tracks/2/path = NodePath("Visuals/Leg2:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -75,7 +75,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Visuals/01Leg:position")
+tracks/3/path = NodePath("Visuals/Leg:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -87,7 +87,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Visuals/01Body:position")
+tracks/4/path = NodePath("Visuals/Body:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -96,88 +96,92 @@ tracks/4/keys = {
 "update": 1,
 "values": [Vector3(0.124, 0, 0), Vector3(0.124, -0.1, 0), Vector3(0.124, 0, 0)]
 }
-tracks/5/type = "value"
+tracks/5/type = "method"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Visuals/01Leg:mesh")
+tracks/5/path = NodePath(".")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_6vlvu")]
+"values": [{
+"args": ["Leg", NodePath("Visuals/Leg")],
+"method": &"get_model"
+}]
 }
-tracks/6/type = "value"
+tracks/6/type = "method"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Visuals/01Leg2:mesh")
+tracks/6/path = NodePath(".")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_6vlvu")]
+"values": [{
+"args": ["Leg", NodePath("Visuals/Leg2")],
+"method": &"get_model"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_6o1x2"]
 resource_name = "Run"
 length = 0.5
 loop_mode = 1
-step = 0.05
+step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/01Leg2:mesh")
+tracks/0/path = NodePath("Visuals/Leg2:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("5_5jail"), ExtResource("2_6vlvu"), ExtResource("6_8ukam"), ExtResource("2_6vlvu")]
+"values": [Vector3(-0.075, 0, 0), Vector3(-0.075, 0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/01Leg2:position")
+tracks/1/path = NodePath("Visuals/Leg:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [Vector3(-0.075, 0, 0), Vector3(-0.075, 0, 0)]
+"values": [Vector3(0.124, 0, 0), Vector3(0.124, 0, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Visuals/01Leg:mesh")
+tracks/2/path = NodePath("Visuals/Shorts:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("6_8ukam"), ExtResource("2_6vlvu"), ExtResource("5_5jail"), ExtResource("2_6vlvu")]
+"values": [Vector3(0.124, -0.1, 0), Vector3(0.124, 0, 0), Vector3(0.124, -0.1, 0), Vector3(0.124, 0, 0)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Visuals/01Leg:position")
+tracks/3/path = NodePath("Visuals/Head:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.25),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector3(0.124, 0, 0), Vector3(0.124, 0, 0)]
+"values": [Vector3(0.124, -0.1, 0), Vector3(0.124, 0, 0), Vector3(0.124, -0.1, 0), Vector3(0.124, 0, 0)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Visuals/01Shorts:position")
+tracks/4/path = NodePath("Visuals/Body:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -186,87 +190,109 @@ tracks/4/keys = {
 "update": 1,
 "values": [Vector3(0.124, -0.1, 0), Vector3(0.124, 0, 0), Vector3(0.124, -0.1, 0), Vector3(0.124, 0, 0)]
 }
-tracks/5/type = "value"
+tracks/5/type = "method"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Visuals/01Head:position")
+tracks/5/path = NodePath(".")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector3(0.124, -0.1, 0), Vector3(0.124, 0, 0), Vector3(0.124, -0.1, 0), Vector3(0.124, 0, 0)]
+"values": [{
+"args": ["Leg_Forward", NodePath("Visuals/Leg")],
+"method": &"get_model"
+}, {
+"args": ["Leg", NodePath("Visuals/Leg")],
+"method": &"get_model"
+}, {
+"args": ["Leg_Back", NodePath("Visuals/Leg")],
+"method": &"get_model"
+}, {
+"args": ["Leg", NodePath("Visuals/Leg")],
+"method": &"get_model"
+}]
 }
-tracks/6/type = "value"
+tracks/6/type = "method"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Visuals/01Body:position")
+tracks/6/path = NodePath(".")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0, 0.125, 0.25, 0.375),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector3(0.124, -0.1, 0), Vector3(0.124, 0, 0), Vector3(0.124, -0.1, 0), Vector3(0.124, 0, 0)]
+"values": [{
+"args": ["Leg_Back", NodePath("Visuals/Leg2")],
+"method": &"get_model"
+}, {
+"args": ["Leg", NodePath("Visuals/Leg2")],
+"method": &"get_model"
+}, {
+"args": ["Leg_Forward", NodePath("Visuals/Leg2")],
+"method": &"get_model"
+}, {
+"args": ["Leg", NodePath("Visuals/Leg2")],
+"method": &"get_model"
+}]
 }
 
-[sub_resource type="Animation" id="Animation_kewdx"]
+[sub_resource type="Animation" id="Animation_5jail"]
 resource_name = "Walk"
 loop_mode = 1
-step = 0.05
+step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/01Leg2:mesh")
+tracks/0/path = NodePath("Visuals/Leg2:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("5_5jail"), ExtResource("2_6vlvu"), ExtResource("6_8ukam"), ExtResource("2_6vlvu")]
+"values": [Vector3(-0.075, 0, 0), Vector3(-0.075, 0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/01Leg2:position")
+tracks/1/path = NodePath("Visuals/Leg:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [Vector3(-0.075, 0, 0), Vector3(-0.075, 0, 0)]
+"values": [Vector3(0.124, 0, 0), Vector3(0.124, 0, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Visuals/01Leg:mesh")
+tracks/2/path = NodePath("Visuals/Shorts:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("6_8ukam"), ExtResource("2_6vlvu"), ExtResource("5_5jail"), ExtResource("2_6vlvu")]
+"values": [Vector3(0.124, -0.1, 0), Vector3(0.124, 0, 0), Vector3(0.124, -0.1, 0), Vector3(0.124, 0, 0)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Visuals/01Leg:position")
+tracks/3/path = NodePath("Visuals/Head:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector3(0.124, 0, 0), Vector3(0.124, 0, 0)]
+"values": [Vector3(0.124, -0.1, 0), Vector3(0.124, 0, 0), Vector3(0.124, -0.1, 0), Vector3(0.124, 0, 0)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Visuals/01Shorts:position")
+tracks/4/path = NodePath("Visuals/Body:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -275,29 +301,51 @@ tracks/4/keys = {
 "update": 1,
 "values": [Vector3(0.124, -0.1, 0), Vector3(0.124, 0, 0), Vector3(0.124, -0.1, 0), Vector3(0.124, 0, 0)]
 }
-tracks/5/type = "value"
+tracks/5/type = "method"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Visuals/01Head:position")
+tracks/5/path = NodePath(".")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector3(0.124, -0.1, 0), Vector3(0.124, 0, 0), Vector3(0.124, -0.1, 0), Vector3(0.124, 0, 0)]
+"values": [{
+"args": ["Leg_Forward", NodePath("Visuals/Leg")],
+"method": &"get_model"
+}, {
+"args": ["Leg", NodePath("Visuals/Leg")],
+"method": &"get_model"
+}, {
+"args": ["Leg_Back", NodePath("Visuals/Leg")],
+"method": &"get_model"
+}, {
+"args": ["Leg", NodePath("Visuals/Leg")],
+"method": &"get_model"
+}]
 }
-tracks/6/type = "value"
+tracks/6/type = "method"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Visuals/01Body:position")
+tracks/6/path = NodePath(".")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector3(0.124, -0.1, 0), Vector3(0.124, 0, 0), Vector3(0.124, -0.1, 0), Vector3(0.124, 0, 0)]
+"values": [{
+"args": ["Leg_Back", NodePath("Visuals/Leg2")],
+"method": &"get_model"
+}, {
+"args": ["Leg", NodePath("Visuals/Leg2")],
+"method": &"get_model"
+}, {
+"args": ["Leg_Forward", NodePath("Visuals/Leg2")],
+"method": &"get_model"
+}, {
+"args": ["Leg", NodePath("Visuals/Leg2")],
+"method": &"get_model"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mcgpu"]
@@ -305,7 +353,7 @@ _data = {
 &"EatChip": SubResource("Animation_mcgpu"),
 &"Idle": SubResource("Animation_cgu6v"),
 &"Run": SubResource("Animation_6o1x2"),
-&"Walk": SubResource("Animation_kewdx")
+&"Walk": SubResource("Animation_5jail")
 }
 
 [sub_resource type="Animation" id="Animation_8ukam"]
@@ -315,50 +363,54 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("01Body:mesh")
+tracks/0/path = NodePath("Reaction:mesh")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_8ukam")]
+"values": [ExtResource("3_68iq3")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Reaction:mesh")
+tracks/1/path = NodePath("Reaction:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_68iq3")]
+"values": [true]
 }
-tracks/2/type = "value"
+tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Reaction:visible")
+tracks/2/path = NodePath("..")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"values": [{
+"args": ["Body", NodePath("Visuals/Body")],
+"method": &"get_model"
+}]
 }
-tracks/3/type = "value"
+tracks/3/type = "method"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("01Head:mesh")
+tracks/3/path = NodePath("..")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("4_l1w7d")]
+"values": [{
+"args": ["Head_Annoyed", NodePath("Visuals/Head")],
+"method": &"get_model"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_g3f36"]
@@ -392,26 +444,42 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("01Head:mesh")
+tracks/2/path = NodePath("Body:mesh")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("6_hsefb")]
+"values": [ExtResource("2_8ukam")]
 }
-tracks/3/type = "value"
+tracks/3/type = "method"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("01Body:mesh")
+tracks/3/path = NodePath("..")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_8ukam")]
+"values": [{
+"args": ["Head_Normal", NodePath("Visuals/Head")],
+"method": &"get_model"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("..")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["Body", NodePath("Visuals/Body")],
+"method": &"get_model"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_l1w7d"]
@@ -421,7 +489,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("01Head:mesh")
+tracks/0/path = NodePath("Head:mesh")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -445,7 +513,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("01Body:mesh")
+tracks/2/path = NodePath("Body:mesh")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -453,6 +521,34 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("2_8ukam")]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["Head_Normal", NodePath("Visuals/Head")],
+"method": &"get_model"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("..")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["Body", NodePath("Visuals/Body")],
+"method": &"get_model"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_hsefb"]
@@ -486,7 +582,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("01Body:mesh")
+tracks/2/path = NodePath("Body:mesh")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -498,7 +594,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("01Head:mesh")
+tracks/3/path = NodePath("Head:mesh")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -506,6 +602,34 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("11_cgu6v")]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("..")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["Head_Startled", NodePath("Visuals/Head")],
+"method": &"get_model"
+}]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("..")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["Body_Freaked", NodePath("Visuals/Body")],
+"method": &"get_model"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l1w7d"]
@@ -540,28 +664,27 @@ target_position = Vector3(0, 0, -1.25)
 
 [node name="Reaction" type="MeshInstance3D" parent="Visuals" unique_id=1843588983]
 transform = Transform3D(-1.5, 0, -1.3113416e-07, 0, 1.5, 0, 1.3113416e-07, 0, -1.5, 0, 5.923512, 0)
-visible = false
 mesh = ExtResource("3_68iq3")
 
-[node name="01Body" type="MeshInstance3D" parent="Visuals" unique_id=1418237536]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.124, 0, 0)
-mesh = ExtResource("4_jbo2n")
+[node name="Body" type="MeshInstance3D" parent="Visuals" unique_id=1418237536]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.124, -0.1, 0)
+mesh = ExtResource("3_l1w7d")
 
-[node name="01Head" type="MeshInstance3D" parent="Visuals" unique_id=1616537121]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.124, 0, 0)
-mesh = ExtResource("6_hsefb")
+[node name="Head" type="MeshInstance3D" parent="Visuals" unique_id=1616537121]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.124, -0.1, 0)
+mesh = ExtResource("11_cgu6v")
 
-[node name="01Shorts" type="MeshInstance3D" parent="Visuals" unique_id=1834477937]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.124, 0, 0)
+[node name="Shorts" type="MeshInstance3D" parent="Visuals" unique_id=1834477937]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.124, -0.1, 0)
 mesh = ExtResource("8_hsefb")
 
-[node name="01Leg" type="MeshInstance3D" parent="Visuals" unique_id=2108839539]
+[node name="Leg" type="MeshInstance3D" parent="Visuals" unique_id=2108839539]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.124, 0, 0)
-mesh = ExtResource("2_6vlvu")
+mesh = ExtResource("6_8ukam")
 
-[node name="01Leg2" type="MeshInstance3D" parent="Visuals" unique_id=428165100]
+[node name="Leg2" type="MeshInstance3D" parent="Visuals" unique_id=428165100]
 transform = Transform3D(1, 0, 1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, -0.075, 0, 0)
-mesh = ExtResource("2_6vlvu")
+mesh = ExtResource("5_5jail")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Visuals" unique_id=1751184644]
 root_node = NodePath("../..")

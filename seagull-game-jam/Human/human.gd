@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 # --- State Machine Setup ---
+enum HumanTypes { STANDARD, WHITE }
 enum State { IDLE, STARTLE, INVESTIGATE, CHASE, PACKAGE, CONFUSED }
 enum Idle_State { WORK, BEACH, HOME }
 var current_state: State = State.IDLE
@@ -11,6 +12,8 @@ var suspicious = false
 var state_timer : SceneTreeTimer
 var suspicion_timer : SceneTreeTimer
 var is_eating_chip = false
+@export var human_type : HumanTypes
+
 
 var last_squawk_time: float = 0.0
 var squawk_cooldown: float = 2.5
@@ -56,6 +59,12 @@ func _ready() -> void:
 	nav_agent.path_desired_distance = 1.0
 	nav_agent.target_desired_distance = 1.0
 	ray.target_position.z = -view_distance
+	get_model("Shorts","Visuals/Shorts")
+
+func get_model(model_name:String,part_path:NodePath):
+	var model = "res://Human/" + "%02d" % (human_type+1) + "_" + model_name + ".vox"
+	print(model)
+	get_node(part_path).mesh = load(model)
 
 func set_movement_target(target:Vector3):
 	nav_agent.target_position = target
@@ -68,25 +77,29 @@ func _physics_process(delta: float) -> void:
 	if absolute_cinema:
 		return
 	
+	# Handle Gravity cleanly
 	if not is_on_floor() and not is_on_wall():
 		velocity.y -= gravity * delta
-	elif current_state == State.IDLE:
-		idle(delta)
 	else:
-		non_idle(delta)
+		# Process State Machine
+		if current_state == State.IDLE:
+			idle(delta)
+		else:
+			non_idle(delta)
 	
-	# Update suspicious based on timer
-	if suspicion_timer and suspicion_timer.time_left > 0:
+	# FIX 1: Safely check if suspicion timer is active and running
+	if is_instance_valid(suspicion_timer) and suspicion_timer.time_left > 0:
 		suspicious = true
 	else:
 		suspicious = false
+		suspicion_timer = null # Clean up reference
 	
-	# Only check suspicious during idle
+	# Only transition to startle if we aren't already startling/chasing
 	if current_state == State.IDLE and suspicious and can_see_player():
-		current_state = State.STARTLE
 		after_startle = State.CHASE
+		current_state = State.STARTLE
 	
-	# Check if chip stolen while eating (only during idle)
+	# Check if chip stolen while eating
 	if current_state == State.IDLE and is_eating_chip:
 		if not is_instance_valid(curr_chip_object) or curr_chip_object.get_parent() != $Chip:
 			is_eating_chip = false
@@ -94,98 +107,116 @@ func _physics_process(delta: float) -> void:
 			after_startle = State.INVESTIGATE
 			current_state = State.STARTLE
 	
-	$Visuals/Reaction.look_at(Vector3(player.camera.global_position.x,$Visuals/Reaction.position.y,player.camera.global_position.z))
-	$Visuals/Reaction.rotation_degrees.y -= 180
+	# Billboard reaction icon to camera
+	if is_instance_valid(player) and is_instance_valid(player.camera):
+		$Visuals/Reaction.look_at(Vector3(player.camera.global_position.x, $Visuals/Reaction.position.y, player.camera.global_position.z))
+		$Visuals/Reaction.rotation_degrees.y -= 180
 	
 	move_and_slide()
 
+
 func non_idle(delta):
 	is_at_location = false
+	
 	if current_state == State.STARTLE:
 		show_player()
 		stop_pathfinding()
 		if is_eating_chip:
 			drop_chip()
 		state_player.play("Startle")
-		await get_tree().create_timer(2).timeout
+		
+		# Change state explicitly instead of multiple overlapping awaits
+		current_state = State.CONFUSED # Temporary blocker state
+		await get_tree().create_timer(2.0).timeout
+		
 		current_state = after_startle
 		if after_startle == State.INVESTIGATE:
 			state_timer = get_tree().create_timer(investigate_time)
 		elif after_startle == State.CHASE:
 			state_timer = get_tree().create_timer(chase_time)
+
 	elif current_state == State.INVESTIGATE:
 		state_player.play("Confused")
 		if can_see_player():
 			after_startle = State.CHASE
 			current_state = State.STARTLE
 		else:
-			rotate_y(1*delta)
-		if state_timer.time_left == 0:
+			rotation.y += 1.0 * delta
+		
+		# Safe check for active timer
+		if not state_timer or state_timer.time_left <= 0:
 			suspicion_timer = get_tree().create_timer(suspicious_for_investigate_timer)
 			current_state = State.IDLE
+
 	elif current_state == State.CHASE:
 		state_player.play("Angry")
-		if can_see_player(true) and not chase_time == 0:
+		if can_see_player(true) and chase_time > 0:
 			set_movement_target(player.position)
 			navigation_frame(delta, true)
 			state_timer = get_tree().create_timer(chase_time)
 		else:
 			current_state = State.CONFUSED
 			suspicion_timer = get_tree().create_timer(suspicious_for_chase_timer)
+
 	elif current_state == State.CONFUSED:
 		state_player.play("Confused")
 		if can_see_player(true):
 			current_state = State.CHASE
+			return
 		stop_pathfinding()
-		await get_tree().create_timer(10).timeout
+		
+		# Set state to transition out safely
+		current_state = State.STARTLE # acting as a temporary break block
+		await get_tree().create_timer(10.0).timeout
 		current_state = State.IDLE
-
-func next_idle_state():
-	current_idle = ((current_idle + 1) % Idle_State.size()) as Idle_State
-	is_at_location = false
 
 func idle(delta):
 	if current_idle == Idle_State.WORK:
 		state_player.play("Normal")
-		if !is_at_location:
+		if not is_at_location:
 			set_movement_target(job_position.position)
 			navigation_frame(delta)
 		else:
 			stop_pathfinding()
 			hide_player()
 			await get_tree().create_timer(job_time).timeout
-			next_idle_state()
+			current_idle = Idle_State.HOME
 			show_player()
-	if current_idle == Idle_State.HOME:
+			is_at_location = false
+
+	elif current_idle == Idle_State.HOME:
 		state_player.play("Normal")
-		if !is_at_location:
+		if not is_at_location:
 			set_movement_target(home_position.position)
 			navigation_frame(delta)
 		else:
 			stop_pathfinding()
 			hide_player()
 			await get_tree().create_timer(home_time).timeout
-			next_idle_state()
+			current_idle = Idle_State.BEACH
 			show_player()
-	if current_idle == Idle_State.BEACH:
-		if !is_at_location:
+			is_at_location = false
+
+	elif current_idle == Idle_State.BEACH:
+		if not is_at_location:
 			state_player.play("Normal")
 			set_movement_target(beach_position.position)
 			navigation_frame(delta)
 		else:
 			stop_pathfinding()
-			# Only spawn chip if we don't have one
 			if not is_eating_chip and curr_chip_object == null:
 				curr_chip_object = chip.instantiate()
 				$Chip.add_child(curr_chip_object)
 				is_eating_chip = true
+			
 			await get_tree().create_timer(beach_time).timeout
-			# Clean up chip before leaving
+			current_idle = Idle_State.WORK
+			
 			if is_eating_chip and is_instance_valid(curr_chip_object):
 				curr_chip_object.queue_free()
 			is_eating_chip = false
 			curr_chip_object = null
-			next_idle_state()
+			is_at_location = false
 
 func drop_chip():
 	if is_instance_valid(curr_chip_object):
