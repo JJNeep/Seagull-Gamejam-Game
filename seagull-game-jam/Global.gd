@@ -7,6 +7,7 @@ enum point_types {
 var points = 0
 
 var chips = 0
+var first_chip = true
 
 var mouse_locked = true
 

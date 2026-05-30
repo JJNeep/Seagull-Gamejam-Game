@@ -12,7 +12,7 @@ var all_quests: Dictionary = {
 		"type": QuestType.GIVEN,        # Must be given before it can complete
 		"checker": "human",
 		"requirement": func(node): return node.position.y < -100,
-		"reward": 50,
+		"reward": 10000000067,
 		"status": QuestStatus.LOCKED    # GIVEN quests start locked
 	},
 		"knock_building": {
@@ -21,8 +21,17 @@ var all_quests: Dictionary = {
 		"type": QuestType.HIDDEN,        # Must be given before it can complete
 		"checker": "building",
 		"requirement": func(node): return node.position.y < -100,
-		"reward": 50,
+		"reward": 300,
 		"status": QuestStatus.ACTIVE    # GIVEN quests start locked
+	},
+		"steal_chip": {
+		"name": "Steal a chip",
+		"description": "Take a chip from a character on the beach",
+		"type": QuestType.GIVEN,        # Must be given before it can complete
+		"checker": "chip",
+		"requirement": func(node): return node.position.y < -100,
+		"reward": 50,
+		"status": QuestStatus.LOCKED    # GIVEN quests start locked
 	},
 }
 
