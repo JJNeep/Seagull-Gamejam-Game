@@ -25,7 +25,7 @@ func get_wave_height(global_pos: Vector3) -> float:
 	var noise_val = noise.get_noise_2d(global_pos.x, global_pos.z)
 	
 	# 3. Multiply by your shader's wave height amplitude factor
-	var wave_amplitude = 5.0 
+	var wave_amplitude = 5.0
 	return noise_val * wave_amplitude
 
 func generate_ocean() -> void:

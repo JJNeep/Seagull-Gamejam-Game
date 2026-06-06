@@ -14,6 +14,11 @@ var suspicion_timer : SceneTreeTimer
 var is_eating_chip = false
 @export var human_type : HumanTypes
 
+# Frame-based countdowns (replace the old await-based timers so the state
+# machine never spawns overlapping coroutines).
+var startle_time: float = 0.0
+var confused_time: float = 0.0
+var location_wait: float = 0.0
 
 var last_squawk_time: float = 0.0
 var squawk_cooldown: float = 2.5
@@ -63,7 +68,6 @@ func _ready() -> void:
 
 func get_model(model_name:String,part_path:NodePath):
 	var model = "res://Human/" + "%02d" % (human_type+1) + "_" + model_name + ".vox"
-	print(model)
 	get_node(part_path).mesh = load(model)
 
 func set_movement_target(target:Vector3):
@@ -98,6 +102,7 @@ func _physics_process(delta: float) -> void:
 	if current_state == State.IDLE and suspicious and can_see_player():
 		after_startle = State.CHASE
 		current_state = State.STARTLE
+		startle_time = 0.0
 	
 	# Check if chip stolen while eating
 	if current_state == State.IDLE and is_eating_chip:
@@ -106,6 +111,7 @@ func _physics_process(delta: float) -> void:
 			curr_chip_object = null
 			after_startle = State.INVESTIGATE
 			current_state = State.STARTLE
+			startle_time = 0.0
 	
 	# Billboard reaction icon to camera
 	if is_instance_valid(player) and is_instance_valid(player.camera):
@@ -125,50 +131,57 @@ func non_idle(delta):
 			drop_chip()
 		state_player.play("Startle")
 		
-		# Change state explicitly instead of multiple overlapping awaits
-		current_state = State.CONFUSED # Temporary blocker state
-		await get_tree().create_timer(2.0).timeout
-		
-		current_state = after_startle
-		if after_startle == State.INVESTIGATE:
-			state_timer = get_tree().create_timer(investigate_time)
-		elif after_startle == State.CHASE:
-			state_timer = get_tree().create_timer(chase_time)
+		# Frame-based wait instead of an await coroutine.
+		startle_time += delta
+		if startle_time >= 2.0:
+			startle_time = 0.0
+			current_state = after_startle
+			if after_startle == State.INVESTIGATE:
+				state_timer = get_tree().create_timer(investigate_time)
+			elif after_startle == State.CHASE:
+				state_timer = get_tree().create_timer(chase_time)
+			elif after_startle == State.CONFUSED:
+				confused_time = 0.0
 
 	elif current_state == State.INVESTIGATE:
 		state_player.play("Confused")
 		if can_see_player():
 			after_startle = State.CHASE
 			current_state = State.STARTLE
+			startle_time = 0.0
 		else:
 			rotation.y += 1.0 * delta
-		
-		# Safe check for active timer
-		if not state_timer or state_timer.time_left <= 0:
-			suspicion_timer = get_tree().create_timer(suspicious_for_investigate_timer)
-			current_state = State.IDLE
+			# Only count down / return to idle while we still can't see the player.
+			if not is_instance_valid(state_timer) or state_timer.time_left <= 0:
+				suspicion_timer = get_tree().create_timer(suspicious_for_investigate_timer)
+				current_state = State.IDLE
+				is_at_location = false
+				location_wait = 0.0
 
 	elif current_state == State.CHASE:
 		state_player.play("Angry")
 		if can_see_player(true) and chase_time > 0:
 			set_movement_target(player.position)
 			navigation_frame(delta, true)
-			state_timer = get_tree().create_timer(chase_time)
 		else:
+			confused_time = 0.0
 			current_state = State.CONFUSED
 			suspicion_timer = get_tree().create_timer(suspicious_for_chase_timer)
 
 	elif current_state == State.CONFUSED:
 		state_player.play("Confused")
 		if can_see_player(true):
+			confused_time = 0.0
 			current_state = State.CHASE
 			return
 		stop_pathfinding()
-		
-		# Set state to transition out safely
-		current_state = State.STARTLE # acting as a temporary break block
-		await get_tree().create_timer(10.0).timeout
-		current_state = State.IDLE
+		# Frame-based wait so he stays responsive (keeps checking for the player).
+		confused_time += delta
+		if confused_time >= 10.0:
+			confused_time = 0.0
+			current_state = State.IDLE
+			is_at_location = false
+			location_wait = 0.0
 
 func idle(delta):
 	if current_idle == Idle_State.WORK:
@@ -179,10 +192,12 @@ func idle(delta):
 		else:
 			stop_pathfinding()
 			hide_player()
-			await get_tree().create_timer(job_time).timeout
-			current_idle = Idle_State.HOME
-			show_player()
-			is_at_location = false
+			location_wait += delta
+			if location_wait >= job_time:
+				location_wait = 0.0
+				current_idle = Idle_State.HOME
+				show_player()
+				is_at_location = false
 
 	elif current_idle == Idle_State.HOME:
 		state_player.play("Normal")
@@ -192,10 +207,12 @@ func idle(delta):
 		else:
 			stop_pathfinding()
 			hide_player()
-			await get_tree().create_timer(home_time).timeout
-			current_idle = Idle_State.BEACH
-			show_player()
-			is_at_location = false
+			location_wait += delta
+			if location_wait >= home_time:
+				location_wait = 0.0
+				current_idle = Idle_State.BEACH
+				show_player()
+				is_at_location = false
 
 	elif current_idle == Idle_State.BEACH:
 		if not is_at_location:
@@ -209,14 +226,16 @@ func idle(delta):
 				$Chip.add_child(curr_chip_object)
 				is_eating_chip = true
 			
-			await get_tree().create_timer(beach_time).timeout
-			current_idle = Idle_State.WORK
-			
-			if is_eating_chip and is_instance_valid(curr_chip_object):
-				curr_chip_object.queue_free()
-			is_eating_chip = false
-			curr_chip_object = null
-			is_at_location = false
+			location_wait += delta
+			if location_wait >= beach_time:
+				location_wait = 0.0
+				current_idle = Idle_State.WORK
+				
+				if is_eating_chip and is_instance_valid(curr_chip_object):
+					curr_chip_object.queue_free()
+				is_eating_chip = false
+				curr_chip_object = null
+				is_at_location = false
 
 func drop_chip():
 	if is_instance_valid(curr_chip_object):
@@ -291,16 +310,21 @@ func can_see_player(ignore_fov = false) -> bool:
 func hear_squawk(bird_pos: Vector3) -> void:
 	var current_time = Time.get_ticks_msec() / 1000.0
 	
+	# Respect the cooldown so rapid squawks can't spam the trigger.
 	if current_time - last_squawk_time < squawk_cooldown:
 		return
-	if current_state in [State.STARTLE, State.CHASE]:
+	# Only react when unaware. If he's already startled / investigating / chasing /
+	# confused, ignore the squawk so it can't restart the reaction or reset timers.
+	if current_state != State.IDLE:
 		return
 	
 	if bird_pos.distance_to(position) < hearing_range:
 		last_squawk_time = current_time
 		after_startle = State.INVESTIGATE
 		current_state = State.STARTLE
+		startle_time = 0.0
 
 func collide_package() -> void:
 	after_startle = State.CONFUSED
 	current_state = State.STARTLE
+	startle_time = 0.0

@@ -13,8 +13,8 @@
 [ext_resource type="ArrayMesh" uid="uid://cvvlywlx8dj4k" path="res://Human/01_Head_Startled.vox" id="11_cgu6v"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sb0fm"]
-radius = 1.097168
-height = 5.6049805
+radius = 0.71875
+height = 5.3875732
 
 [sub_resource type="Animation" id="Animation_mcgpu"]
 resource_name = "EatChip"
@@ -647,7 +647,7 @@ script = ExtResource("1_sb0fm")
 hearing_range = 50.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=380257067]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8024902, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6937866, 0)
 shape = SubResource("CapsuleShape3D_sb0fm")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1128873949]

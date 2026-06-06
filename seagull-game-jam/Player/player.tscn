@@ -17,6 +17,8 @@
 radius = 0.9086914
 height = 2.4145508
 
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_5htga"]
+
 [sub_resource type="Animation" id="Animation_dkpta"]
 resource_name = "Fall"
 step = 0.05
@@ -743,6 +745,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2071532, 0)
 spring_length = 5.0
 
 [node name="Camera3D" type="Camera3D" parent="CamPivot/SpringArm3D" unique_id=1057931142]
+attributes = SubResource("CameraAttributesPractical_5htga")
 
 [node name="Visuals" type="Node3D" parent="." unique_id=2002228515]
 
@@ -776,6 +779,7 @@ mesh = ExtResource("6_dkpta")
 [node name="ShapeCast3D" type="ShapeCast3D" parent="Visuals/Offset" unique_id=1440114208]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.281681, 0)
 shape = SubResource("CylinderShape3D_5htga")
+collision_mask = 5
 
 [node name="Package_Drop_Point" type="Marker3D" parent="Visuals/Offset" unique_id=366868600]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.79864204, 0)

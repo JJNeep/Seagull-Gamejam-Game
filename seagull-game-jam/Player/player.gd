@@ -78,7 +78,6 @@ func _input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	if can_move:
-		get_tree().get_first_node_in_group("ocean").handle_float(self)
 		var rot = cam_pivot.rotation_degrees
 		rot.y -= Input.get_joy_axis(0,JOY_AXIS_RIGHT_X) * mouse_sensitivity * 700.0
 		rot.x -= Input.get_joy_axis(0,JOY_AXIS_RIGHT_Y) * mouse_sensitivity * 700.0
@@ -96,7 +95,9 @@ func _physics_process(delta: float) -> void:
 	
 		if is_gliding and is_on_floor():
 			toggle_glide()
-	
+		
+		velocity += get_tree().get_first_node_in_group("ocean").handle_float(self)
+		
 		spring_arm.rotation_degrees.y = 180 * abs(clamp(pov,-1,0))
 		move_and_slide()
 

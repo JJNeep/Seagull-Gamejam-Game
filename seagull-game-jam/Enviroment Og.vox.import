@@ -1,0 +1,18 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions.To.Mesh"
+type="Mesh"
+uid="uid://ct2ti2tecn2l"
+path="res://.godot/imported/Enviroment Og.vox-6d6508c6fa510ea840b3742658cbf33e.mesh"
+
+[deps]
+
+source_file="res://Enviroment Og.vox"
+dest_files=["res://.godot/imported/Enviroment Og.vox-6d6508c6fa510ea840b3742658cbf33e.mesh"]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
+FirstKeyframeOnly=true

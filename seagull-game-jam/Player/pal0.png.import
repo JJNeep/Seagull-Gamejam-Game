@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://du4xqiupnkjud"
 path.s3tc="res://.godot/imported/pal0.png-99e806d851a972c84747c35a3430c598.s3tc.ctex"
+path.etc2="res://.godot/imported/pal0.png-99e806d851a972c84747c35a3430c598.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Player/pal0.png"
-dest_files=["res://.godot/imported/pal0.png-99e806d851a972c84747c35a3430c598.s3tc.ctex"]
+dest_files=["res://.godot/imported/pal0.png-99e806d851a972c84747c35a3430c598.s3tc.ctex", "res://.godot/imported/pal0.png-99e806d851a972c84747c35a3430c598.etc2.ctex"]
 
 [params]
 
