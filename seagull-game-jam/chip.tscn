@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bfpgvvwhq30i8" path="res://chip.gd" id="1_ojlvc"]
 [ext_resource type="ArrayMesh" uid="uid://cisobe5kw6bov" path="res://Chip.vox" id="1_ri5qt"]
-[ext_resource type="PackedScene" uid="uid://bhjtvkxags828" path="res://level_01.tscn" id="3_3la36"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ojlvc"]
 size = Vector3(1.2771485, 0.2, 0.23007813)
@@ -27,7 +26,5 @@ collision_mask = 7
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=928081250]
 shape = SubResource("BoxShape3D_3la36")
-
-[node name="Level01" parent="." unique_id=1646612265 instance=ExtResource("3_3la36")]
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

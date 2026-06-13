@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cd00js8sxx5m3"]
 
-[ext_resource type="Script" uid="uid://o5p4eb22dbg2" path="res://hud.gd" id="1_6sniq"]
+[ext_resource type="Script" uid="uid://o5p4eb22dbg2" path="res://HUD.gd" id="1_6sniq"]
 [ext_resource type="FontFile" uid="uid://db28q6344mu8p" path="res://DoHyeon-Regular.ttf" id="2_08eom"]
 [ext_resource type="Texture2D" uid="uid://rooad0xa7rta" path="res://Chip Underbar.png" id="3_bhg8y"]
 [ext_resource type="Texture2D" uid="uid://c8k5aps3rftl1" path="res://Chip overbar.png" id="4_7et1j"]
@@ -34,6 +34,8 @@ ssao_enabled = true
 ssil_enabled = true
 sdfgi_enabled = true
 glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
 adjustment_enabled = true
 
 [node name="MainItems" type="Node3D" unique_id=1226901575]

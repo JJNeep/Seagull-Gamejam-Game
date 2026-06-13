@@ -32,6 +32,11 @@ transform_format = 1
 mesh = SubResource("BoxMesh_tiovm")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j38dg"]
+size = Vector3(1, 5, 1)
+
+[sub_resource type="FogMaterial" id="FogMaterial_j38dg"]
+albedo = Color(0, 0.3019608, 1, 1)
+emission = Color(0, 0, 0.7411765, 1)
 
 [node name="Ocean" type="MultiMeshInstance3D" unique_id=214444040 groups=["ocean"]]
 multimesh = SubResource("MultiMesh_tiovm")
@@ -43,3 +48,7 @@ collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=755978055]
 shape = SubResource("BoxShape3D_j38dg")
+
+[node name="FogVolume" type="FogVolume" parent="." unique_id=5717830]
+size = Vector3(300, 10, 300)
+material = SubResource("FogMaterial_j38dg")

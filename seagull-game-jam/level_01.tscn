@@ -59,6 +59,10 @@ shape = SubResource("ConcavePolygonShape3D_qlag8")
 transform = Transform3D(-1.3113416e-07, 0, -3, 0, 3, 0, 3, 0, -1.3113416e-07, 9.3546295, 11.563118, -24.876797)
 shape = SubResource("ConcavePolygonShape3D_8q3i6")
 
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D" unique_id=5703010]
+transform = Transform3D(100.22, 0, 0, 0, 100.22, 0, 0, 0, 100.22, 0, -6.448826, 0)
+shape = SubResource("ConcavePolygonShape3D_5itje")
+
 [node name="Human" parent="." unique_id=2136399363 node_paths=PackedStringArray("job_position", "home_position", "beach_position", "player") instance=ExtResource("6_8q3i6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4842033, 14.75383, -22.211803)
 human_type = 1
@@ -91,10 +95,6 @@ omni_range = 7.989
 [node name="Jack\'s food building" type="MeshInstance3D" parent="." unique_id=845726660]
 transform = Transform3D(-1.3113416e-07, 0, -3, 0, 3, 0, 3, 0, -1.3113416e-07, 9.3546295, 11.563118, -24.876797)
 mesh = ExtResource("5_qrmce")
-
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=5703010]
-transform = Transform3D(100.22, 0, 0, 0, 100.22, 0, 0, 0, 100.22, 0, -6.448826, 0)
-shape = SubResource("ConcavePolygonShape3D_5itje")
 
 [node name="Undersea" type="MeshInstance3D" parent="." unique_id=559706588]
 transform = Transform3D(100.22, 0, 0, 0, 100.22, 0, 0, 0, 100.22, 0, -6.448826, 0)
