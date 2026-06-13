@@ -50,5 +50,6 @@ collision_mask = 3
 shape = SubResource("BoxShape3D_j38dg")
 
 [node name="FogVolume" type="FogVolume" parent="." unique_id=5717830]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
 size = Vector3(300, 10, 300)
 material = SubResource("FogMaterial_j38dg")
