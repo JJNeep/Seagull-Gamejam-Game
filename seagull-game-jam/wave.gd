@@ -12,7 +12,7 @@ func _ready() -> void:
 
 func handle_float(body: CharacterBody3D) -> Vector3:
 	if $Area3D.overlaps_body(body) and body.position.y < get_wave_height(body.position):
-		var push_up = get_wave_height(body.position) - body.position.y
+		var push_up = get_wave_height(body.position) - body.position.y 
 		print(Vector3(0, push_up, 0))
 		return Vector3(0, push_up, 0)
 	return Vector3.ZERO
