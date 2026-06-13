@@ -57,17 +57,13 @@ shape = SubResource("ConcavePolygonShape3D_iafiv")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 0, -35)
 mesh = ExtResource("5_5itje")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D" unique_id=1262531483]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.367832, 1.5906372, -9.060226)
-mesh = ExtResource("8_5itje")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D" unique_id=594507401]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.367832, 1.5906372, -9.060226)
-shape = SubResource("ConcavePolygonShape3D_sb6k4")
-
 [node name="Jack\'sFoodBuilding" type="MeshInstance3D" parent="." unique_id=845726660]
 transform = Transform3D(-1.3113416e-07, 0, -3, 0, 3, 0, 3, 0, -1.3113416e-07, 9.3546295, 11.563118, -24.876797)
 mesh = ExtResource("5_qrmce")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D" unique_id=5703010]
+transform = Transform3D(100.22, 0, 0, 0, 100.22, 0, 0, 0, 100.22, 0, -6.448826, 0)
+shape = SubResource("ConcavePolygonShape3D_5itje")
 
 [node name="Human" parent="." unique_id=2136399363 node_paths=PackedStringArray("job_position", "home_position", "beach_position", "player") instance=ExtResource("6_8q3i6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4842033, 14.75383, -22.211803)
@@ -93,3 +89,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.236713, 1.6910448, 2.10595
 gizmo_extents = 4.11
 
 [node name="MainItems" parent="." unique_id=1226901575 instance=ExtResource("8_qlag8")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=544833401]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.367832, 1.5906372, -9.060226)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1262531483]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+mesh = ExtResource("8_5itje")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=594507401]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_sb6k4")
+
+[node name="Undersea" type="MeshInstance3D" parent="." unique_id=559706588]
+transform = Transform3D(100.22, 0, 0, 0, 100.22, 0, 0, 0, 100.22, 0, -6.448826, 0)
+mesh = ExtResource("5_qlag8")
