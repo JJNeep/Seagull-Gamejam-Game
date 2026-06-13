@@ -29,7 +29,7 @@ var all_quests: Dictionary = {
 		"description": "Take a chip from a character on the beach",
 		"type": QuestType.GIVEN,        # Must be given before it can complete
 		"checker": "chip",
-		"requirement": func(node): return true,
+		"requirement": func(node): return node.position.y < -100,
 		"reward": 50,
 		"status": QuestStatus.LOCKED    # GIVEN quests start locked
 	},

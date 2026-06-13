@@ -77,6 +77,10 @@ func _input(event: InputEvent) -> void:
 				drop_package()
 
 func _physics_process(delta: float) -> void:
+	if camera.global_position.y <= 0:
+		$CamPivot/SpringArm3D/Camera3D/MeshInstance3D.show()
+	else:
+		$CamPivot/SpringArm3D/Camera3D/MeshInstance3D.hide()
 	if can_move:
 		var rot = cam_pivot.rotation_degrees
 		rot.y -= Input.get_joy_axis(0,JOY_AXIS_RIGHT_X) * mouse_sensitivity * 700.0
