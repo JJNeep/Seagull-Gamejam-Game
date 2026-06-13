@@ -10,12 +10,31 @@ func _ready() -> void:
 	ocean_noise.noise = FastNoiseLite.new()
 	generate_ocean()
 
-func handle_float(body: CharacterBody3D) -> Vector3:
-	if $Area3D.overlaps_body(body) and body.position.y < get_wave_height(body.position):
-		var push_up = get_wave_height(body.position) - body.position.y 
-		print(Vector3(0, push_up, 0))
-		return Vector3(0, push_up, 0)
-	return Vector3.ZERO
+func handle_float(body: CharacterBody3D, delta: float) -> void:
+	if not $Area3D.overlaps_body(body):
+		return
+		
+	var wave_height = get_wave_height(body.position)
+	var depth = wave_height - body.position.y
+	
+	# Only apply buoyancy if the object is actually submerged
+	if depth > 0:
+		# 1. BUOYANCY FORCE: Deeper means more upward force
+		# Increase float_force (e.g., 15.0) for a higher bounce
+		var float_force = 10.0 
+		var buoyancy = depth * float_force
+		
+		# 2. WATER RESISTANCE: Damps the velocity to prevent endless overshooting
+		# Increase water_damping (e.g., 4.0) to make it settle faster
+		var water_damping = 3.0
+		var damping = body.velocity.y * water_damping
+		
+		# 3. APPLY FORCES: Combine buoyancy, damping, and counteract gravity
+		# This replaces gravity entirely while floating
+		body.velocity.y += (buoyancy - damping - body.default_gravity) * delta
+	else:
+		# If overlapping the area but above the wave crest, let gravity rule
+		body.velocity.y -= body.default_gravity * delta
 
 func get_wave_height(global_pos: Vector3) -> float:
 	# 1. Get the noise configuration from your texture
@@ -56,7 +75,7 @@ func generate_ocean() -> void:
 
 func create_ocean_hitbox():
 	var total_width = ocean_size * voxel_size
-	var depth_thickness = 2.0 # Thickness of the floor collider
+	var depth_thickness = 4.0 # Thickness of the floor collider
 	$Area3D/CollisionShape3D.shape = BoxShape3D.new()
 	$Area3D/CollisionShape3D.shape.size = Vector3(total_width,depth_thickness*4,total_width)
 	
