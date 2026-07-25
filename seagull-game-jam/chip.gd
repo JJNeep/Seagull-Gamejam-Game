@@ -1,4 +1,6 @@
-#joseph@codekids.com.au
+# Shoot email to 
+# joseph@codekids.com.au
+# Pew Pew
 extends RigidBody3D
 
 class_name Chip

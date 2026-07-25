@@ -14,6 +14,7 @@ const SPLAT_SIZE_NORMAL := 1.5
 const SPLAT_SIZE_LARGE := 4.0
 const SPLAT_LIFETIME := 30.0
 const EDIT_MAX_DURATION := 16.0  # seconds (real time) before edit force-ends
+const STANDARD_FOV = 75.0
 
 # === State ===
 var on_floor := false
@@ -22,7 +23,6 @@ var _edit_started := false
 var _impact_triggered := false
 
 # Edit state
-var _saved_fov := 75.0
 var _shake_cam: Camera3D
 var _shake_amount := 0.0
 var _emoji_spawning := false
@@ -185,10 +185,9 @@ func _start_edit() -> void:
 	
 	var cam := get_viewport().get_camera_3d()
 	if cam:
-		_saved_fov = cam.fov
 		var t := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 		t.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-		t.tween_property(cam, "fov", _saved_fov - FOV_PUNCH, 0.4)
+		t.tween_property(cam, "fov", STANDARD_FOV - FOV_PUNCH, 0.4)
 	
 	if _phonk_player.stream:
 		_phonk_player.play()
@@ -266,7 +265,7 @@ func _end_edit() -> void:
 	t.tween_method(_set_chromatic, 0.015, 0.0, 0.4)
 	t.tween_property(_hype_text, "modulate:a", 0.0, 0.4)
 	if cam:
-		t.tween_property(cam, "fov", _saved_fov, 0.4)
+		t.tween_property(cam, "fov", STANDARD_FOV, 0.4)
 	if _phonk_player.playing:
 		t.tween_property(_phonk_player, "volume_db", -40.0, 0.4)
 	
@@ -365,7 +364,7 @@ func _exit_tree() -> void:
 		Engine.time_scale = 1.0
 		var cam := get_viewport().get_camera_3d()
 		if cam:
-			cam.fov = _saved_fov
+			cam.fov = STANDARD_FOV
 			cam.h_offset = 0.0
 			cam.v_offset = 0.0
 		if get_tree().paused:

@@ -22,6 +22,7 @@ font_size = 72
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i4ou3"]
 sky_top_color = Color(0.015859274, 0.49726123, 0.99996144, 1)
 sky_horizon_color = Color(0.8417286, 0.60062116, 0.28336942, 1)
+ground_bottom_color = Color(0.060529716, 0, 0.54975253, 1)
 
 [sub_resource type="Sky" id="Sky_uty7l"]
 sky_material = SubResource("ProceduralSkyMaterial_i4ou3")
@@ -34,6 +35,8 @@ ssao_enabled = true
 ssil_enabled = true
 sdfgi_enabled = true
 glow_enabled = true
+fog_light_color = Color(1, 1, 1, 1)
+fog_density = 0.001
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0
 adjustment_enabled = true
