@@ -41,6 +41,7 @@ albedo = Color(0, 0.3019608, 1, 1)
 emission = Color(0, 0, 0.7411765, 1)
 
 [node name="Ocean" type="MultiMeshInstance3D" unique_id=214444040 groups=["ocean"]]
+cast_shadow = 0
 gi_mode = 0
 multimesh = SubResource("MultiMesh_tiovm")
 script = ExtResource("1_tiovm")

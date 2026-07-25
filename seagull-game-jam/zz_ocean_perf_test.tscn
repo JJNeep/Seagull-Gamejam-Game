@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://8vf7wlrtxtto"]
+
+[ext_resource type="PackedScene" uid="uid://dhmsuhkn50pl4" path="res://ocean.tscn" id="1_ocean"]
+[ext_resource type="Script" path="res://zz_ocean_perf_test.gd" id="2_probe"]
+
+[node name="Root" type="Node3D"]
+script = ExtResource("2_probe")
+
+[node name="Ocean" parent="." instance=ExtResource("1_ocean")]
+transform = Transform3D(-1, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -1, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 20, -30)
