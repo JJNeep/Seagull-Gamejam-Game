@@ -14,8 +14,15 @@ var motor : int = 0
 
 var init_transform = null
 
+enum boat_types {GOODBOAT, GULLBOAT}
+
+@onready var boats = [preload("res://goodBoat.vox"),preload("res://Gullboat.vox")]
+
+@export var boat_type : boat_types = boat_types.GULLBOAT
+
 func _ready() -> void:
 	init_transform = transform
+	$Mesh.mesh = boats[boat_type]
 
 func _physics_process(delta: float) -> void:
 	get_tree().get_first_node_in_group("ocean").handle_float(self,delta)
