@@ -97,6 +97,7 @@ text = "Chip meter"
 label_settings = SubResource("LabelSettings_a8ydc")
 
 [node name="MarginContainer3" type="MarginContainer" parent="HUD" unique_id=54705205]
+visible = false
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -122,7 +123,7 @@ theme = SubResource("Theme_r245s")
 [node name="QuestMenu" parent="." unique_id=2068119428 instance=ExtResource("5_x0re8")]
 visible = false
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2002797965]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2002797965 groups=["main_music"]]
 stream = ExtResource("6_io8pm")
 volume_db = -3.43
 autoplay = true

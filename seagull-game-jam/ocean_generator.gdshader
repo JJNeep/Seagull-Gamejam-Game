@@ -1,4 +1,8 @@
 shader_type spatial;
+// Reading hint_depth_texture forces this material into the transparent pass,
+// where depth writing is off by default - that made the water blocks draw
+// in the wrong order (the "layering" artifact). This turns depth write back on.
+render_mode depth_draw_always;
 
 // --- COLORS ---
 uniform vec3 deep_color : source_color = vec3(0.0, 0.2, 0.6);
@@ -8,6 +12,7 @@ uniform vec3 foam_color : source_color = vec3(1.0, 1.0, 1.0);
 // --- WAVES ---
 uniform float wave_height = 2.0;
 uniform float speed = 0.1;
+uniform float time = 0.0; // Driven from wave.gd so physics and visuals share one clock
 uniform float wave_foam_level = 0.65; // High peaks turn white
 
 // --- NOISE TEXTURE ---
@@ -23,7 +28,7 @@ varying float wave_h;
 
 void vertex() {
 	vec3 world_pos = MODEL_MATRIX[3].xyz;
-	vec2 uv = (world_pos.xz * noise_scale) + vec2(TIME * speed, TIME * speed * 0.3);
+	vec2 uv = (world_pos.xz * noise_scale) + vec2(time * speed, time * speed * 0.3);
 	
 	float noise = texture(noise_tex, uv).r;
 	noise = pow(noise, 2.0); // Sharpen the peaks

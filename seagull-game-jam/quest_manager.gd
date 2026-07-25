@@ -12,7 +12,6 @@ var all_quests: Dictionary = {
 		"type": QuestType.GIVEN,        # Must be given before it can complete
 		"checker": "human",
 		"requirement": func(node): return node.position.y < -100,
-		"reward": 10000000067,
 		"status": QuestStatus.LOCKED    # GIVEN quests start locked
 	},
 		"knock_building": {
@@ -21,16 +20,14 @@ var all_quests: Dictionary = {
 		"type": QuestType.HIDDEN,        # Must be given before it can complete
 		"checker": "building",
 		"requirement": func(node): return node.position.y < -100,
-		"reward": 300,
 		"status": QuestStatus.ACTIVE    # GIVEN quests start locked
 	},
 		"steal_chip": {
-		"name": "Steal a chip",
-		"description": "Take a chip from a character on the beach",
+		"name": "First of Many",
+		"description": "Steal a chip from the dude on the beach",
 		"type": QuestType.GIVEN,        # Must be given before it can complete
 		"checker": "chip",
 		"requirement": func(node): return node.position.y < -100,
-		"reward": 50,
 		"status": QuestStatus.LOCKED    # GIVEN quests start locked
 	},
 }
@@ -72,8 +69,6 @@ func complete_quest(quest_id: String) -> void:
 	var quest = all_quests[quest_id]
 	quest.status = QuestStatus.COMPLETED
 	completed_quests.append(quest_id)
-	Global.create_popup_display(Vector3(0,0,0),quest.reward,10)
-	Global.points += quest.reward    # However you're storing points
 	quest_completed.emit(quest_id)
 
 # Signals for UI to listen to

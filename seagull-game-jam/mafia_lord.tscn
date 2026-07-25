@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d3gumrhshhd3d"]
 
-[ext_resource type="Script" path="res://mafia_lord.gd" id="1_k2yjw"]
+[ext_resource type="Script" uid="uid://bkqli33unsmdi" path="res://mafia_lord.gd" id="1_k2yjw"]
 [ext_resource type="ArrayMesh" uid="uid://cjktyy3uhhcwu" path="res://Seagull mafia lord.vox" id="2_vflte"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s1hry"]

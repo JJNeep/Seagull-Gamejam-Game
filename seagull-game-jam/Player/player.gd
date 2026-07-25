@@ -36,6 +36,7 @@ var default_gravity: float = ProjectSettings.get_setting("physics/3d/default_gra
 
 var poop_time : SceneTreeTimer
 var can_move = true
+var handle_input : bool = true
 
 func _ready() -> void:
 	camera.current = true
@@ -56,21 +57,21 @@ func _input(event: InputEvent) -> void:
 			rot.z = 0.0
 			cam_pivot.rotation_degrees = rot
 
-		if event.is_action_pressed("jump") and not is_on_floor():
+		if handle_input and event.is_action_pressed("jump") and not is_on_floor():
 			toggle_glide()
 			
-		if event.is_action_pressed("squawk"):
+		if handle_input and event.is_action_pressed("squawk"):
 			perform_squawk()
 	
-		if event.is_action_pressed("toggle_pov"):
+		if handle_input and event.is_action_pressed("toggle_pov"):
 			if pov == 1:
 				pov = -1
 			else:
 				pov = 1
 	
-		if event.is_action_pressed("drop_package"):
+		if handle_input and event.is_action_pressed("drop_package"):
 			poop_time = get_tree().create_timer(1)
-		if event.is_action_released("drop_package"):
+		if handle_input and event.is_action_released("drop_package"):
 			if poop_time.time_left == 0 and Global.chips > 4:
 				drop_package(true)
 			elif Global.chips > 0:
@@ -93,7 +94,7 @@ func _physics_process(delta: float) -> void:
 		update_visuals(delta)
 		update_animations() 
 	
-		if is_gliding and is_on_floor():
+		if is_gliding and (is_on_floor() or not handle_input):
 			toggle_glide()
 		
 		spring_arm.rotation_degrees.y = 180 * abs(clamp(pov,-1,0))
@@ -154,7 +155,7 @@ func process_glide(delta: float) -> void:
 	#if Input.is_action_just_pressed("flap"):
 	#	is_flapping = true
 	
-	if Input.is_action_pressed("flap"):
+	if handle_input and Input.is_action_pressed("flap"):
 		velocity.y += flap_force * delta * 10
 		is_flapping = true
 	else:
@@ -169,7 +170,7 @@ func process_standard_movement(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= default_gravity * delta
 
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if handle_input and Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_velocity
 
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
@@ -177,7 +178,7 @@ func process_standard_movement(delta: float) -> void:
 	var direction = (cam_basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	direction.y = 0 
 	
-	if direction:
+	if handle_input and direction:
 		velocity.x = direction.x * walk_speed
 		velocity.z = direction.z * walk_speed
 	else:

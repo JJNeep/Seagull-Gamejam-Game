@@ -37,6 +37,8 @@ enabled=PackedStringArray("res://addons/MagicaVoxel_Importer_with_Extensions/plu
 
 humans=""
 hud=""
+player=""
+world=""
 
 [input]
 

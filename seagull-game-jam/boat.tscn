@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://cumnd1ofvqfum"]
+
+[ext_resource type="Script" uid="uid://d54rqr35ppam" path="res://boat.gd" id="1_viw7v"]
+[ext_resource type="ArrayMesh" uid="uid://5htampfka314" path="res://Gullboat.vox" id="2_henu8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_anwow"]
+size = Vector3(3, 0.3, 4.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_viw7v"]
+size = Vector3(3, 2.9398682, 4.2)
+
+[node name="Boat" type="CharacterBody3D" unique_id=599003676]
+script = ExtResource("1_viw7v")
+
+[node name="Gullboat" type="MeshInstance3D" parent="." unique_id=799966198]
+mesh = ExtResource("2_henu8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1585356401]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+shape = SubResource("BoxShape3D_anwow")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1363712495]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 2.32, 0)
+billboard = 1
+text = "Press Q to enter boat"
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1795515621]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=246727196]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.469934, 0)
+shape = SubResource("BoxShape3D_viw7v")
+
+[node name="Sitting Position" type="Node3D" parent="." unique_id=109712537]

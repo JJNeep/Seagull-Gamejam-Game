@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://kqu56rvqv7tf" path="res://wave.gd" id="1_tiovm"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_j38dg"]
+frequency = 0.02
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nb2vx"]
 noise = SubResource("FastNoiseLite_j38dg")
@@ -17,6 +18,7 @@ shader_parameter/shallow_color = Color(0.2, 0.6, 1, 1)
 shader_parameter/foam_color = Color(1, 1, 1, 1)
 shader_parameter/wave_height = 2.0
 shader_parameter/speed = 0.1
+shader_parameter/time = 0.0
 shader_parameter/wave_foam_level = 0.65
 shader_parameter/noise_tex = SubResource("NoiseTexture2D_nb2vx")
 shader_parameter/noise_scale = 0.05
@@ -25,7 +27,7 @@ shader_parameter/voxel_style_foam = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_tiovm"]
 material = SubResource("ShaderMaterial_nb2vx")
-size = Vector3(0.4, 0.4, 0.4)
+size = Vector3(0.4, 4, 0.4)
 
 [sub_resource type="MultiMesh" id="MultiMesh_tiovm"]
 transform_format = 1
@@ -39,6 +41,7 @@ albedo = Color(0, 0.3019608, 1, 1)
 emission = Color(0, 0, 0.7411765, 1)
 
 [node name="Ocean" type="MultiMeshInstance3D" unique_id=214444040 groups=["ocean"]]
+gi_mode = 0
 multimesh = SubResource("MultiMesh_tiovm")
 script = ExtResource("1_tiovm")
 voxel_size = 0.4

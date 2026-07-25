@@ -27,6 +27,7 @@ var view_distance: float = 1000.0
 var fov_angle: float = 90.0
 
 var curr_chip_object : RigidBody3D
+var frozen : bool = false
 
 @export var absolute_cinema : bool = false
 
@@ -82,7 +83,7 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	# Handle Gravity cleanly
-	if not is_on_floor() and not is_on_wall():
+	if not is_on_floor() and not is_on_wall() and not frozen:
 		velocity.y -= gravity * delta
 	else:
 		# Process State Machine
@@ -91,7 +92,6 @@ func _physics_process(delta: float) -> void:
 		else:
 			non_idle(delta)
 	
-	# FIX 1: Safely check if suspicion timer is active and running
 	if is_instance_valid(suspicion_timer) and suspicion_timer.time_left > 0:
 		suspicious = true
 	else:
@@ -279,9 +279,13 @@ func stop_pathfinding():
 
 func hide_player():
 	$Visuals.hide()
+	frozen = true
+	$CollisionShape3D.disabled = true
 
 func show_player():
 	$Visuals.show()
+	frozen = false
+	$CollisionShape3D.disabled = false
 
 func can_see_player(ignore_fov = false) -> bool:
 	var dist = global_position.distance_to(player.global_position)

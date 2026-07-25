@@ -177,7 +177,7 @@ func _start_edit() -> void:
 	_edit_started = true
 	Engine.time_scale = SLOWMO_SCALE
 	
-	_main_music = get_node_or_null("/root/Node3D/AudioStreamPlayer")
+	_main_music = get_tree().get_first_node_in_group("main_music")
 	if _main_music and _main_music.playing:
 		_main_music_was_playing = true
 		_main_music_position = _main_music.get_playback_position()
