@@ -56,6 +56,8 @@ func _physics_process(delta: float) -> void:
 			SoundManager.play_sound_3d("splat.mp3", position, 0.0, randf_range(0.5, 1.5))
 			if large and _edit_started and not _impact_triggered:
 				QuestManager.check_quests("poo",self)
+				if get_tree().get_first_node_in_group("Nuke_centre").global_position.distance_to(position) < 20:
+					get_tree().get_first_node_in_group("Nuke_centre").get_node("../GPUParticles3D2").emitting = true
 				_spawn_splat()
 				_impact_triggered = true
 				_trigger_impact()

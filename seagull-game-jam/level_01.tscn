@@ -46,9 +46,35 @@ color = Color(0, 1, 0.0666666, 1)
 color_ramp = SubResource("GradientTexture1D_yp1q4")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yp1q4"]
+transparency = 1
+shading_mode = 0
 vertex_color_use_as_albedo = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_o3xv4"]
+material = SubResource("StandardMaterial3D_yp1q4")
+
+[sub_resource type="Curve" id="Curve_rlskx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.6686274, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_yp1q4"]
+curve = SubResource("Curve_rlskx")
+
+[sub_resource type="Gradient" id="Gradient_o3xv4"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.98333335, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ygp6w"]
+gradient = SubResource("Gradient_o3xv4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xna0i"]
+emission_shape = 3
+emission_box_extents = Vector3(0.7, 0.1, 0.7)
+direction = Vector3(0, 1, 0)
+initial_velocity_max = 6.0
+color_ramp = SubResource("GradientTexture1D_ygp6w")
+alpha_curve = SubResource("CurveTexture_yp1q4")
+
+[sub_resource type="BoxMesh" id="BoxMesh_rhow8"]
 material = SubResource("StandardMaterial3D_yp1q4")
 
 [sub_resource type="FogMaterial" id="FogMaterial_rlskx"]
@@ -131,6 +157,18 @@ collision_base_size = 9.15
 process_material = SubResource("ParticleProcessMaterial_rlskx")
 draw_pass_1 = SubResource("BoxMesh_o3xv4")
 
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="NavigationRegion3D/StaticBody3D/Nuketest" unique_id=2073340307]
+transform = Transform3D(1, 0, 7.4505806e-07, 0, 1, 0, -7.4505806e-07, 0, 1, -0.221, 2.971, 0.415)
+emitting = false
+amount = 2000
+lifetime = 5.0
+one_shot = true
+explosiveness = 0.55
+randomness = 1.0
+collision_base_size = 9.15
+process_material = SubResource("ParticleProcessMaterial_xna0i")
+draw_pass_1 = SubResource("BoxMesh_rhow8")
+
 [node name="FogVolume" type="FogVolume" parent="NavigationRegion3D/StaticBody3D/Nuketest" unique_id=1883626346]
 transform = Transform3D(0.11111111, 0, 3.7252903e-09, 0, 0.11111111, 0, -3.7252903e-09, 0, 0.11111111, 0.04705906, 0.57628727, 0.13988304)
 size = Vector3(18.610626, 35.719116, 18.840698)
@@ -176,6 +214,9 @@ omni_range = 7.989
 [node name="Boat" parent="." unique_id=599003676 instance=ExtResource("10_5itje")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.875023, 6.182511, 0)
 boat_type = 0
+
+[node name="Boat2" parent="." unique_id=1705422674 instance=ExtResource("10_5itje")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59.863564, 6.182511, 0)
 
 [node name="Yujia" type="MeshInstance3D" parent="." unique_id=582548450]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -20.42373, 13.554532, 2.9408169)

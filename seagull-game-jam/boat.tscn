@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cumnd1ofvqfum"]
 
 [ext_resource type="Script" uid="uid://d54rqr35ppam" path="res://boat.gd" id="1_viw7v"]
-[ext_resource type="ArrayMesh" uid="uid://5htampfka314" path="res://Gullboat.vox" id="2_henu8"]
+[ext_resource type="ArrayMesh" uid="uid://4tcv8wnb2vn7" path="res://goodBoat.vox" id="2_viw7v"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_anwow"]
 size = Vector3(3, 0.3, 4.2)
@@ -14,7 +14,7 @@ script = ExtResource("1_viw7v")
 
 [node name="Mesh" type="MeshInstance3D" parent="." unique_id=799966198]
 transform = Transform3D(1.94, 0, 0, 0, 1.94, 0, 0, 0, 1.94, 0, 0, 0)
-mesh = ExtResource("2_henu8")
+mesh = ExtResource("2_viw7v")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1585356401]
 transform = Transform3D(1.94, 0, 0, 0, 1.94, 0, 0, 0, 1.94, 0, 0.15, 0)
@@ -32,5 +32,3 @@ collision_mask = 2
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=246727196]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.469934, 0)
 shape = SubResource("BoxShape3D_viw7v")
-
-[node name="Sitting Position" type="Node3D" parent="." unique_id=109712537]

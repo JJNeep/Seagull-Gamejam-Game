@@ -3,6 +3,7 @@ extends CharacterBody3D
 
 const SPEED = 50.0
 const JUMP_VELOCITY = 4.5
+const default_area_shape_size = Vector3(3.0,2.94,4.2)
 
 var in_boat : bool = false
 
@@ -19,11 +20,13 @@ var init_transform = null
 @onready var boats = {
 	0:{
 		"mesh": preload("res://goodBoat.vox"),
-		"cam_distance": 10
+		"cam_distance": 10,
+		"size": 1.94,
 	},
 	1:{
 		"mesh": preload("res://Gullboat.vox"),
-		"cam_distance": 5
+		"cam_distance": 5,
+		"size": 1,
 	}
 }
 
@@ -35,6 +38,9 @@ func _ready() -> void:
 	init_transform = transform
 	$Mesh.mesh = boats[boat_type].mesh
 	boat_cam_distance = boats[boat_type].cam_distance
+	$Mesh.scale = Vector3(boats[boat_type].size,boats[boat_type].size,boats[boat_type].size)
+	$Area3D/CollisionShape3D.shape.size = Vector3(boats[boat_type].size * default_area_shape_size.x,default_area_shape_size.y,boats[boat_type].size * default_area_shape_size.z)
+	print($Area3D/CollisionShape3D.shape.size," ",boat_type)
 
 func _physics_process(delta: float) -> void:
 	get_tree().get_first_node_in_group("ocean").handle_float(self,delta)
