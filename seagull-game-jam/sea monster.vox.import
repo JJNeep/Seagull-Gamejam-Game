@@ -1,0 +1,18 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions.To.Mesh"
+type="Mesh"
+uid="uid://bb4mgoev7u07l"
+path="res://.godot/imported/sea monster.vox-d29d7b47f5390b68657d3fddb92e6991.mesh"
+
+[deps]
+
+source_file="res://sea monster.vox"
+dest_files=["res://.godot/imported/sea monster.vox-d29d7b47f5390b68657d3fddb92e6991.mesh"]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
+FirstKeyframeOnly=true
