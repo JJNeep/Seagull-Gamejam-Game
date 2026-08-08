@@ -2,6 +2,10 @@ extends CharacterBody3D
 
 class_name Player
 
+const base_cam_distance : float = 5.0
+
+@onready var cam_distance : float = base_cam_distance
+
 # --- Configuration ---
 @export_group("Movement")
 @export var walk_speed: float = 8.0
@@ -37,6 +41,8 @@ var default_gravity: float = ProjectSettings.get_setting("physics/3d/default_gra
 var poop_time : SceneTreeTimer
 var can_move = true
 var handle_input : bool = true
+
+var noclip = false
 
 func _ready() -> void:
 	camera.current = true
@@ -78,7 +84,22 @@ func _input(event: InputEvent) -> void:
 				drop_package()
 
 func _physics_process(delta: float) -> void:
+	$CamPivot/SpringArm3D.spring_length = cam_distance
+	if is_launched():
+		position = Vector3(0,16.088,0)
+		velocity = Vector3.ZERO
 	if can_move:
+		#if ((get_slide_collision_count() > 2 and is_on_floor()) or noclip) and Input.is_action_pressed("jump") and Input.is_action_pressed("move_forward") and Input.is_action_pressed("drop_package"):
+		#	collision_mask = 0
+		#	noclip = true
+		#else:
+		#	collision_mask = 7
+		#	noclip = false
+		
+		var nuke_centre : Node3D = get_tree().get_first_node_in_group("Nuke_centre")
+		if nuke_centre.global_position.distance_to(position) < 20:
+			velocity += nuke_centre.global_position.direction_to(position) * 20
+		
 		var rot = cam_pivot.rotation_degrees
 		rot.y -= Input.get_joy_axis(0,JOY_AXIS_RIGHT_X) * mouse_sensitivity * 700.0
 		rot.x -= Input.get_joy_axis(0,JOY_AXIS_RIGHT_Y) * mouse_sensitivity * 700.0
@@ -169,7 +190,7 @@ func process_glide(delta: float) -> void:
 func process_standard_movement(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= default_gravity * delta
-
+	
 	if handle_input and Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_velocity
 
@@ -243,4 +264,9 @@ func start_cutscene():
 func end_cutscene():
 	can_move = true
 	camera.current = true
-	
+
+func is_launched() -> bool:
+	if position.x > 1000 or position.x < -1000 or position.z > 1000 or position.z < -1000 or position.y > 1000 or position.y < -1000:
+		return true
+	else:
+		return false

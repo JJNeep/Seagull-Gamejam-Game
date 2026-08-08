@@ -55,6 +55,7 @@ func _physics_process(delta: float) -> void:
 		if not on_floor:
 			SoundManager.play_sound_3d("splat.mp3", position, 0.0, randf_range(0.5, 1.5))
 			if large and _edit_started and not _impact_triggered:
+				QuestManager.check_quests("poo",self)
 				_spawn_splat()
 				_impact_triggered = true
 				_trigger_impact()

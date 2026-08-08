@@ -12,17 +12,29 @@ var default_gravity: float = ProjectSettings.get_setting("physics/3d/default_gra
 
 var motor : int = 0
 
+var boat_cam_distance = 10
+
 var init_transform = null
 
-enum boat_types {GOODBOAT, GULLBOAT}
+@onready var boats = {
+	0:{
+		"mesh": preload("res://goodBoat.vox"),
+		"cam_distance": 10
+	},
+	1:{
+		"mesh": preload("res://Gullboat.vox"),
+		"cam_distance": 5
+	}
+}
 
-@onready var boats = [preload("res://goodBoat.vox"),preload("res://Gullboat.vox")]
+enum boat_types {GOODBOAT, GULLBOAT}
 
 @export var boat_type : boat_types = boat_types.GULLBOAT
 
 func _ready() -> void:
 	init_transform = transform
-	$Mesh.mesh = boats[boat_type]
+	$Mesh.mesh = boats[boat_type].mesh
+	boat_cam_distance = boats[boat_type].cam_distance
 
 func _physics_process(delta: float) -> void:
 	get_tree().get_first_node_in_group("ocean").handle_float(self,delta)
@@ -39,7 +51,6 @@ func _physics_process(delta: float) -> void:
 		$Label3D.transparency = lerpf($Label3D.transparency, 0.0, delta * 10)
 	
 	var direction = (global_transform.basis * Vector3.FORWARD).normalized()
-	print(direction)
 	if direction:
 		velocity.x += direction.x * delta * SPEED * motor
 		velocity.z += direction.z * delta * SPEED * motor
@@ -47,6 +58,7 @@ func _physics_process(delta: float) -> void:
 	velocity.z *= pow(0.2, delta)
 	
 	if in_boat:
+		player.cam_distance = boat_cam_distance
 		player.handle_input = false
 		player.position = to_global(player_offset)
 		rotation.y = get_viewport().get_camera_3d().global_rotation.y
@@ -58,9 +70,10 @@ func _physics_process(delta: float) -> void:
 		if not $Area3D.has_overlapping_bodies():
 			in_boat = !in_boat
 	else:
+		player.cam_distance = player.base_cam_distance
 		player.handle_input = true
 	
-	if position.x > 100 or position.x < -100 or position.z > 100 or position.z < -100:
+	if position.x > 150 or position.x < -150 or position.z > 150 or position.z < -150:
 		respawn(player)
 	
 	move_and_slide()

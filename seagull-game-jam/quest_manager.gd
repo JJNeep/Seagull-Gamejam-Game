@@ -27,8 +27,16 @@ var all_quests: Dictionary = {
 		"description": "Steal a chip from the dude on the beach",
 		"type": QuestType.GIVEN,        # Must be given before it can complete
 		"checker": "chip",
-		"requirement": func(node): return node.position.y < -100,
-		"status": QuestStatus.LOCKED    # GIVEN quests start locked
+		"requirement": func(node): var r = Global.first_chip; Global.first_chip = false; print(r); return r,
+		"status": QuestStatus.ACTIVE    # GIVEN quests start locked
+	},
+		"nuke": {
+		"name": "Nuclear Disaster",
+		"description": "poo in the nuclear power plant",
+		"type": QuestType.GIVEN,        # Must be given before it can complete
+		"checker": "poo",
+		"requirement": func(node): return get_tree().get_first_node_in_group("Nuke_centre").global_position.distance_to(node.position) < 20,
+		"status": QuestStatus.ACTIVE    # GIVEN quests start locked
 	},
 }
 
