@@ -1,0 +1,18 @@
+[remap]
+
+importer="MagicaVoxel.With.Extensions.To.Mesh"
+type="Mesh"
+uid="uid://p0bvnsyiljt6"
+path="res://.godot/imported/Radioactive Turtle.vox-b43a2ad8c5404ee756102bc2caec0144.mesh"
+
+[deps]
+
+source_file="res://Radioactive Turtle.vox"
+dest_files=["res://.godot/imported/Radioactive Turtle.vox-b43a2ad8c5404ee756102bc2caec0144.mesh"]
+
+[params]
+
+Scale=0.1
+GreedyMeshGenerator=true
+SnapToGround=false
+FirstKeyframeOnly=true
