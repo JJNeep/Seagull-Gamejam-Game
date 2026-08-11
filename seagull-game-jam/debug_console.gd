@@ -151,6 +151,8 @@ func _register_default_commands() -> void:
 	register("tp", _cmd_tp, "Teleport player. Usage: tp <x> <y> <z>")
 	register("timescale", _cmd_timescale, "Set engine time scale. Usage: timescale <float>")
 	register("god", _cmd_god, "Toggle infinite chips.")
+	register("coords", _cmd_coords, "Show current coords")
+	register("run", _cmd_check, "Run any command from inside the game")
 
 
 func _cmd_help(args: Array) -> String:
@@ -233,3 +235,28 @@ func _cmd_god(_args: Array) -> String:
 		Global.chips = 999999
 		return "God mode ON. Chips topped up."
 	return "God mode OFF."
+
+func _cmd_coords(_args: Array) -> String:
+	return "Seagull coords are: " + str(get_tree().get_first_node_in_group("player").global_position)
+
+func _cmd_check(args: Array) -> String:
+	if args.is_empty() or typeof(args[0]) != TYPE_STRING:
+		return "Error: Command must be a string."
+		
+	var command_string: String = args[0]
+	var expression = Expression.new()
+	
+	# Parse without passing variable placeholders
+	var error = expression.parse(command_string)
+	if error != OK:
+		return "Parse Error: " + expression.get_error_text()
+	
+	# Execute relative to 'self' (the node running this script)
+	var result = expression.execute([], self)
+	if expression.has_execute_failed():
+		return "Execution Error: " + expression.get_error_text()
+		
+	if result != null:
+		return str(result)
+		
+	return "Executed successfully (void)."

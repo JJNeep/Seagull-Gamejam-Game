@@ -44,6 +44,7 @@ var frozen : bool = false
 @export var home_time : float
 @export var beach_position = Node3D
 @export var beach_time : float
+@export var starting_idle : Idle_State
 
 @export_group("Movement")
 @export var walk_speed: float = 2.5
@@ -66,6 +67,7 @@ func _ready() -> void:
 	nav_agent.target_desired_distance = 1.0
 	ray.target_position.z = -view_distance
 	get_model("Shorts","Visuals/Shorts")
+	current_idle = starting_idle
 
 func get_model(model_name:String,part_path:NodePath):
 	var model = "res://Human/" + "%02d" % (human_type+1) + "_" + model_name + ".vox"

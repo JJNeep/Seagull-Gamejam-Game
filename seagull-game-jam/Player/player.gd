@@ -89,16 +89,16 @@ func _physics_process(delta: float) -> void:
 		position = Vector3(0,16.088,0)
 		velocity = Vector3.ZERO
 	if can_move:
-		#if ((get_slide_collision_count() > 2 and is_on_floor()) or noclip) and Input.is_action_pressed("jump") and Input.is_action_pressed("move_forward") and Input.is_action_pressed("drop_package"):
-		#	collision_mask = 0
-		#	noclip = true
-		#else:
-		#	collision_mask = 7
-		#	noclip = false
+		if OS.is_debug_build() and ((get_slide_collision_count() > 2 and is_on_floor()) or noclip) and Input.is_action_pressed("jump") and Input.is_action_pressed("move_forward") and Input.is_action_pressed("drop_package"):
+			collision_mask = 0
+			noclip = true
+		else:
+			collision_mask = 7
+			noclip = false
 		
-		var nuke_centre : Node3D = get_tree().get_first_node_in_group("Nuke_centre")
-		if nuke_centre.global_position.distance_to(position) < 20:
-			velocity += nuke_centre.global_position.direction_to(position) * 20
+		var nuke_pos : Vector3 = get_tree().get_first_node_in_group("Nuke_centre").global_position
+		if (nuke_pos*Vector3(1, 0, 1)).distance_squared_to(position*Vector3(1, 0, 1)) < 100 and nuke_pos.y > position.y:
+			velocity += nuke_pos.direction_to(position) * 5
 		
 		var rot = cam_pivot.rotation_degrees
 		rot.y -= Input.get_joy_axis(0,JOY_AXIS_RIGHT_X) * mouse_sensitivity * 700.0
