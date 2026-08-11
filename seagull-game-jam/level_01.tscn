@@ -2,6 +2,7 @@
 
 [ext_resource type="MeshLibrary" uid="uid://bg5bkh2u0hlag" path="res://Enviroment Pieces/Roads.tres" id="1_bri2l"]
 [ext_resource type="Script" uid="uid://dummnenquukp1" path="res://main_env.gd" id="1_xna0i"]
+[ext_resource type="Script" path="res://main_env.gd" id="1_xna0i"]
 [ext_resource type="PackedScene" uid="uid://dhmsuhkn50pl4" path="res://ocean.tscn" id="2_iafiv"]
 [ext_resource type="PackedScene" uid="uid://sthmotkx108k" path="res://Player/player.tscn" id="3_kdijb"]
 [ext_resource type="ArrayMesh" uid="uid://iepyppinyx0x" path="res://Enviroment.vox" id="4_qrmce"]
