@@ -233,7 +233,7 @@ light_volumetric_fog_energy = 16.0
 script = ExtResource("12_rlskx")
 
 [node name="SeaMonster" type="MeshInstance3D" parent="." unique_id=1745883567]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 40.332985, 8.923862, -9.327663)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 39.497803, 17.663393, -34.18682)
 mesh = ExtResource("14_yp1q4")
 
 [node name="RadioactiveTurtle" type="MeshInstance3D" parent="." unique_id=548776143]
