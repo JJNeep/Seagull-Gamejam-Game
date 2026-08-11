@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://c2jnko3ihlxvq"]
+
+[ext_resource type="Script" uid="uid://bjgkyouk35528" path="res://sean_cutscene.gd" id="1_2ur5c"]
+[ext_resource type="ArrayMesh" uid="uid://bb4mgoev7u07l" path="res://sea monster.vox" id="2_jwcss"]
+
+[node name="Sean cutscene" type="Node3D" unique_id=1970923963]
+script = ExtResource("1_2ur5c")
+
+[node name="SeaMonster" type="MeshInstance3D" parent="." unique_id=2125257591]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 6.174, -8, -7.552)
+mesh = ExtResource("2_jwcss")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=943148758]
+transform = Transform3D(0.7265747, 0, 0.68708754, 0, 1, 0, -0.68708754, 0, 0.7265747, 7.462672, 2.3967805, 1.544055)
