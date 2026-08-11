@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://db28q6344mu8p" path="res://DoHyeon-Regular.ttf" id="2_08eom"]
 [ext_resource type="Texture2D" uid="uid://rooad0xa7rta" path="res://Chip Underbar.png" id="3_bhg8y"]
 [ext_resource type="Texture2D" uid="uid://c8k5aps3rftl1" path="res://Chip overbar.png" id="4_7et1j"]
-[ext_resource type="PackedScene" uid="uid://coacalsc2uesw" path="res://quest_menu.tscn" id="5_x0re8"]
+[ext_resource type="PackedScene" uid="uid://bt30dumfyb6mv" path="res://quest_menu.tscn" id="5_x0re8"]
 [ext_resource type="AudioStream" uid="uid://cko45pbkpq582" path="res://starostin-comedy-cartoon-funny-background-music-492540.mp3" id="6_io8pm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_s0qdl"]

@@ -1,0 +1,13 @@
+{
+	"start" : {
+		"text":	"1v1 me noob",
+		"name": "Sean",
+		"mood": "angry",
+		"next": "A"
+	}
+	"A" : {
+		"text":	"",
+		"name": "Sean",
+		"mood": "angry",
+	}
+}
