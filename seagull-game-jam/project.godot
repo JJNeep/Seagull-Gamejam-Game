@@ -17,6 +17,10 @@ boot_splash/bg_color=Color(0.18820322, 0.13859308, 0.05748591, 1)
 boot_splash/image="uid://k3nfkpf3jcla"
 config/icon="uid://k3nfkpf3jcla"
 
+[audio]
+
+buses/default_bus_layout="uid://cfx88xpgg46sj"
+
 [autoload]
 
 Global="*uid://dtpcleyjvvoo"

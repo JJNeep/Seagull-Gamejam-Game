@@ -6,20 +6,12 @@ enum QuestType { GIVEN, HIDDEN }
 enum QuestStatus { LOCKED, ACTIVE, COMPLETED }
 
 var all_quests: Dictionary = {
-	"disgrace_to_humanity": {
-		"name": "Disgrace to Humanity",
-		"description": "Kill a human",
-		"type": QuestType.GIVEN,        # Must be given before it can complete
-		"checker": "human",
-		"requirement": func(node): return node.position.y < -100,
-		"status": QuestStatus.LOCKED    # GIVEN quests start locked
-	},
 		"knock_building": {
 		"name": "I Didn't touch it",
 		"description": "Knock the falling building off the edge",
 		"type": QuestType.HIDDEN,        # Must be given before it can complete
 		"checker": "building",
-		"requirement": func(node): return node.position.y < -100,
+		"requirement": func(node): return node.position.y < -1,
 		"status": QuestStatus.ACTIVE    # GIVEN quests start locked
 	},
 		"steal_chip": {
@@ -35,8 +27,8 @@ var all_quests: Dictionary = {
 		"description": "poo in the nuclear power plant",
 		"type": QuestType.GIVEN,        # Must be given before it can complete
 		"checker": "poo",
-		"requirement": func(node): return get_tree().get_first_node_in_group("Nuke_centre").global_position.distance_to(node.position) < 20 and node.large and node._edit_started and not node._impact_triggered,
-		"status": QuestStatus.LOCKED    # GIVEN quests start locked
+		"requirement": func(node): var nuke_pos = get_tree().get_first_node_in_group("Nuke_centre").global_position; return node.large and node._edit_started and not node._impact_triggered and (nuke_pos*Vector3(1, 0, 1)).distance_squared_to(node.position*Vector3(1, 0, 1)) < 64 and node.position.y < nuke_pos.y + 13,
+		"status": QuestStatus.ACTIVE    # GIVEN quests start locked
 	},
 		"ocean_poo": {
 		"name": "It was the fish",
@@ -45,12 +37,46 @@ var all_quests: Dictionary = {
 		"checker": "poo",
 		"requirement": func(node): return node.position.y < 0,
 		"status": QuestStatus.ACTIVE    # GIVEN quests start locked
+	},
+		"dance": {
+		"name": "Party Time!",
+		"description": "Dance at the party",
+		"type": QuestType.GIVEN,        # Must be given before it can complete
+		"checker": "world",
+		"requirement": func(node): return node.time_at_party >= 10.0 and node.player_pos.x > -28 and node.player_pos.x < -11 and node.player_pos.y > 12 and node.player_pos.y < 41 and node.player_pos.z > -8 and node.player_pos.z < 10,
+		"status": QuestStatus.ACTIVE    # GIVEN quests start locked
+	},
+		"jacks": {
+		"name": "Expose Jacks Food",
+		"description": "Expose the secret behind jacks food",
+		"type": QuestType.GIVEN,        # Must be given before it can complete
+		"checker": "world",
+		"requirement": func(node): return node.player_pos.x > 5 and node.player_pos.x < 13 and node.player_pos.y > 13 and node.player_pos.y < 18.5 and node.player_pos.z > -29 and node.player_pos.z < -17,
+		"status": QuestStatus.ACTIVE    # GIVEN quests start locked
+	},
+		"lighthouse": {
+		"name": "Let There be light",
+		"description": "Turn on the lighthouse",
+		"type": QuestType.GIVEN,        # Must be given before it can complete
+		"checker": "world",
+		"requirement": func(node): return node.player_pos.distance_to(Vector3(69.8213, 2.912558, 29.58148)) < 5,
+		"status": QuestStatus.ACTIVE    # GIVEN quests start locked
 	}
 }
 
 # Only quests the player KNOWS about (given + discovered hidden ones)
 var known_quests: Array = []
 var completed_quests: Array = []
+
+# Play the popup once at startup, invisible and silent, so its font atlas (179/81/45px)
+# is rasterized now instead of hitching on the first real quest completion.
+# It removes itself via the queue_free method track at the end of the "main" animation.
+func _ready() -> void:
+	var warm = quest_complete.instantiate()
+	warm.modulate.a = 0.0
+	warm.get_node("ColorRect").mouse_filter = Control.MOUSE_FILTER_IGNORE
+	warm.get_node("AudioStreamPlayer").volume_db = -80.0
+	add_child(warm)
 
 func give_quest(quest_id: String) -> void:
 	var quest = all_quests.get(quest_id)

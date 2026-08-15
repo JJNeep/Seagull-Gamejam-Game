@@ -4,8 +4,12 @@ extends CharacterBody3D
 @export var SPEED : float = 50.0
 const JUMP_VELOCITY = 4.5
 const default_area_shape_size = Vector3(3.0,2.94,4.2)
+# what boat.tscn's CollisionShape3D is authored at (goodBoat)
+const base_size := 1.94
+const base_collision_offset_y := 0.15
 
 var in_boat : bool = false
+var was_in_boat : bool = false
 
 var player_offset : Vector3
 
@@ -36,11 +40,21 @@ enum boat_types {GOODBOAT, GULLBOAT}
 
 func _ready() -> void:
 	init_transform = transform
+	var size : float = boats[boat_type].size
 	$Mesh.mesh = boats[boat_type].mesh
 	boat_cam_distance = boats[boat_type].cam_distance
-	$Mesh.scale = Vector3(boats[boat_type].size,boats[boat_type].size,boats[boat_type].size)
-	$Area3D/CollisionShape3D.shape.size = Vector3(boats[boat_type].size * default_area_shape_size.x,default_area_shape_size.y,boats[boat_type].size * default_area_shape_size.z)
-	print($Area3D/CollisionShape3D.shape.size," ",boat_type)
+	$Mesh.scale = Vector3(size,size,size)
+
+	# the shapes come from boat.tscn as shared sub-resources, so every boat
+	# instance would otherwise resize the same resource and the last one wins
+	$CollisionShape3D.shape = $CollisionShape3D.shape.duplicate()
+	$Area3D/CollisionShape3D.shape = $Area3D/CollisionShape3D.shape.duplicate()
+
+	# solid hitbox scales with the mesh (base scale in the scene is goodBoat's 1.94)
+	$CollisionShape3D.scale = Vector3(size,size,size)
+	$CollisionShape3D.position.y = base_collision_offset_y / base_size * size
+
+	$Area3D/CollisionShape3D.shape.size = Vector3(size * default_area_shape_size.x,default_area_shape_size.y,size * default_area_shape_size.z)
 
 func _physics_process(delta: float) -> void:
 	get_tree().get_first_node_in_group("ocean").handle_float(self,delta)
@@ -64,7 +78,8 @@ func _physics_process(delta: float) -> void:
 	velocity.z *= pow(0.2, delta)
 	
 	if in_boat:
-		player.cam_distance = boat_cam_distance
+		if not was_in_boat:
+			player.cam_distance = boat_cam_distance
 		player.handle_input = false
 		player.position = to_global(player_offset)
 		rotation.y = get_viewport().get_camera_3d().global_rotation.y
@@ -75,10 +90,13 @@ func _physics_process(delta: float) -> void:
 		motor = clamp(motor,-1,1)
 		if not $Area3D.has_overlapping_bodies():
 			in_boat = !in_boat
-	else:
+	elif was_in_boat:
+		# only the boat we just left restores the player's camera/input
 		player.cam_distance = player.base_cam_distance
 		player.handle_input = true
-	
+
+	was_in_boat = in_boat
+
 	if position.x > 150 or position.x < -150 or position.z > 150 or position.z < -150:
 		respawn(player)
 	

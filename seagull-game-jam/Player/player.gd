@@ -84,7 +84,7 @@ func _input(event: InputEvent) -> void:
 				drop_package()
 
 func _physics_process(delta: float) -> void:
-	$CamPivot/SpringArm3D.spring_length = cam_distance
+	spring_arm.spring_length = cam_distance
 	if is_launched():
 		position = Vector3(0,16.088,0)
 		velocity = Vector3.ZERO
@@ -95,10 +95,6 @@ func _physics_process(delta: float) -> void:
 		else:
 			collision_mask = 7
 			noclip = false
-		
-		var nuke_pos : Vector3 = get_tree().get_first_node_in_group("Nuke_centre").global_position
-		if (nuke_pos*Vector3(1, 0, 1)).distance_squared_to(position*Vector3(1, 0, 1)) < 100 and nuke_pos.y > position.y:
-			velocity += nuke_pos.direction_to(position) * 5
 		
 		var rot = cam_pivot.rotation_degrees
 		rot.y -= Input.get_joy_axis(0,JOY_AXIS_RIGHT_X) * mouse_sensitivity * 700.0
@@ -122,6 +118,11 @@ func _physics_process(delta: float) -> void:
 		
 		get_tree().get_first_node_in_group("ocean").handle_float(self,delta)
 		
+		if get_tree().get_first_node_in_group("Nuke_centre"):
+			var nuke_pos : Vector3 = get_tree().get_first_node_in_group("Nuke_centre").global_position
+			if (nuke_pos*Vector3(1, 0, 1)).distance_squared_to(position*Vector3(1, 0, 1)) < 64 and position.y < nuke_pos.y + 22:
+				velocity += nuke_pos.direction_to(position) * 5
+
 		move_and_slide()
 
 func drop_package(large:bool=false) -> void:
