@@ -3,6 +3,10 @@
 [ext_resource type="Script" uid="uid://bjgkyouk35528" path="res://sean_cutscene.gd" id="1_2ur5c"]
 [ext_resource type="ArrayMesh" uid="uid://bb4mgoev7u07l" path="res://sea monster.vox" id="2_jwcss"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_2ur5c"]
+font_size = 32
+font_color = Color(0, 0, 0, 1)
+
 [node name="Sean cutscene" type="Node3D" unique_id=1970923963]
 script = ExtResource("1_2ur5c")
 
@@ -12,3 +16,14 @@ mesh = ExtResource("2_jwcss")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=943148758]
 transform = Transform3D(0.7265747, 0, 0.68708754, 0, 1, 0, -0.68708754, 0, 0.7265747, 7.462672, 2.3967805, 1.544055)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=758229257]
+
+[node name="Getouttamyswamp" type="Label" parent="CanvasLayer" unique_id=1963021247]
+offset_left = 15.0
+offset_top = 135.0
+offset_right = 690.0
+offset_bottom = 228.0
+text = "How dare you disrespect the mighty Sean!!!!
+                                      >:("
+label_settings = SubResource("LabelSettings_2ur5c")

@@ -21,5 +21,7 @@ func _process(delta: float) -> void:
 		cutscene_started = true
 	if cutscene_started:
 		$SeaMonster.position.y = lerpf($SeaMonster.position.y,rise_to.y,delta*100)
+		$SeaMonster.position.y = lerp($SeaMonster.position.y,rise_to.y,delta)
 		print($SeaMonster.position.y)
+		$CanvasLayer/Getouttamyswamp.visible = true
 	
