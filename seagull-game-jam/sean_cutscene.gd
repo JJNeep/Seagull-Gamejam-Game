@@ -19,9 +19,12 @@ func _process(delta: float) -> void:
 		player.start_cutscene()
 		$Camera3D.current = true
 		cutscene_started = true
+		player.end_cutscene()
+		$Camera3D.current = false
+		queue_free()
 	if cutscene_started:
-		$SeaMonster.position.y = lerpf($SeaMonster.position.y,rise_to.y,delta*100)
 		$SeaMonster.position.y = lerp($SeaMonster.position.y,rise_to.y,delta)
 		print($SeaMonster.position.y)
 		$CanvasLayer/Getouttamyswamp.visible = true
+		
 	

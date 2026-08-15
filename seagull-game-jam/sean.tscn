@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://brq27wa1kyv26"]
+
+[ext_resource type="Script" uid="uid://glq517lj0utp" path="res://sean.gd" id="1_ev5e4"]
+[ext_resource type="ArrayMesh" uid="uid://bb4mgoev7u07l" path="res://sea monster.vox" id="2_o7mi1"]
+
+[node name="Sean" type="Node3D" unique_id=1969406006]
+script = ExtResource("1_ev5e4")
+
+[node name="SeaMonster" type="MeshInstance3D" parent="." unique_id=1705537148]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.47467136, 0.8620465, 1.499656)
+mesh = ExtResource("2_o7mi1")
