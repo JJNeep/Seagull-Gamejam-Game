@@ -19,6 +19,7 @@ func _process(delta: float) -> void:
 		player.start_cutscene()
 		$Camera3D.current = true
 		cutscene_started = true
+		await get_tree().create_timer(5).timeout
 		player.end_cutscene()
 		$Camera3D.current = false
 		queue_free()
