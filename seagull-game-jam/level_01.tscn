@@ -17,8 +17,6 @@
 [ext_resource type="ArrayMesh" uid="uid://dxktjpf4ixr55" path="res://YUJIA.vox" id="11_pl2qr"]
 [ext_resource type="Script" uid="uid://gjlyvw8gue62" path="res://disco_light.gd" id="12_rlskx"]
 [ext_resource type="ArrayMesh" uid="uid://bdut385faog3q" path="res://NUKETEST.vox" id="13_rlskx"]
-[ext_resource type="ArrayMesh" uid="uid://bb4mgoev7u07l" path="res://sea monster.vox" id="14_yp1q4"]
-[ext_resource type="ArrayMesh" uid="uid://p0bvnsyiljt6" path="res://Radioactive Turtle.vox" id="15_o3xv4"]
 [ext_resource type="PackedScene" uid="uid://d3gumrhshhd3d" path="res://mafia_lord.tscn" id="16_ygp6w"]
 [ext_resource type="AudioStream" uid="uid://clvhpuwudsjsx" path="res://GlitchCat, prodBigMike - whatdoyousee [NCS Release].mp3" id="18_rhow8"]
 [ext_resource type="ArrayMesh" uid="uid://csccy2l0f6qn0" path="res://Speaker.vox" id="19_o25yy"]
@@ -301,14 +299,6 @@ omni_range = 26.675
 omni_attenuation = 3.078
 script = ExtResource("12_rlskx")
 
-[node name="SeaMonster" type="MeshInstance3D" parent="." unique_id=1745883567]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 39.497803, 17.663393, -34.18682)
-mesh = ExtResource("14_yp1q4")
-
-[node name="RadioactiveTurtle" type="MeshInstance3D" parent="." unique_id=548776143]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -12.244442, 34.653236, -79.26265)
-mesh = ExtResource("15_o3xv4")
-
 [node name="Mafia Lord" parent="." unique_id=479415176 instance=ExtResource("16_ygp6w")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 21.790075, 1.9994788, -23.887524)
 
@@ -318,7 +308,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.439913, 18.528759, 3.0496
 [node name="Music" type="AudioStreamPlayer3D" parent="Speakers" unique_id=588684521]
 stream = ExtResource("18_rhow8")
 max_distance = 20.0
-bus = &"Music"
 parameters/looping = true
 
 [node name="Speaker" type="MeshInstance3D" parent="Speakers" unique_id=58416186]
