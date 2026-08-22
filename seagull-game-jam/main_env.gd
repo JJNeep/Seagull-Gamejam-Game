@@ -13,6 +13,10 @@ func _ready() -> void:
 
 var player_pos : Vector3
 
+var chip_timer : float = 0.0
+
+var chip = preload("res://chip.tscn")
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	player_pos = get_tree().get_first_node_in_group("player").position
@@ -31,3 +35,11 @@ func _process(delta: float) -> void:
 	#	QuestManager.check_quests("world",self)
 	QuestManager.check_quests("building", $NavigationRegion3D/RigidBody3D)
 	QuestManager.check_quests("world",self)
+	chip_timer += delta
+	if chip_timer > 10:
+		chip_timer = 0
+		var inst = chip.instantiate()
+		inst.global_position = Vector3(8.841242, 15.12513, -25.56569)
+		get_node("/root/Level01/").add_child(inst)
+		inst.freeze = false
+		

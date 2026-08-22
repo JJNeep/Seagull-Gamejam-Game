@@ -7,6 +7,8 @@ extends Area3D
 var is_gaining_quest = false
 var cutscene_started = false               # Prevents cutscene() firing every frame
 
+var first_quest = true
+
 @onready var player: Player = get_parent().get_node("Player")
 
 func _ready() -> void:
@@ -83,6 +85,10 @@ func cutscene() -> void:
 		await get_tree().create_timer(3).timeout
 		end_cutscene()
 		return
+	
+	if first_quest:
+		first_quest = false
+		#quest_id = 
 	
 	# Store the chosen quest so the button can give it
 	quest_id = locked_quests[randi() % locked_quests.size()]

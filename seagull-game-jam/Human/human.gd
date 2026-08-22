@@ -42,9 +42,12 @@ var frozen : bool = false
 @export var job_time : float
 @export var home_position = Node3D
 @export var home_time : float
-@export var beach_position = Node3D
+@export var beach_position_point_1 = Node3D
+@export var beach_position_point_2 = Node3D
 @export var beach_time : float
 @export var starting_idle : Idle_State
+
+var beach_point : Vector3
 
 @export_group("Movement")
 @export var walk_speed: float = 2.5
@@ -213,13 +216,14 @@ func idle(delta):
 			if location_wait >= home_time:
 				location_wait = 0.0
 				current_idle = Idle_State.BEACH
+				beach_point = _find_beach_position()
 				show_player()
 				is_at_location = false
 
 	elif current_idle == Idle_State.BEACH:
 		if not is_at_location:
 			state_player.play("Normal")
-			set_movement_target(beach_position.position)
+			set_movement_target(beach_point)
 			navigation_frame(delta)
 		else:
 			stop_pathfinding()
@@ -334,3 +338,19 @@ func collide_package() -> void:
 	after_startle = State.CONFUSED
 	current_state = State.STARTLE
 	startle_time = 0.0
+
+func _find_beach_position() -> Vector3:
+	# Get the marker positions
+	var min_pos = beach_position_point_1.global_position
+	var max_pos = beach_position_point_2.global_position
+	
+	# Get random X and Z coordinates within the boundary
+	var random_x = randf_range(min_pos.x, max_pos.x)
+	var random_z = randf_range(min_pos.z, max_pos.z)
+	
+	# Keep the Y level exactly where the agent currently is
+	var target_y = global_position.y 
+	
+	# Combine into the final target position
+	var target_position = Vector3(random_x, target_y, random_z)
+	return target_position

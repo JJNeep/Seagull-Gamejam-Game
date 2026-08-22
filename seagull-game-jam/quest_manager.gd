@@ -51,7 +51,7 @@ var all_quests: Dictionary = {
 		"description": "Expose the secret behind jacks food",
 		"type": QuestType.GIVEN,        # Must be given before it can complete
 		"checker": "world",
-		"requirement": func(node): return node.player_pos.x > 5 and node.player_pos.x < 13 and node.player_pos.y > 13 and node.player_pos.y < 18.5 and node.player_pos.z > -29 and node.player_pos.z < -17,
+		"requirement": func(node): return node.player_pos.x > 5 and node.player_pos.x < 13 and node.player_pos.y > 13 and node.player_pos.y < 18.5 and node.player_pos.z > -29 and node.player_pos.z < -21,
 		"status": QuestStatus.ACTIVE    # GIVEN quests start locked
 	},
 		"lighthouse": {

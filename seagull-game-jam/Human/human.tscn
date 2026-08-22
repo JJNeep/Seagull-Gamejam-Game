@@ -644,7 +644,20 @@ _data = {
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_sb0fm")
+human_type = null
+absolute_cinema = null
+investigate_time = null
+chase_time = null
+suspicious_for_investigate_timer = null
+suspicious_for_chase_timer = null
 hearing_range = 50.0
+job_time = null
+home_time = null
+beach_time = null
+starting_idle = null
+walk_speed = null
+run_speed = null
+flee_duration = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=380257067]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6937866, 0)

@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://domqlt3k2lfg0"]
+
+[ext_resource type="Script" uid="uid://10u40jy4yuea" path="res://audio_specctrum Test.gd" id="1_uioff"]
+
+[node name="Control" type="PanelContainer" unique_id=1550785909]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uioff")
+
+[connection signal="resized" from="." to="." method="_on_resized"]

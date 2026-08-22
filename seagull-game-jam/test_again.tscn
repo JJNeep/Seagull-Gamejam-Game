@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://b6ttbq40plrs6"]
+
+[ext_resource type="PackedScene" uid="uid://domqlt3k2lfg0" path="res://spectrum test.tscn" id="1_wmxha"]
+[ext_resource type="AudioStream" uid="uid://clvhpuwudsjsx" path="res://GlitchCat, prodBigMike - whatdoyousee [NCS Release].mp3" id="2_2p6jn"]
+
+[node name="Test again" type="Control" unique_id=980537244]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" parent="." unique_id=1550785909 instance=ExtResource("1_wmxha")]
+layout_mode = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1976232410]
+stream = ExtResource("2_2p6jn")
+autoplay = true
+bus = &"Music"
+parameters/looping = true
