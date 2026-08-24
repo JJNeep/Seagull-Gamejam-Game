@@ -20,7 +20,7 @@ var all_quests: Dictionary = {
 		"type": QuestType.GIVEN,        # Must be given before it can complete
 		"checker": "chip",
 		"requirement": func(node): var r = Global.first_chip; Global.first_chip = false; print(r); return r,
-		"status": QuestStatus.ACTIVE    # GIVEN quests start locked
+		"status": QuestStatus.LOCKED    # GIVEN quests start locked
 	},
 		"nuke": {
 		"name": "Nuclear Disaster",
