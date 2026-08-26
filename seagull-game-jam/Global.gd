@@ -11,7 +11,7 @@ var first_chip = true
 
 var mouse_locked = true
 
-var pet_unlocked = true
+var pet_unlocked = false
 
 var pet_enabled = false
 

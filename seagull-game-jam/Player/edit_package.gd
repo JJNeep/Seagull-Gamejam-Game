@@ -54,7 +54,7 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor():
 		if not on_floor:
 			QuestManager.check_quests("poo",self)
-			if position.y < 0:
+			if position.y < 0 and Global.pet_unlocked == false and not large:
 				var sean = load("res://sean_cutscene.tscn")
 				var inst = sean.instantiate()
 				inst.position = get_tree().get_first_node_in_group("player").position

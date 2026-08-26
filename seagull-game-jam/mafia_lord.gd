@@ -88,10 +88,10 @@ func cutscene() -> void:
 	
 	if first_quest:
 		first_quest = false
-		#quest_id = 
-	
-	# Store the chosen quest so the button can give it
-	quest_id = locked_quests[randi() % locked_quests.size()]
+		quest_id = "steal_chip"
+	else:
+		# Store the chosen quest so the button can give it
+		quest_id = locked_quests[randi() % locked_quests.size()]
 	
 	cutscene_started = true
 	is_gaining_quest = true
