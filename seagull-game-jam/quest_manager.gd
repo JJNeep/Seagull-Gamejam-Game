@@ -28,7 +28,7 @@ var all_quests: Dictionary = {
 		"type": QuestType.GIVEN,        # Must be given before it can complete
 		"checker": "poo",
 		"requirement": func(node): var nuke_pos = get_tree().get_first_node_in_group("Nuke_centre").global_position; return node.large and node._edit_started and not node._impact_triggered and (nuke_pos*Vector3(1, 0, 1)).distance_squared_to(node.position*Vector3(1, 0, 1)) < 64 and node.position.y < nuke_pos.y + 13,
-		"status": QuestStatus.ACTIVE    # GIVEN quests start locked
+		"status": QuestStatus.LOCKED    # GIVEN quests start locked
 	},
 		"ocean_poo": {
 		"name": "It was the fish",

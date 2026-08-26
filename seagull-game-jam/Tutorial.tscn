@@ -17,21 +17,18 @@ grow_vertical = 2
 script = ExtResource("1_jl26d")
 
 [node name="Label" type="Label" parent="." unique_id=1965092287]
-layout_mode = 0
-offset_left = 11.0
-offset_right = 1080.0
-offset_bottom = 686.0
-text = "Tutorial
-Use WASD to move
-Press E to squark
-Press space to jump
-Press space in the air to fly
-Hold shift while flying to fly faster
-Collect chips from humans on the beach to fill up the chip bar
-Press F to poop
-Pooping consumes chips from the chip bar
-When chip bar is full, hold F and release for a mega poo
-Mega poo consumes the whole chip bar.
-Try to annoy the humans
-"
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -165.0
+offset_top = -51.5
+offset_right = 165.0
+offset_bottom = 51.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Use WASD to move
+[T to close tutorial]"
 label_settings = SubResource("LabelSettings_tlmse")
