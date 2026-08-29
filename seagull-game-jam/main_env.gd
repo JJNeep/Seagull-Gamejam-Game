@@ -26,7 +26,6 @@ func _process(delta: float) -> void:
 		main_music.stream_paused = true
 		if !$Speakers/Music.playing:
 			$Speakers/Music.play()
-		QuestManager.check_quests("world",self)
 	elif stopped:
 		time_at_party = 0.0
 		main_music.stream_paused = false
@@ -42,4 +41,7 @@ func _process(delta: float) -> void:
 		inst.global_position = Vector3(8.841242, 15.12513, -25.56569)
 		get_node("/root/Level01/").add_child(inst)
 		inst.freeze = false
-		
+	if Input.is_action_just_pressed("select") and $NavigationRegion3D/StaticBody3D/MeshInstance3D/Area3D.has_overlapping_bodies():
+		print("Double YAY")
+		$NavigationRegion3D/StaticBody3D/LightGlass/OmniLight3D.show()
+		QuestManager.check_quests("lighthouse",self)

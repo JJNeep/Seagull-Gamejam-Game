@@ -35,6 +35,9 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "ACTIVE QUESTS"
 
+[node name="HSeparator" type="HSeparator" parent="Panel/HBox/LeftPanel" unique_id=365772349]
+layout_mode = 2
+
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/HBox/LeftPanel" unique_id=1397595441]
 layout_mode = 2
 size_flags_vertical = 3
@@ -48,6 +51,9 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 4
 text = "COMPLETED"
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/HBox/LeftPanel" unique_id=2071369295]
+layout_mode = 2
 
 [node name="ScrollContainer2" type="ScrollContainer" parent="Panel/HBox/LeftPanel" unique_id=1451971331]
 layout_mode = 2
@@ -63,6 +69,9 @@ layout_mode = 2
 size_flags_vertical = 4
 text = "✕ Close"
 
+[node name="VSeparator" type="VSeparator" parent="Panel/HBox" unique_id=1862053465]
+layout_mode = 2
+
 [node name="RightPanel" type="VBoxContainer" parent="Panel/HBox" unique_id=1307801219]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -74,7 +83,6 @@ size_flags_vertical = 3
 [node name="QuestName" type="Label" parent="Panel/HBox/RightPanel/VBox" unique_id=2005765903]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "example"
 
 [node name="HSeparator" type="HSeparator" parent="Panel/HBox/RightPanel/VBox" unique_id=436144342]
 layout_mode = 2
@@ -83,18 +91,11 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
-text = "example Description"
+text = "Click a quest to see overview"
 
 [node name="QuestStatus" type="Label" parent="Panel/HBox/RightPanel/VBox" unique_id=55541583]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
-text = "example Satus"
-
-[node name="QuestReward" type="Label" parent="Panel/HBox/RightPanel/VBox" unique_id=1845020476]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-text = "example Reward"
 
 [connection signal="pressed" from="Panel/HBox/LeftPanel/Button" to="." method="_on_button_pressed"]

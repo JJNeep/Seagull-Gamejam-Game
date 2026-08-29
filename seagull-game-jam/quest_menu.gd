@@ -7,7 +7,6 @@ var selected_quest_id: String = ""
 @onready var detail_name    = $Panel/HBox/RightPanel/VBox/QuestName
 @onready var detail_desc    = $Panel/HBox/RightPanel/VBox/QuestDescription
 @onready var detail_status  = $Panel/HBox/RightPanel/VBox/QuestStatus
-@onready var detail_reward  = $Panel/HBox/RightPanel/VBox/QuestReward
 
 func _ready() -> void:
 	hide()
@@ -90,12 +89,6 @@ func show_detail(quest_id: String) -> void:
 		QuestManager.QuestStatus.COMPLETED:
 			detail_status.text = "Status: Completed ✓"
 			detail_status.add_theme_color_override("font_color", Color(0.5, 0.8, 0.5))
-
-	# Format rewards
-	if quest.has("reward"):
-		detail_reward.text = "Reward: " + str(quest.reward) + " points"
-	else:
-		detail_reward.text = "No reward"
 
 	refresh()   # Re-render list to update highlight
 

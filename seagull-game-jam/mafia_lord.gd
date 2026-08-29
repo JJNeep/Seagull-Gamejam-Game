@@ -41,28 +41,28 @@ func cutscene() -> void:
 	if cutscene_started:
 		return
 	
-	# Check if player already has an active given quest
-	var has_active = QuestManager.known_quests.any(func(id):
-		var q = QuestManager.all_quests[id]
-		return q.type == QuestManager.QuestType.GIVEN and q.status == QuestManager.QuestStatus.ACTIVE
-	)
-	
-	if has_active:
-		# Different dialogue if player already has a quest
-		cutscene_started = true
-		is_gaining_quest = true
-		player.start_cutscene()
-		$Camera3D.current = true
-		$Camera3D.global_position = player.camera.global_position
-		$Camera3D.global_rotation = player.camera.global_rotation
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		$CanvasLayer/Label.text = "You already have a job!\nFinish that first."
-		$CanvasLayer/Label.visible_ratio = 0
-		$CanvasLayer.show()
-		# No buttons, just auto close
-		await get_tree().create_timer(3).timeout
-		end_cutscene()
-		return
+	## Check if player already has an active given quest
+	#var has_active = QuestManager.known_quests.any(func(id):
+		#var q = QuestManager.all_quests[id]
+		#return q.type == QuestManager.QuestType.GIVEN and q.status == QuestManager.QuestStatus.ACTIVE
+	#)
+	#
+	#if has_active:
+		## Different dialogue if player already has a quest
+		#cutscene_started = true
+		#is_gaining_quest = true
+		#player.start_cutscene()
+		#$Camera3D.current = true
+		#$Camera3D.global_position = player.camera.global_position
+		#$Camera3D.global_rotation = player.camera.global_rotation
+		#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		#$CanvasLayer/Label.text = "You already have a job!\nFinish that first."
+		#$CanvasLayer/Label.visible_ratio = 0
+		#$CanvasLayer.show()
+		## No buttons, just auto close
+		#await get_tree().create_timer(3).timeout
+		#end_cutscene()
+		#return
 	
 	# Pick a random locked quest
 	var locked_quests = QuestManager.all_quests.keys().filter(func(id):

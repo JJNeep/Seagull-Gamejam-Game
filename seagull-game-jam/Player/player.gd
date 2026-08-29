@@ -76,7 +76,7 @@ func _input(event: InputEvent) -> void:
 				pov = 1
 	
 		if handle_input and event.is_action_pressed("drop_package"):
-			poop_time = get_tree().create_timer(1)
+			poop_time = get_tree().create_timer(0.3)
 		if handle_input and event.is_action_released("drop_package"):
 			if poop_time.time_left == 0 and Global.chips > 4:
 				drop_package(true)

@@ -19,12 +19,12 @@ var all_quests: Dictionary = {
 		"description": "Steal a chip from the dude on the beach",
 		"type": QuestType.GIVEN,        # Must be given before it can complete
 		"checker": "chip",
-		"requirement": func(node): var r = Global.first_chip; Global.first_chip = false; print(r); return r,
+		"requirement": func(node): var r = Global.first_chip; Global.first_chip = false; return r,
 		"status": QuestStatus.LOCKED    # GIVEN quests start locked
 	},
 		"nuke": {
 		"name": "Nuclear Disaster",
-		"description": "poo in the nuclear power plant",
+		"description": "megapoo in the nuclear power plant",
 		"type": QuestType.GIVEN,        # Must be given before it can complete
 		"checker": "poo",
 		"requirement": func(node): var nuke_pos = get_tree().get_first_node_in_group("Nuke_centre").global_position; return node.large and node._edit_started and not node._impact_triggered and (nuke_pos*Vector3(1, 0, 1)).distance_squared_to(node.position*Vector3(1, 0, 1)) < 64 and node.position.y < nuke_pos.y + 13,
@@ -58,9 +58,17 @@ var all_quests: Dictionary = {
 		"name": "Let There be light",
 		"description": "Turn on the lighthouse",
 		"type": QuestType.GIVEN,        # Must be given before it can complete
-		"checker": "world",
-		"requirement": func(node): return node.player_pos.distance_to(Vector3(69.8213, 2.912558, 29.58148)) < 5,
+		"checker": "lighthouse",
+		"requirement": func(node): return true,
 		"status": QuestStatus.ACTIVE    # GIVEN quests start locked
+	},
+		"megapoo": {
+		"name": "Ultimate Drop",
+		"description": "Do a megapoo by holding F with a full chip bar",
+		"type": QuestType.GIVEN,        # Must be given before it can complete
+		"checker": "poo",
+		"requirement": func(node): return node.large,
+		"status": QuestStatus.LOCKED    # GIVEN quests start locked
 	}
 }
 

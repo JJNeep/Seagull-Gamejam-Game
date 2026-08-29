@@ -30,5 +30,6 @@ offset_bottom = 51.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Use WASD to move
-[T to close tutorial]"
+[T to quit tutorial or try it out to continue]"
 label_settings = SubResource("LabelSettings_tlmse")
+horizontal_alignment = 1

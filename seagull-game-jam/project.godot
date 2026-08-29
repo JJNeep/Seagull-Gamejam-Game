@@ -16,6 +16,7 @@ config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/bg_color=Color(0.18820322, 0.13859308, 0.05748591, 1)
 boot_splash/image="uid://k3nfkpf3jcla"
 config/icon="uid://k3nfkpf3jcla"
+run/main_scene.dedicated_server="res://mp_test/server.tscn"
 
 [audio]
 
@@ -27,6 +28,7 @@ Global="*uid://dtpcleyjvvoo"
 SoundManager="*uid://chsiqhed6plri"
 QuestManager="*uid://ct3tl6q4p06nv"
 DebugConsole="*uid://bmkhqu4171jql"
+MPTest="*res://mp_test/mp_test.gd"
 
 [display]
 
@@ -140,6 +142,11 @@ volume_down={
 "deadzone": 0.2,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194435,"key_label":0,"unicode":45,"location":0,"echo":false,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":45,"key_label":0,"unicode":45,"location":0,"echo":false,"script":null)
+]
+}
+next={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194309,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
 

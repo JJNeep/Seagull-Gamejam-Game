@@ -32,7 +32,6 @@ func _process(delta: float) -> void:
 	light_color = rainbow[hue]
 
 func is_beat() -> bool:
-	prin("               ")
 	var l_hz: float = (0 + 1) * FREQ_MAX / BAR_COUNT
 	var l_magnitiude: float = spectrum.get_magnitude_for_frequency_range(0.0, l_hz).length()
 	var l_energy: float = clampf((MIN_DB + linear_to_db(l_magnitiude)) / MIN_DB, 0, 1)
@@ -40,7 +39,7 @@ func is_beat() -> bool:
 	if len(past_beats) > beat_memory_len:
 		past_beats.remove_at(0)
 	if len(past_beats) == beat_memory_len:
-		return past_beats.max() == past_beats[2]
+		return past_beats.max() == past_beats[2] and past_beats.max() != past_beats[0]
 	return false
 
 func prin(e) -> void:

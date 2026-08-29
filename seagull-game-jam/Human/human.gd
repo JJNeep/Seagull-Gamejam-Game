@@ -34,7 +34,7 @@ var frozen : bool = false
 @export var investigate_time : float = 4.0
 @export var chase_time : float = 4.0
 @export var suspicious_for_investigate_timer : float = 20.0
-@export var suspicious_for_chase_timer : float = 60.0
+@export var suspicious_for_chase_timer : float = 20.0
 @export var hearing_range : float = 1000.0
 
 @export_group("Pathfind")
