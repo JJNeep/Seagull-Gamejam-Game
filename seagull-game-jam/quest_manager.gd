@@ -12,7 +12,7 @@ var all_quests: Dictionary = {
 		"type": QuestType.HIDDEN,        # Must be given before it can complete
 		"checker": "building",
 		"requirement": func(node): return node.position.y < -1,
-		"status": QuestStatus.ACTIVE    # GIVEN quests start locked
+		"status": QuestStatus.ACTIVE   # GIVEN quests start locked
 	},
 		"steal_chip": {
 		"name": "First of Many",
@@ -36,7 +36,7 @@ var all_quests: Dictionary = {
 		"type": QuestType.GIVEN,        # Must be given before it can complete
 		"checker": "poo",
 		"requirement": func(node): return node.position.y < 0,
-		"status": QuestStatus.ACTIVE    # GIVEN quests start locked
+		"status": QuestStatus.LOCKED    # GIVEN quests start locked
 	},
 		"dance": {
 		"name": "Party Time!",
@@ -44,7 +44,7 @@ var all_quests: Dictionary = {
 		"type": QuestType.GIVEN,        # Must be given before it can complete
 		"checker": "world",
 		"requirement": func(node): return node.time_at_party >= 10.0 and node.player_pos.x > -28 and node.player_pos.x < -11 and node.player_pos.y > 12 and node.player_pos.y < 41 and node.player_pos.z > -8 and node.player_pos.z < 10,
-		"status": QuestStatus.ACTIVE    # GIVEN quests start locked
+		"status": QuestStatus.LOCKED    # GIVEN quests start locked
 	},
 		"jacks": {
 		"name": "Expose Jacks Food",
@@ -52,7 +52,7 @@ var all_quests: Dictionary = {
 		"type": QuestType.GIVEN,        # Must be given before it can complete
 		"checker": "world",
 		"requirement": func(node): return node.player_pos.x > 5 and node.player_pos.x < 13 and node.player_pos.y > 13 and node.player_pos.y < 18.5 and node.player_pos.z > -29 and node.player_pos.z < -21,
-		"status": QuestStatus.ACTIVE    # GIVEN quests start locked
+		"status": QuestStatus.LOCKED    # GIVEN quests start locked
 	},
 		"lighthouse": {
 		"name": "Let There be light",
@@ -60,7 +60,7 @@ var all_quests: Dictionary = {
 		"type": QuestType.GIVEN,        # Must be given before it can complete
 		"checker": "lighthouse",
 		"requirement": func(node): return true,
-		"status": QuestStatus.ACTIVE    # GIVEN quests start locked
+		"status": QuestStatus.LOCKED    # GIVEN quests start locked
 	},
 		"megapoo": {
 		"name": "Ultimate Drop",
