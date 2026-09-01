@@ -77,7 +77,10 @@ func _physics_process(delta: float) -> void:
 	velocity.x *= pow(0.2, delta)
 	velocity.z *= pow(0.2, delta)
 	
+	was_in_boat = in_boat
+	
 	if in_boat:
+		
 		if not was_in_boat:
 			player.cam_distance = boat_cam_distance
 		player.handle_input = false
@@ -90,12 +93,10 @@ func _physics_process(delta: float) -> void:
 		motor = clamp(motor,-1,1)
 		if not $Area3D.has_overlapping_bodies():
 			in_boat = !in_boat
-	elif was_in_boat:
+	if was_in_boat:
 		# only the boat we just left restores the player's camera/input
 		player.cam_distance = player.base_cam_distance
 		player.handle_input = true
-
-	was_in_boat = in_boat
 
 	if position.x > 150 or position.x < -150 or position.z > 150 or position.z < -150:
 		respawn(player)

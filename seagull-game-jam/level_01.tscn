@@ -251,13 +251,13 @@ light_volumetric_fog_energy = 23.085
 omni_range = 132.911
 
 [node name="RigidBody3D" type="RigidBody3D" parent="NavigationRegion3D" unique_id=1052905360]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -31.656538, 12.94541, -15.846025)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -31.657, 12.945, -15.811039)
 collision_mask = 7
 contact_monitor = true
 max_contacts_reported = 100
 
 [node name="CityBuilding1" type="MeshInstance3D" parent="NavigationRegion3D/RigidBody3D" unique_id=554427680]
-transform = Transform3D(-1.09278474e-07, 0, 2.5, 0, 2.5, 0, -2.5, 0, -1.09278474e-07, 0, 0, 2.7101994)
+transform = Transform3D(-1.09278474e-07, 0, 2.5, 0, 2.5, 0, -2.5, 0, -1.09278474e-07, 0, 0, 0)
 layers = 2
 mesh = ExtResource("10_rskd8")
 
@@ -374,7 +374,6 @@ mesh = ExtResource("19_o25yy")
 
 [node name="Control" parent="." unique_id=1260721804 instance=ExtResource("21_fxmm5")]
 
-<<<<<<< Updated upstream
 [node name="No" type="MeshInstance3D" parent="." unique_id=1880412697]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -10.263862, 12.379912, 1.7063503)
 mesh = ExtResource("24_uwofx")
@@ -390,9 +389,5 @@ mesh = ExtResource("26_6q3se")
 [node name="BasicBuilding2" type="MeshInstance3D" parent="." unique_id=1151432599]
 transform = Transform3D(3.577464e-08, 0, -3, 0, 3, 0, 3, 0, 3.577464e-08, -18.367134, 16.41693, -33.882027)
 mesh = ExtResource("26_6q3se")
-=======
-[node name="Camera3D" type="Camera3D" parent="." unique_id=2026279350]
-transform = Transform3D(0.54887694, 0, 0.83590317, 0, 1, 0, -0.83590317, 0, 0.54887694, 38.99079, 12.584507, -4.3901825)
->>>>>>> Stashed changes
 
 [connection signal="body_entered" from="NavigationRegion3D/RigidBody3D" to="NavigationRegion3D/RigidBody3D" method="_on_body_entered"]
