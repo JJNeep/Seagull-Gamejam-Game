@@ -168,8 +168,8 @@ func process_glide(delta: float) -> void:
 		
 	current_glide_speed = clamp(current_glide_speed, min_glide_speed, max_glide_speed)
 	
-	if current_glide_speed == 5 and not is_flapping:
-		toggle_glide()
+	#if current_glide_speed == 5 and not is_flapping:
+		#toggle_glide()
 	
 	velocity = aim_dir * current_glide_speed
 	velocity.y -= glide_gravity * delta

@@ -11,8 +11,13 @@ var all_quests: Dictionary = {
 		"description": "Knock the falling building off the edge",
 		"type": QuestType.HIDDEN,        # Must be given before it can complete
 		"checker": "building",
+<<<<<<< Updated upstream
 		"requirement": func(node): return node.position.y < -1,
 		"status": QuestStatus.ACTIVE   # GIVEN quests start locked
+=======
+		"requirement": func(node): return node.rotation_degrees.x > 30 or node.rotation_degrees.z > 30,
+		"status": QuestStatus.ACTIVE    # GIVEN quests start locked
+>>>>>>> Stashed changes
 	},
 		"steal_chip": {
 		"name": "First of Many",

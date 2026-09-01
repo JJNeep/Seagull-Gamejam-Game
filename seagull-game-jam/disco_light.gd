@@ -8,6 +8,10 @@ const MIN_DB: int = 60
 
 var spectrum : AudioEffectSpectrumAnalyzerInstance
 
+@export var curve : Curve
+
+var max_energy = 9.053
+
 var beat_memory_len = 16
 
 var past_beats : Array[float] = []
@@ -35,6 +39,8 @@ func is_beat() -> bool:
 	var l_hz: float = (0 + 1) * FREQ_MAX / BAR_COUNT
 	var l_magnitiude: float = spectrum.get_magnitude_for_frequency_range(0.0, l_hz).length()
 	var l_energy: float = clampf((MIN_DB + linear_to_db(l_magnitiude)) / MIN_DB, 0, 1)
+	light_energy = lerp(light_energy,curve.sample(l_energy) * max_energy,0.5)
+	print(light_energy)
 	past_beats.append(l_energy)
 	if len(past_beats) > beat_memory_len:
 		past_beats.remove_at(0)
