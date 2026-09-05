@@ -258,7 +258,7 @@ layers = 2
 mesh = ExtResource("10_rskd8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/RigidBody3D" unique_id=1118552598]
-transform = Transform3D(-1.09278474e-07, 0, 2.5, 0, 2.5, 0, -2.5, 0, -1.09278474e-07, 0, 0, 0)
+transform = Transform3D(-1.1845786e-07, 0, 2.71, 0, 2.71, 0, -2.71, 0, -1.1845786e-07, 0, 0, 2.8018017)
 shape = SubResource("ConvexPolygonShape3D_fxmm5")
 
 [node name="Human" parent="." unique_id=2136399363 node_paths=PackedStringArray("job_position", "home_position", "beach_position_point_1", "beach_position_point_2", "player") instance=ExtResource("6_8q3i6")]
