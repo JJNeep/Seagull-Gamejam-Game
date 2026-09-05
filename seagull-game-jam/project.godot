@@ -46,6 +46,10 @@ hud=""
 player=""
 world=""
 
+[gui]
+
+theme/custom_font="uid://db28q6344mu8p"
+
 [input]
 
 ui_accept={

@@ -5,6 +5,8 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_2ur5c"]
 font_size = 32
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Sean cutscene" type="Node3D" unique_id=1970923963]
 script = ExtResource("1_2ur5c")

@@ -3,7 +3,7 @@ extends Node
 @onready var quest_complete = preload("res://quest_complete.tscn")
 
 enum QuestType { GIVEN, HIDDEN }
-enum QuestStatus { LOCKED, ACTIVE, COMPLETED }
+enum QuestStatus { LOCKED, ACTIVE, COMPLETED, ACTIVE_LOCKED }
 
 var all_quests: Dictionary = {
 		"knock_building": {
@@ -28,7 +28,7 @@ var all_quests: Dictionary = {
 		"type": QuestType.GIVEN,        # Must be given before it can complete
 		"checker": "poo",
 		"requirement": func(node): var nuke_pos = get_tree().get_first_node_in_group("Nuke_centre").global_position; return node.large and node._edit_started and not node._impact_triggered and (nuke_pos*Vector3(1, 0, 1)).distance_squared_to(node.position*Vector3(1, 0, 1)) < 64 and node.position.y < nuke_pos.y + 13,
-		"status": QuestStatus.LOCKED    # GIVEN quests start locked
+		"status": QuestStatus.ACTIVE_LOCKED    # GIVEN quests start locked
 	},
 		"ocean_poo": {
 		"name": "It was the fish",
@@ -36,7 +36,7 @@ var all_quests: Dictionary = {
 		"type": QuestType.GIVEN,        # Must be given before it can complete
 		"checker": "poo",
 		"requirement": func(node): return node.position.y < 0,
-		"status": QuestStatus.LOCKED    # GIVEN quests start locked
+		"status": QuestStatus.ACTIVE_LOCKED    # GIVEN quests start locked
 	},
 		"dance": {
 		"name": "Party Time!",
@@ -44,7 +44,7 @@ var all_quests: Dictionary = {
 		"type": QuestType.GIVEN,        # Must be given before it can complete
 		"checker": "world",
 		"requirement": func(node): return node.time_at_party >= 10.0 and node.player_pos.x > -28 and node.player_pos.x < -11 and node.player_pos.y > 12 and node.player_pos.y < 41 and node.player_pos.z > -8 and node.player_pos.z < 10,
-		"status": QuestStatus.LOCKED    # GIVEN quests start locked
+		"status": QuestStatus.ACTIVE_LOCKED    # GIVEN quests start locked
 	},
 		"jacks": {
 		"name": "Expose Jacks Food",
@@ -52,7 +52,7 @@ var all_quests: Dictionary = {
 		"type": QuestType.GIVEN,        # Must be given before it can complete
 		"checker": "world",
 		"requirement": func(node): return node.player_pos.x > 5 and node.player_pos.x < 13 and node.player_pos.y > 13 and node.player_pos.y < 18.5 and node.player_pos.z > -29 and node.player_pos.z < -21,
-		"status": QuestStatus.LOCKED    # GIVEN quests start locked
+		"status": QuestStatus.ACTIVE_LOCKED    # GIVEN quests start locked
 	},
 		"lighthouse": {
 		"name": "Let There be light",
@@ -60,7 +60,7 @@ var all_quests: Dictionary = {
 		"type": QuestType.GIVEN,        # Must be given before it can complete
 		"checker": "lighthouse",
 		"requirement": func(node): return true,
-		"status": QuestStatus.LOCKED    # GIVEN quests start locked
+		"status": QuestStatus.ACTIVE_LOCKED    # GIVEN quests start locked
 	},
 		"megapoo": {
 		"name": "Ultimate Drop",
@@ -69,6 +69,14 @@ var all_quests: Dictionary = {
 		"checker": "poo",
 		"requirement": func(node): return node.large,
 		"status": QuestStatus.LOCKED    # GIVEN quests start locked
+	},
+		"every_quest": {
+		"name": "Seriously Dedicated",
+		"description": "Complete all the quests",
+		"type": QuestType.GIVEN,        # Must be given before it can complete
+		"checker": "q_manager",
+		"requirement": func(node): return true,
+		"status": QuestStatus.ACTIVE_LOCKED    # GIVEN quests start locked
 	}
 }
 
@@ -92,7 +100,7 @@ func give_quest(quest_id: String) -> void:
 		return
 	if quest.type != QuestType.GIVEN:
 		return
-	if quest.status == QuestStatus.LOCKED:
+	if quest.status == QuestStatus.LOCKED or quest.status == QuestStatus.ACTIVE_LOCKED:
 		quest.status = QuestStatus.ACTIVE
 		known_quests.append(quest_id)  # Make sure this is quest_id, not quest or anything else
 		quest_received.emit(quest_id)
@@ -103,7 +111,7 @@ func check_quests(checker_type: String, node: Node) -> void:
 		var quest = all_quests[quest_id]
 
 		# Skip if not active
-		if quest.status != QuestStatus.ACTIVE:
+		if not (quest.status == QuestStatus.ACTIVE or quest.status == QuestStatus.ACTIVE_LOCKED):
 			continue
 		# Skip if wrong checker
 		if quest.checker != checker_type:
@@ -130,7 +138,7 @@ func get_active_quests() -> Array:
 	var result = []
 	for quest_id in QuestManager.known_quests:
 		var quest = QuestManager.all_quests[quest_id]
-		if quest.status == QuestStatus.ACTIVE:
+		if quest.status == QuestStatus.ACTIVE or quest.status == QuestStatus.ACTIVE_LOCKED:
 			result.append({
 				"id": quest_id,
 				"name": quest.name,
@@ -149,5 +157,7 @@ func get_completed_quests() -> Array:
 		})
 	return result
 
-#func _process(delta: float) -> void:
-	#print(get_active_quests())
+func _process(delta: float) -> void:
+	if len(completed_quests) == all_quests.size() - 1:
+		await get_tree().create_timer(3).timeout
+		check_quests("q_manager", self)

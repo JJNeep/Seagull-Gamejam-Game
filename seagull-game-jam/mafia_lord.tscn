@@ -42,6 +42,8 @@ _data = {
 
 [sub_resource type="LabelSettings" id="LabelSettings_k2yjw"]
 font_size = 77
+outline_size = 36
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Mafia Lord" type="Area3D" unique_id=479415176]
 collision_layer = 0

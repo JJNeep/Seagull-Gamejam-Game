@@ -13,6 +13,8 @@ var chip_timer : float = 0.0
 
 var chip = preload("res://chip.tscn")
 
+var lighthouse_on = false
+
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
@@ -20,12 +22,15 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	player_pos = get_tree().get_first_node_in_group("player").position
 	if player_pos.x > -28 and player_pos.x < -11 and player_pos.y > 12 and player_pos.y < 41 and player_pos.z > -8 and player_pos.z < 10:
-		time_at_party += delta
+		if player_pos.x < -12:
+			time_at_party += delta
+			$NavigationRegion3D/StaticBody3D/LightGlass/OmniLight3D.hide()
 		stopped = true
 		main_music.stream_paused = true
 		if !$Speakers/Music.playing:
 			$Speakers/Music.play()
 	elif stopped:
+		$NavigationRegion3D/StaticBody3D/LightGlass/OmniLight3D.visible = lighthouse_on
 		time_at_party = 0.0
 		main_music.stream_paused = false
 		stopped = false
@@ -41,6 +46,6 @@ func _process(delta: float) -> void:
 		get_node("/root/Level01/").add_child(inst)
 		inst.freeze = false
 	if Input.is_action_just_pressed("select") and $NavigationRegion3D/StaticBody3D/MeshInstance3D/Area3D.has_overlapping_bodies():
-		print("Double YAY")
+		lighthouse_on = true
 		$NavigationRegion3D/StaticBody3D/LightGlass/OmniLight3D.show()
 		QuestManager.check_quests("lighthouse",self)

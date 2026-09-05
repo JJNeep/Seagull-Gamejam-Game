@@ -1,0 +1,6 @@
+[gd_resource type="Theme" format=3 uid="uid://cxvtox76capk8"]
+
+[ext_resource type="FontFile" uid="uid://db28q6344mu8p" path="res://DoHyeon-Regular.ttf" id="1_470mv"]
+
+[resource]
+default_font = ExtResource("1_470mv")

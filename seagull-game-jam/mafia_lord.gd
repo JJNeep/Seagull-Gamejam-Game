@@ -67,7 +67,7 @@ func cutscene() -> void:
 	# Pick a random locked quest
 	var locked_quests = QuestManager.all_quests.keys().filter(func(id):
 		var q = QuestManager.all_quests[id]
-		return q.type == QuestManager.QuestType.GIVEN and q.status == QuestManager.QuestStatus.LOCKED
+		return q.type == QuestManager.QuestType.GIVEN and (q.status == QuestManager.QuestStatus.LOCKED or q.status == QuestManager.QuestStatus.ACTIVE_LOCKED)
 	)
 	
 	if locked_quests.is_empty():
