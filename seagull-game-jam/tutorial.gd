@@ -17,7 +17,7 @@ you can drop a package with F","You can do a large poo when you have a full chip
 
 var how_far = 0
 
-var poi : Label3D
+var poi : MeshInstance3D
 
 @onready var player : Player = get_tree().get_first_node_in_group("player")
 
@@ -62,13 +62,20 @@ func _input(event: InputEvent) -> void:
 func next_page() -> void:
 	how_far += 1
 	if how_far == 5:
-		poi = Label3D.new()
-		poi.global_position = Vector3(26.5,3.5,-23.5)
-		poi.billboard = BaseMaterial3D.BILLBOARD_FIXED_Y
-		poi.no_depth_test = true
-		poi.text = "📍"
-		poi.font_size = 1070
-		poi.outline_size = 0
+		poi = MeshInstance3D.new()
+		poi.global_position = Vector3(26.5,2.15,-23.5)
+		poi.mesh = preload("res://pin.vox")
+		poi.scale = Vector3(3,3,3)
+		poi.material_overlay = StandardMaterial3D.new()
+		poi.material_overlay.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		poi.material_overlay.albedo_color = Color(1.0, 1.0, 1.0, 0.0)
+		poi.material_overlay.stencil_mode = BaseMaterial3D.STENCIL_MODE_XRAY
+		poi.material_overlay.stencil_color = Color(187,0,0)
+		#poi.billboard = BaseMaterial3D.BILLBOARD_FIXED_Y
+		#poi.no_depth_test = true
+		#poi.text = "📍"
+		#poi.font_size = 1070
+		#poi.outline_size = 0
 		get_parent().add_child(poi)
 	elif how_far == 6:
 		poi.queue_free()
