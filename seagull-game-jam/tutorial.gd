@@ -1,17 +1,19 @@
 extends Control
 
 var text = ["Use WASD to move
-[T to quit tutorial at any time]",
-"Use Space to jump",
-"Press Space to toggle flight while in the air",
-"Hold Shift to flap while flying and get more lift",
-"You can walk through doors to go into buildings
+[try it out to continue]
+[T to quit tutorial at any time]","Use Space to jump
+[try it out to continue]","Press Space to toggle flight while in the air
+[try it out to continue]","Hold Shift to flap while flying and get more lift
+[try it out to continue]","You can walk through doors to go into buildings
 [Press Enter to continue]","Talk to the mafia leader on the beach to
 gain quests or find secret achievements by trying things out
-[talk to the mafia leader to continue]","",
-"Press backspace to look at current quests","Humans come to the beach and hold out chips.
-Swoop at them to gain chips","When you have a chip in your bar,
-you can drop a package with F","You can do a large poo when you have a full chip bar
+[talk to the mafia leader to continue]","","Press backspace to look at current quests
+[try it out to continue]","Humans come to the beach and hold out chips.
+Swoop at them to gain chips
+[try it out to continue]","When you have a chip in your bar,
+you can drop a package with F
+[try it out to continue]","You can do a large poo when you have a full chip bar
 [Press Enter to continue]","Press E to squawk","good luck!
 [T to end tutorial]"]
 
