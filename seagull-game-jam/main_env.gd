@@ -7,15 +7,14 @@ var stopped = false
 
 var time_at_party : float = 0.0
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
 var player_pos : Vector3
 
 var chip_timer : float = 0.0
 
 var chip = preload("res://chip.tscn")
+
+func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
