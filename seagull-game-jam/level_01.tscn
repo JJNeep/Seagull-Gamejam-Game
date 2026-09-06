@@ -49,34 +49,34 @@ data = PackedVector3Array(-4, -1.9, -4, -3.8999999, -1.9, -4, -3.8999999, -1.9, 
 
 [sub_resource type="Gradient" id="Gradient_rlskx"]
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_yp1q4"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8f2vm"]
 gradient = SubResource("Gradient_rlskx")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rlskx"]
 direction = Vector3(0, 1, 0)
 initial_velocity_max = 6.0
 color = Color(0, 1, 0.0666666, 1)
-color_ramp = SubResource("GradientTexture1D_yp1q4")
+color_ramp = SubResource("GradientTexture1D_8f2vm")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yp1q4"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_je6rq"]
 transparency = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_o3xv4"]
-material = SubResource("StandardMaterial3D_yp1q4")
+material = SubResource("StandardMaterial3D_je6rq")
 
 [sub_resource type="Curve" id="Curve_rlskx"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.6686274, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_yp1q4"]
+[sub_resource type="CurveTexture" id="CurveTexture_vrgkq"]
 curve = SubResource("Curve_rlskx")
 
 [sub_resource type="Gradient" id="Gradient_o3xv4"]
 colors = PackedColorArray(1, 0, 0, 1, 1, 0.98333335, 0, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_ygp6w"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dckca"]
 gradient = SubResource("Gradient_o3xv4")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xna0i"]
@@ -84,11 +84,11 @@ emission_shape = 3
 emission_box_extents = Vector3(0.7, 0.1, 0.7)
 direction = Vector3(0, 1, 0)
 initial_velocity_max = 6.0
-color_ramp = SubResource("GradientTexture1D_ygp6w")
-alpha_curve = SubResource("CurveTexture_yp1q4")
+color_ramp = SubResource("GradientTexture1D_dckca")
+alpha_curve = SubResource("CurveTexture_vrgkq")
 
 [sub_resource type="BoxMesh" id="BoxMesh_rhow8"]
-material = SubResource("StandardMaterial3D_yp1q4")
+material = SubResource("StandardMaterial3D_je6rq")
 
 [sub_resource type="FogMaterial" id="FogMaterial_rlskx"]
 albedo = Color(7.219613e-08, 0.5643285, 0.19696465, 1)
@@ -354,11 +354,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3199744, 11.832198, -19.543
 gizmo_extents = 4.11
 
 [node name="home_position" type="Marker3D" parent="." unique_id=1841089805]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.157218, 13.097994, 5.436516)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5327845, 13.097994, 5.436516)
 gizmo_extents = 4.11
 
 [node name="home_position2" type="Marker3D" parent="." unique_id=1366012013]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.157218, 13.097994, 0.48190737)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4610167, 12.684769, 0.48190737)
 gizmo_extents = 4.11
 
 [node name="beach_position_1" type="Marker3D" parent="." unique_id=661506788]

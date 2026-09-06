@@ -71,6 +71,10 @@ func _ready() -> void:
 	ray.target_position.z = -view_distance
 	get_model("Shorts","Visuals/Shorts")
 	current_idle = starting_idle
+	# Starting straight in BEACH skips the HOME->BEACH transition that normally
+	# picks a spot, so choose one now instead of walking to an unset (0,0,0).
+	if current_idle == Idle_State.BEACH:
+		beach_point = _find_beach_position()
 
 func get_model(model_name:String,part_path:NodePath):
 	var model = "res://Human/" + "%02d" % (human_type+1) + "_" + model_name + ".vox"

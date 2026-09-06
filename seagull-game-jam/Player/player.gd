@@ -50,7 +50,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
-		if event.key_label == Key.KEY_F2 or event.key_label == Key.KEY_F11:
+		if OS.is_debug_build() and event.key_label == Key.KEY_F2 or event.key_label == Key.KEY_F11:
 			get_tree().quit(137)
 	if can_move:
 		if event is InputEventMouseMotion:
