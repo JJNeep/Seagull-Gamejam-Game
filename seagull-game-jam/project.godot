@@ -10,12 +10,12 @@ config_version=5
 
 [application]
 
-config/name="Seagull Game Jam"
-run/main_scene="uid://bhjtvkxags828"
+config/name="MSG"
+run/main_scene="uid://dbg6kxb2d1hrk"
 config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/bg_color=Color(0.18820322, 0.13859308, 0.05748591, 1)
 boot_splash/image="uid://k3nfkpf3jcla"
-config/icon="uid://k3nfkpf3jcla"
+config/icon="uid://dv1oa0ti3gf0s"
 run/main_scene.dedicated_server="res://mp_test/server.tscn"
 
 [audio]
@@ -28,7 +28,6 @@ Global="*uid://dtpcleyjvvoo"
 SoundManager="*uid://chsiqhed6plri"
 QuestManager="*uid://ct3tl6q4p06nv"
 DebugConsole="*uid://bmkhqu4171jql"
-MPTest="*res://mp_test/mp_test.gd"
 
 [display]
 
